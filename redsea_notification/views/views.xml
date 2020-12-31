@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="redsea_notification.list">
+      <field name="name">redsea_notification list</field>
+      <field name="model">redsea_notification.redsea_notification</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="redsea_notification.action_window">
+      <field name="name">redsea_notification window</field>
+      <field name="res_model">redsea_notification.redsea_notification</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="redsea_notification.action_server">
+      <field name="name">redsea_notification server</field>
+      <field name="model_id" ref="model_redsea_notification_redsea_notification"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="redsea_notification" id="redsea_notification.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="redsea_notification.menu_1" parent="redsea_notification.menu_root"/>
+    <menuitem name="Menu 2" id="redsea_notification.menu_2" parent="redsea_notification.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="redsea_notification.menu_1_list" parent="redsea_notification.menu_1"
+              action="redsea_notification.action_window"/>
+    <menuitem name="Server to list" id="redsea_notification" parent="redsea_notification.menu_2"
+              action="redsea_notification.action_server"/>
+    -->
+  </data>
+</odoo>

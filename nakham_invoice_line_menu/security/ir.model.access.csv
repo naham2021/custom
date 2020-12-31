@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nakham_invoice_line_menu_nakham_invoice_line_menu,nakham_invoice_line_menu.nakham_invoice_line_menu,model_nakham_invoice_line_menu_nakham_invoice_line_menu,base.group_user,1,1,1,1

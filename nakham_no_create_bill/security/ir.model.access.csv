@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nakham_no_create_bill_nakham_no_create_bill,nakham_no_create_bill.nakham_no_create_bill,model_nakham_no_create_bill_nakham_no_create_bill,,1,0,0,0

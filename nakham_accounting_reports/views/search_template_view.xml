@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <template id="account_reports.search_template_analytic">
+        <a t-if="options.get('analytic')" type="button" class="dropdown-toggle account_analytic_filter" data-toggle="dropdown">
+            <span class="fa fa-folder-open"/> Analytic
+        </a>
+        <div class="dropdown-menu o_filters_menu" role="menu">
+            <div t-if="options.get('analytic_accounts') != None" class="o_account_report_search" role="menuitem">
+                <b>Accounts</b><br />
+                <select class="js_account_reports_analytic_auto_complete o_account_report_select" data-filter="analytic_accounts" multiple="multiple">
+                    <t t-foreach="analytic_accounts" t-as="a">
+                        <option t-att-value="a[0]"><t t-esc="a[1]" /></option>
+                    </t>
+                </select>
+            </div>
+            <div t-if="options.get('analytic_tags') != None" class="o_account_report_search" role="menuitem">
+                <b>Tags</b><br />
+                <select class="js_account_reports_analytic_auto_complete o_account_report_select" data-filter="analytic_tags" multiple="multiple">
+                    <t t-foreach="analytic_tags" t-as="t">
+                        <option t-att-value="t[0]"><t t-esc="t[1]" /></option>
+                    </t>
+                </select>
+            </div>
+            <div t-if="options.get('analytic_groups') != None" class="o_account_report_search" role="menuitem">
+                <b>Groups</b><br />
+                <select class="js_account_reports_analytic_auto_complete o_account_report_select" data-filter="analytic_groups" multiple="multiple">
+                    <t t-foreach="analytic_groups" t-as="t">
+                        <option t-att-value="t[0]"><t t-esc="t[1]" /></option>
+                    </t>
+                </select>
+            </div>
+            <div class="dropdown-divider" role="separator"></div>
+        </div>
+    </template>
+
+
+    </data>
+</odoo>

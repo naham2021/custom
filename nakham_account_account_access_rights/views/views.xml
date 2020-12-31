@@ -1,0 +1,25 @@
+<odoo>
+  <data>
+    <record id="partner_account_group" model="res.groups">
+        <field name="name">Partner Account</field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="res_partner_account_group" model="ir.ui.view">
+        <field name="name">res.partner.account.group</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="arch" type="xml">
+
+          <xpath expr="//group[@name='accounting_entries']" position="replace">
+            <group string="Accounting Entries" name="accounting_entries" groups="nakham_account_account_access_rights.partner_account_group">
+              <field name="currency_id" invisible="1"/>
+              <field name="property_account_receivable_id"/>
+              <field name="property_account_payable_id"/>
+            </group>
+          </xpath>
+
+        </field>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,74 @@
+<odoo>
+    <data>
+        <record id="customer_order_model" model="ir.ui.view">
+            <field name="name">Customers Orders</field>
+            <field name="model">customer.order</field>
+            <field name="arch" type="xml">
+                <form string="Customers Orders">
+                    <sheet>
+                        <group>
+                            <group>
+<!--                                <field name="user_id" required="1" />-->
+<!--                                <field name="location_id"  />-->
+<!--                                <field name="partner_id" required="1" />-->
+                                <field name="product_id" required="1" />
+                                <field name="product_uom" required="1" />
+<!--                                <field name="order_qty" required="1" />-->
+<!--                                <field name="date_order" required="1" />-->
+<!--                                <button name="open_available_quantities" string="Check Qty" type="object" />-->
+                                <button name="open_available_quantities_location" string="Check Qty Location"  type="object" />
+                            </group>
+
+                        </group>
+                                                        <notebook>
+                                    <page string="Lines ">
+                                        <group>
+                                            <field name="order_line_ids" widget="one2many" nolabel="1">
+                                                <tree string="Lines" editable="bottom">
+                                                    <field name="product_id" />
+                                                    <field name="location_id" />
+                                                    <field name="order_qty" />
+                                                </tree>
+                                                <form string="Account Mapping">
+                                                    <field name="product_id" />
+                                                    <field name="location_id" />
+                                                    <field name="order_qty" />
+                                                </form>
+                                            </field>
+                                        </group>
+                                    </page>
+                                </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="customer_order_model_tree" model="ir.ui.view">
+            <field name="name">Customers Orders</field>
+            <field name="model">customer.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="user_id"  />
+                    <field name="partner_id"  />
+                    <field name="product_id"  />
+                    <field name="product_uom"  />
+                    <field name="order_qty"  />
+                </tree>
+            </field>
+        </record>
+
+        <record id='customer_order_model_action' model='ir.actions.act_window'>
+            <field name="name">Customers Orders</field>
+            <field name="res_model">customer.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="customer_order_model_menuitem" name="Customers Orders"
+                  parent="sale.sale_order_menu" action="customer_order_model_action" sequence="15"/>
+
+
+
+    </data>
+</odoo>

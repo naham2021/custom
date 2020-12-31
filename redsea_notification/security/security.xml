@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <record id="group_post_account_move" model="res.groups">
+            <field name="name">Post (Account Move)</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record id="account_rule_group" model="res.groups">
+            <field name="name">Accounts Rule</field>
+        </record>
+
+        <record model="ir.rule" id="account_allowed_all">
+            <field name="name">account allowed</field>
+            <field name="model_id" ref="account.model_account_account"/>
+            <field name="domain_force">[('id', 'in', user.allowed_account_ids.ids)]</field>
+            <field name="groups" eval="[(4, ref('maxab_accounts_rule.account_rule_group'))]"/>
+        </record>
+
+    </data>
+</odoo>

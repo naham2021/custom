@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record id="view_inherit_area_form" model="ir.ui.view">
+            <field name="name">view.inherit.customer.area.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="customer_rank" invisible="1"/>
+                    <field name="area_id" invisible="1"/>
+                    <field name="area_id" attrs="{'invisible':[('customer_rank','=',0)], 'required': [('customer_rank','!=',0)]}"/>
+                    <field name="name_seq" attrs="{'invisible':[('customer_rank','=',0)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

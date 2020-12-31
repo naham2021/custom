@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_stock_scrap_form_inherit_review" model="ir.ui.view">
+            <field name="name">view.scrap.picking.form.inherit.dest</field>
+            <field name="model">stock.scrap</field>
+            <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="review" widget="radio" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_stock_scrap_form_inherit_review_group" model="ir.ui.view">
+            <field name="name">view.stock.scrap.form.inherit.dest</field>
+            <field name="model">stock.scrap</field>
+            <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
+                        <field name="groups_id" eval="[(6,0,[ref('nakham_review_documents.group_review')])]"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='review']" position="after">
+                    <field name="review" widget="radio" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

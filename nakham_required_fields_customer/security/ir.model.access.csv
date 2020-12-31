@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nakham_required_fields_customer_nakham_required_fields_customer,nakham_required_fields_customer.nakham_required_fields_customer,model_nakham_required_fields_customer_nakham_required_fields_customer,,1,0,0,0

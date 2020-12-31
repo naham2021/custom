@@ -1,0 +1,95 @@
+<odoo>
+  <data>
+    <record id="journal_entries_group" model="res.groups">
+        <field name="name">Journal Entries Group</field>
+    </record>
+
+    <record id="journal_miscellaneous_group" model="res.groups">
+        <field name="name">Journal Miscellaneous Group</field>
+    </record>
+
+    <record id="journal_automatic_transfers_group" model="res.groups">
+        <field name="name">Journal Automatic Transfers Group</field>
+    </record>
+
+    <record id="accounting_analytic_items_group" model="res.groups">
+        <field name="name">Accounting Analytic Items Transfers Group</field>
+    </record>
+
+    <record id="accounting_assets_group" model="res.groups">
+        <field name="name">Accounting Assets Group</field>
+    </record>
+
+    <record id="accounting_deferred_revenues_group" model="res.groups">
+        <field name="name">Accounting Deferred Revenues Group</field>
+    </record>
+
+    <record id="accounting_deferred_expenses_group" model="res.groups">
+        <field name="name">Accounting Deferred Expenses Group</field>
+    </record>
+
+    <record id="accounting_reconciliation_group" model="res.groups">
+        <field name="name">Accounting Reconciliation Group</field>
+    </record>
+
+    <record id="accounting_lock_dates_group" model="res.groups">
+        <field name="name">Lock Dates Group</field>
+    </record>
+
+    <record id="accounting_tax_adjustments_group" model="res.groups">
+        <field name="name">Tax Adjustments Group</field>
+    </record>
+
+    <record id="accounting_journal_items_group" model="res.groups">
+        <field name="name">Accounting Journal Items Group</field>
+    </record>
+
+
+    <record id="account.menu_action_move_journal_line_form" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6,0,[ref('journal_entries_group')])]"/>
+    </record>
+
+    <record id="account.menu_action_account_moves_journal_misc" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6,0,[ref('journal_miscellaneous_group')])]"/>
+    </record>
+
+    <record id="account_auto_transfer.menu_auto_transfer" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6,0,[ref('journal_automatic_transfers_group')])]"/>
+    </record>
+
+    <record id="account.menu_action_analytic_lines_tree" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6,0,[ref('accounting_analytic_items_group')])]"/>
+    </record>
+
+    <record id="account_asset.menu_action_account_asset_form" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6,0,[ref('accounting_assets_group')])]"/>
+    </record>
+
+    <record id="account_asset.menu_action_account_revenue_recognition" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6,0,[ref('accounting_deferred_revenues_group')])]"/>
+    </record>
+
+    <record id="account_asset.menu_action_account_expense_recognition" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6,0,[ref('accounting_deferred_expenses_group')])]"/>
+    </record>
+
+    <record id="account.menu_action_manual_reconciliation" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6,0,[ref('accounting_reconciliation_group')])]"/>
+    </record>
+
+    <record id="account_accountant.menu_action_change_lock_date" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6,0,[ref('accounting_lock_dates_group')])]"/>
+    </record>
+
+    <record id="account.menu_action_tax_adjustment" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6,0,[ref('accounting_tax_adjustments_group')])]"/>
+    </record>
+
+    <record id="account.menu_action_account_moves_all" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6,0,[ref('accounting_journal_items_group')])]"/>
+    </record>
+
+
+
+  </data>
+</odoo>

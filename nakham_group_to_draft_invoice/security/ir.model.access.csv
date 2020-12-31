@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nakham_group_to_draft_invoice_nakham_group_to_draft_invoice,nakham_group_to_draft_invoice.nakham_group_to_draft_invoice,model_nakham_group_to_draft_invoice_nakham_group_to_draft_invoice,base.group_user,1,1,1,1

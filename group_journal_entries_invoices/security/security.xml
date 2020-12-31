@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <record id="group_journal_invoices" model="res.groups">
+            <field name="name">Group journal Invoices</field>
+        </record>
+    </data>
+</odoo>

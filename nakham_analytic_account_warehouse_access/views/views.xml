@@ -1,0 +1,32 @@
+<odoo>
+  <data>
+    <!-- Inherit Form View to Modify it -->
+    <record id="account_analytic_account_add_users" model="ir.ui.view">
+        <field name="name">account.analytic.account.add.users</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+              <field name="user_ids" widget="many2many_tags"/>
+            </xpath>
+
+        </field>
+    </record>
+
+      <record id="account_analytic_account_rule_group" model="res.groups">
+          <field name="name">Account Analytic Account Rule Group</field>
+      </record>
+
+    <record id="account_analytic_account" model="ir.rule">
+            <field name="name">Account Analytic Account Rule</field>
+            <field name="model_id" ref="model_account_analytic_account"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">[('user_ids', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('account_analytic_account_rule_group'))]"/>
+        </record>
+  </data>
+</odoo>

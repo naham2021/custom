@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_search_products_with_serial_no_search_products_with_serial_no,search_products_with_serial_no.search_products_with_serial_no,model_search_products_with_serial_no_search_products_with_serial_no,,1,0,0,0

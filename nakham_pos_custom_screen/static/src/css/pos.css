@@ -1,0 +1,117 @@
+/* --- Fonts --- */
+
+
+/*omara added: for element not be clickable*/
+.element_not_clickable {
+color: #92a8d1;
+pointer-events: none;
+}
+
+.pos .pos-rightheader {
+    position: absolute;
+    left:784px;
+    right:0;
+    top:0;
+    height:100%;
+    display: -webkit-flex;
+    display: flex;
+    overflow : hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.pos .leftpane {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+            box-sizing: border-box;
+    position:absolute;
+    left:0;
+    width:560px;/*860px;*/
+    top:0px;
+    bottom:0;
+    border-right: solid 1px #CECBCB;
+    border-right: solid 3px #787878;
+    background: #e2e2e2;
+}
+
+.pos .actionpad {
+    display: inline-block;
+    float: left;
+    padding: 0;
+    margin: 0px;
+    margin-top: 8px;
+    /*margin-left: 310px;*/ /*437px;*/
+    text-align: center;
+    vertical-align: top;
+    width: 321px;/*186px*/;
+    border: none;
+    border-radius: 0;
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-color: #bfbfbf;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.pos .rightpane {
+    position: absolute;
+    top: 0;
+    bottom:0;
+    left: 560px; /*861px;*/
+    right: 0;
+    vertical-align: top;
+    -webkit-transform: translate3d(0,0,0);
+}
+
+.pos .order .summary{
+    width:110%;/*174%*/;
+    text-align:right;
+    font-weight: bold;
+    margin-top:20px;
+    margin-bottom:10px;
+}
+
+
+.pos .order .orderline{
+    width:112%;/*171%;*/
+    margin:0px;
+    padding-top:3px;
+    padding-bottom:10px;
+    padding-left:15px;
+    padding-right:15px;
+    cursor: pointer;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+            box-sizing: border-box;
+    -webkit-transition: background 250ms ease-in-out;
+       -moz-transition: background 250ms ease-in-out;
+            transition: background 250ms ease-in-out;
+}
+
+.pos .order .order-empty {
+    text-align: center;
+    margin: 100px;
+    margin-left: 250px;
+    color: #DDD;
+}
+
+.pos .product-list-container .product-list{
+    font-size: 13px;
+    width: 100%;
+    line-height: 40px;
+}
+.pos .product-list-container .product-list th,
+.pos .product-list-container .product-list td {
+    padding: 0px 8px;
+    width:40px;
+
+}
+.pos .product-list-container .product-list tr{
+    transition: all 150ms linear;
+    background: rgb(230,230,230);
+}
+.pos .product-list-container .product-list thead > tr,
+.pos .product-list-container .product-list tbody > tr:nth-child(even) {
+    background: rgb(247,247,247);
+}

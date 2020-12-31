@@ -1,0 +1,86 @@
+<odoo>
+    <data>
+        <record id="view_inherit_hr_employee_analytic_form" model="ir.ui.view">
+            <field name="name">view.inherit.analytic.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="analytic_id"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_inherit_sale_group_form" model="ir.ui.view">
+            <field name="name">view.inherit.confirm.group.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_confirm'][1]" position="attributes">
+                    <attribute name="groups">nakham_custom_security_groups.group_sale_confirm</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm'][2]" position="attributes">
+                    <attribute name="groups">nakham_custom_security_groups.group_sale_confirm</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_inherit_purchase_group_form" model="ir.ui.view">
+            <field name="name">view.inherit.confirm.purchase.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_confirm'][1]" position="attributes">
+                    <attribute name="groups">nakham_custom_security_groups.group_purchase_confirm</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_confirm'][2]" position="attributes">
+                    <attribute name="groups">nakham_custom_security_groups.group_purchase_confirm</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_inherit_stock_group_form" model="ir.ui.view">
+            <field name="name">view.inherit.validate.stock.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_validate'][1]" position="attributes">
+                    <attribute name="groups">nakham_custom_security_groups.group_stock_validate</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_validate'][2]" position="attributes">
+                    <attribute name="groups">nakham_custom_security_groups.group_stock_validate</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_inherit_invoice_group_form" model="ir.ui.view">
+            <field name="name">view.inherit.confirm.invoice.payment.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_invoice_register_payment']" position="attributes">
+                    <attribute name="groups">nakham_custom_security_groups.group_register_payment</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_post']" position="attributes">
+                    <attribute name="groups">nakham_custom_security_groups.group_invoice_post</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_inherit_statement_group_form" model="ir.ui.view">
+            <field name="name">view.inherit.confirm.statement.form</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_bank_reconcile_bank_statements']" position="attributes">
+                    <attribute name="groups">nakham_custom_security_groups.group_statement_reconcile</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_inherit_payment_group_form" model="ir.ui.view">
+            <field name="name">view.inherit.confirm.payment.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='post']" position="attributes">
+                    <attribute name="groups">nakham_custom_security_groups.group_statement_reconcile</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

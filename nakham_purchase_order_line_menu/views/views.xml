@@ -1,0 +1,78 @@
+<odoo>
+  <data>
+        <record id="purchase_order_line_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.line.inherit</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_order_line_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='product_qty']" position="after">
+                    <field name="qty_received"/>
+                    <field name="remaining_qty"/>
+                </xpath>
+
+            </field>
+        </record>
+      <!-- Inherit Form View to Modify it -->
+      <record id="sale_order_remaining_qty" model="ir.ui.view">
+          <field name="name">sale.order.remaining.qty</field>
+          <field name="model">sale.order</field>
+          <field name="inherit_id" ref="sale.view_order_form"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//field[@name='order_line']/tree/field[@name='qty_delivered']" position="after">
+                  <field name="remaining_qty"/>
+              </xpath>
+
+          </field>
+      </record>
+      <!-- Inherit Form View to Modify it -->
+      <record id="purchase_order_type" model="ir.ui.view">
+          <field name="name">purchase.order.type</field>
+          <field name="model">purchase.order</field>
+          <field name="inherit_id" ref="purchase.purchase_order_form"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="purchase_type"/>
+              </xpath>
+
+              <xpath expr="//field[@name='order_line']/tree/field[@name='qty_received']" position="after">
+                  <field name="remaining_qty"/>
+              </xpath>
+
+          </field>
+      </record>
+
+      <record id="purchase_order_line_action" model="ir.actions.act_window">
+          <field name="name">Purchase Order Lines</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">purchase.order.line</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+
+      <!-- This Menu Item must have a parent and an action -->
+      <menuitem id="purchase_order_line_menu"
+                name="Purchase Order Line"
+                parent="purchase.menu_procurement_management"
+                action="purchase_order_line_action"
+                sequence="16"
+      />
+
+      <record id="sale_order_line_action" model="ir.actions.act_window">
+          <field name="name">Sale Order Lines</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">sale.order.line</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+
+      <!-- This Menu Item must have a parent and an action -->
+      <menuitem id="sale_order_line_menu"
+                name="Sale Order Line"
+                parent="sale.sale_order_menu"
+                action="sale_order_line_action"
+                sequence="16"
+      />
+
+  </data>
+</odoo>

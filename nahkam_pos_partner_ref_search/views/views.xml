@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <template id="client_salesperson" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/nahkam_pos_partner_ref_search/static/src/js/customer_list_salesperson.js"></script>
+                <script type="text/javascript" src="/nahkam_pos_partner_ref_search/static/src/js/highlited_invoice.js"></script>
+            </xpath>
+        </template>
+
+        <record id="set_barcode_respartner" model="ir.actions.server">
+            <field name="name">Map Barcode</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="binding_model_id" ref="model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.set_barcode()
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

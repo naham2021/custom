@@ -1,0 +1,45 @@
+<odoo>
+  <data>
+      <!-- Inherit Form View to Modify it -->
+      <record id="stock_valuation_layer_category" model="ir.ui.view">
+          <field name="name">stock.valuation.layer.category</field>
+          <field name="model">stock.valuation.layer</field>
+          <field name="inherit_id" ref="stock_account.stock_valuation_layer_form"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//field[@name='product_id']" position="after">
+                <field name="categ_id"/>
+              </xpath>
+
+          </field>
+      </record>
+
+      <!-- Inherit Form View to Modify it -->
+      <record id="stock_valuation_layer_category_search" model="ir.ui.view">
+          <field name="name">stock.valuation.layer.category.search</field>
+          <field name="model">stock.valuation.layer</field>
+          <field name="inherit_id" ref="stock_account.view_inventory_valuation_search"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//filter[@name='group_by_product_id']" position="after">
+                  <filter string="Product Category" name="group_by_categ_id" context="{'group_by':'categ_id'}"/>
+              </xpath>
+
+          </field>
+      </record>
+
+      <!-- Inherit Form View to Modify it -->
+      <record id="stock_quant_category_search" model="ir.ui.view">
+          <field name="name">stock.quant.category.search</field>
+          <field name="model">stock.quant</field>
+          <field name="inherit_id" ref="stock.quant_search_view"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//filter[@name='productgroup']" position="after">
+                  <filter string="Product Category" name="categorygroup" context="{'group_by': 'categ_id'}"/>
+              </xpath>
+
+          </field>
+      </record>
+  </data>
+</odoo>

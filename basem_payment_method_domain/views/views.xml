@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="pos_payment_method_inherite" model="ir.ui.view">
+            <field name="name">pos.payment.method</field>
+            <field name="model">pos.payment.method</field>
+            <field name="inherit_id" ref="point_of_sale.pos_payment_method_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='cash_journal_id']" position="replace">
+                    <field name="cash_journal_id" domain="[('type','in',['bank','cash'])]" attrs="{'invisible': [('is_cash_count', '=', False)], 'required': [('is_cash_count', '=', True)]}"/>
+
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

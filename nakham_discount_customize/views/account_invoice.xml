@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="discount_account_invoice_view_form" model="ir.ui.view">
+            <field name="name">discount.account.invoice</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@class='oe_subtotal_footer']" position="before">
+                    <group col="4">
+                        <group name="discount">
+                            <field name="discount_type" attrs="{'invisible':[('type', '!=', 'out_invoice')]}"/>
+                            <field name="discount_rate" attrs="{'invisible':[('type', '!=', 'out_invoice')]}"/>
+                        </group>
+                    </group>
+                </xpath>
+                <!-- position values: after|before|replace|attributes|inside -->
+                <xpath expr="//field[@name='amount_untaxed']" position="before">
+                    <!-- Add your fields or attributes here -->
+                    <field name="amount_discount" widget='monetary'
+                           attrs="{'invisible':[('type', '!=', 'out_invoice')]}"
+                           options="{'currency_field': 'currency_id'}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

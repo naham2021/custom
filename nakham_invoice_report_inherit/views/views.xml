@@ -1,0 +1,13 @@
+<odoo>
+  <data>
+<!--    <record id="account.account_invoices" model="ir.actions.report">-->
+<!--        <field name="name">Invoice</field>-->
+<!--        <field name="model">pos.order</field>-->
+<!--        <field name="report_type">qweb-pdf</field>-->
+<!--        <field name="report_name">nakham_invoice_report.naham_invoice_report_new</field>-->
+<!--        <field name="print_report_name">'Invoice - %s' % (object.name)</field>-->
+<!--    </record>-->
+
+    <template id="point_of_sale.report_invoice" inherit_id="nakham_invoice_report.naham_invoice_report_new" primary="True"/>
+  </data>
+</odoo>
