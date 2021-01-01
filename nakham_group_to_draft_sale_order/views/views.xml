@@ -1,0 +1,21 @@
+<odoo>
+  <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_order_form_group_cancel" model="ir.ui.view">
+            <field name="name">sale.order.group.cance</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                             <xpath expr="//button[@name='action_draft']" position="attributes">
+                <attribute name="groups">nakham_group_to_draft_sale_order.group_reset_to_draft_sale_order</attribute>
+              </xpath>
+
+              <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="groups">nakham_group_to_draft_sale_order.group_cancel_sale_order</attribute>
+              </xpath>
+
+            </field>
+        </record>
+  </data>
+</odoo>

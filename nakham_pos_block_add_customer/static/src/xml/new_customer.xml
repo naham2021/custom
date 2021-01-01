@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="ClientListScreenWidget">
+        <t t-jquery='.new-customer' t-operation='replace'>
+
+
+                   <span class='button new-customer' role="img" aria-label="Add a customer" title="Add a customer" style="display: block;cursor: not-allowed;pointer-events: none;">
+                        <i class='fa fa-user'></i>
+                        <i class='fa fa-plus'></i>
+                    </span>
+
+
+    </t>
+
+    </t>
+
+
+
+</templates>
+
+
+
+
+
+
+
+
+

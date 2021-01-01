@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_stock_picking_form_inherit_dest" model="ir.ui.view">
+            <field name="name">view.stock.picking.form.inherit.dest</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='location_dest_id']" position="replace">
+                    <field name="location_dest_id"
+                           groups="stock.group_stock_multi_locations"
+                           attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}"
+                           domain="[('usage', '=', 'transit'), '|', ('company_id', '=', company_id), ('company_id', '=', False)]"
+                    />
+                </xpath>
+
+                <xpath expr="//field[@name='location_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('picking_type_code', '!=', 'incoming')]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='picking_type_id']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

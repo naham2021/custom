@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record model="ir.actions.server" id="action_update_area_sequence">
+            <field name="name">Update Area Sequence</field>
+            <field name="model_id" ref="account.model_res_partner"/>
+            <field name="binding_model_id" ref="account.model_res_partner"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">
+                for item in records:
+                item.res_partner_area()
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nakham_sale_invoice_create_nakham_sale_invoice_create,nakham_sale_invoice_create.nakham_sale_invoice_create,model_nakham_sale_invoice_create_nakham_sale_invoice_create,base.group_user,1,1,1,1

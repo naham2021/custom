@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nakham_domain_partner_j_items_nakham_domain_partner_j_items,nakham_domain_partner_j_items.nakham_domain_partner_j_items,model_nakham_domain_partner_j_items_nakham_domain_partner_j_items,base.group_user,1,1,1,1

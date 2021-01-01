@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <record id="group_reset_to_draft_payment" model="res.groups">
+            <field name="name">Reset To Draft ( payment )</field>
+        </record>
+    </data>
+</odoo>

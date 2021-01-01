@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nakham_pos_add_int_product_nakham_pos_add_int_product,nakham_pos_add_int_product.nakham_pos_add_int_product,model_nakham_pos_add_int_product_nakham_pos_add_int_product,,1,0,0,0

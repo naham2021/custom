@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="sale_discount_order_form">
+            <field name="name">sale.discount.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='note']" position="before">
+                    <group>
+                        <field name="discount_type"/>
+                        <field name="discount_rate"
+                               attrs="{'invisible':['|',('discount_type','=','3'),('discount_type', '=', False)]}"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//group[@class='oe_subtotal_footer oe_right']" position="replace">
+                        <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            <field name="total_before_dis" readonly="1" widget="monetary"/>
+                            <field name="amount_discount" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_tax" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                <label for="amount_total"/>
+                                <button name="button_dummy" states="draft" string="(update)" type="object"
+                                        class="oe_edit_only oe_link"/>
+                            </div>
+                            <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                   widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

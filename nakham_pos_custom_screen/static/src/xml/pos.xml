@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="ProductListWidget">
+        <t t-jquery="div.product-list-container" t-operation="extend">
+            <div class='product-list-container'>
+                <div class="product-list-scroller touch-scrollable">
+                    <table class="product-list">
+                        <thead>
+                            <tr>
+                                <!-- <th>Image</th> -->
+                                <!-- <th>Code</th> -->
+                                <th>Name</th>
+                                <th>Barcode</th>
+                                <th>Price</th>
+                                <th class="text-center">UoM</th>
+                                <th class="text-center">On-Hand</th>
+
+                            </tr>
+                        </thead>
+                        <tbody class='product-list-contents'>
+                        </tbody>
+                    </table>
+                </div>
+                <span class="placeholder-ScrollbarWidget" />
+            </div>
+        </t>
+    </t>
+<!--   if product.qty_available <=0 product-list_elem   product-list -->
+    <t t-extend="Product">
+        <t t-jquery="article.product" t-operation="replace">
+
+            <tr  t-att-data-product-id="product.id"
+
+             t-attf-class='product-list #{ ( product.qty_available &lt;=0 and product.type == "product") ? "element_not_clickable" : "" }' >
+            >
+
+                <!-- <td>
+                    <img t-att-src='image_url' height='45px'/> 
+                </td> -->
+                <!-- <td>
+                    <t t-esc="product.default_code"/>
+                </td> -->
+                <td>
+                    <t t-esc="product.display_name"/>
+                </td>
+                <td>
+                    <span t-if="product.barcode">
+                        <t t-esc="product.barcode"/>
+                    </span>
+                </td>
+                <td class="text-right">
+                    <span class="price-tag text-right">
+                        <t t-esc="widget.format_currency(product.list_price,'Product Price')"/>
+                    </span>
+                </td>
+                <td>
+
+                    <t t-esc="product.uom_id[1]"/>
+                    <!-- <span t-if="!product.to_weight">
+                       <t t-esc="widget.pos.units_by_id[product.uom_id[0]].name"/>
+                    </span> -->
+                </td>
+
+
+                <td>
+
+<!--                    <t t-esc="product.qty_available"/>-->
+
+            <span class="qty-tag qty_pro" id="myDIV">
+
+                5000
+            </span>                </td>
+
+
+            </tr>
+        </t>
+    </t>
+</templates>

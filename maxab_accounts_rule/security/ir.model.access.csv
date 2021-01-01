@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_maxab_accounts_rule_maxab_accounts_rule,maxab_accounts_rule.maxab_accounts_rule,model_maxab_accounts_rule_maxab_accounts_rule,,1,0,0,0

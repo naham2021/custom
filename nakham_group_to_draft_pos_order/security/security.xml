@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <record id="group_return_product_payment" model="res.groups">
+            <field name="name">Return Product ( Pos )</field>
+        </record>
+    </data>
+</odoo>

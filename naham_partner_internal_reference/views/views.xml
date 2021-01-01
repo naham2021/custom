@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_inherit_internal_form" model="ir.ui.view">
+            <field name="name">view.inherit.reference.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='sales_purchases']//field[@name='ref']" position="replace"/>
+                <!-- position values: after|before|replace|attributes|inside -->
+                <xpath expr="//field[@name='name']/.." position="before">
+
+                    <h1>
+                        <label for="ref" string="Reference"/>
+                        <br/>
+                        <field name="ref" default_focus="1" placeholder="Reference"/>
+                    </h1>
+                    <label for="name" string="Name"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_reference_partner_inherit_tree" model="ir.ui.view">
+            <field name="name">view.partner.reference.inherit.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="before">
+                    <field name="ref"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

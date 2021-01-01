@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_pos_session_form_review">
+            <field name="name">pos.session</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='start_at']" position="after">
+                  <field name="review" widget="radio" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_pos_session_form_review_group">
+            <field name="name">pos.session</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+            <field name="groups_id" eval="[(6,0,[ref('nakham_review_documents.group_review')])]"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='review']" position="replace">
+                            <field name="review" widget="radio"/>
+                    </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

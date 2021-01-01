@@ -1,0 +1,14 @@
+<odoo>
+	<data>
+		<record id="view_inherit_account_analytic_group_form" model="ir.ui.view">
+			<field name="name">view.inherit.analytic.group.form</field>
+			<field name="model">account.analytic.group</field>
+			<field name="inherit_id" ref="analytic.account_analytic_group_form_view"/>
+			<field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+					<field name="in_filter"/>
+				</xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

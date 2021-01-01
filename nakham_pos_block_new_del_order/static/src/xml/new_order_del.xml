@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="OrderSelectorWidget">
+        <t t-jquery='.neworder-button' t-operation='replace'>
+
+
+            <span class="order-button square neworder-button" style="display: block;cursor: not-allowed;pointer-events: none;">
+                <i class='fa fa-plus' role="img" aria-label="New order" title="New order"/>
+            </span>
+
+
+    </t>
+        <t t-jquery='.deleteorder-button' t-operation='replace'>
+
+
+            <span class="order-button square deleteorder-button" style="display: block;cursor: not-allowed;pointer-events: none;">
+                <i class='fa fa-minus' role="img" aria-label="Delete order" title="Delete order"/>
+            </span>
+
+
+    </t>
+
+    </t>
+
+
+
+</templates>
+
+
+
+
+
+
+
+
+

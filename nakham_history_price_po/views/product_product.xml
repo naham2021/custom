@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="product_product_only_form_view_test" model="ir.ui.view">
+            <field name="name">product_product_only_form_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='inventory']" position="after">
+                        <page string="History Price " name="history_price" >
+                                <group name="history_price" >
+                                    <group>                            <field
+                                name="history_price_product_ids">
+                                <tree string="History Price " editable="bottom">
+                                    <field name="date" />
+                                    <field name="partner_id" />
+                                    <field name="purchase_id" />
+                                    <field name="unit_price" />
+                                    <field name="quantity" />
+                                </tree>
+                            </field>
+</group>
+
+
+                                </group>
+
+                        </page>
+                </xpath>
+            </field>
+        </record>
+
+                <record id="product_template_only_form_view_test" model="ir.ui.view">
+            <field name="name">product_template_only_form_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='inventory']" position="after">
+                        <page string="History Price " name="history_price" >
+                                <group name="history_price" >
+                                    <group>                            <field
+                                name="history_price_product_ids">
+                                <tree string="History Price " editable="bottom">
+                                    <field name="date" />
+                                    <field name="partner_id" />
+                                    <field name="purchase_id" />
+                                    <field name="unit_price" />
+                                    <field name="quantity" />
+                                </tree>
+                            </field>
+</group>
+
+                                </group>
+
+                        </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

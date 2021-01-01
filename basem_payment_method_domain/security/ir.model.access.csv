@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_basem_domain_product_by_vendor_basem_domain_product_by_vendor,basem_domain_product_by_vendor.basem_domain_product_by_vendor,model_basem_domain_product_by_vendor_basem_domain_product_by_vendor,,1,0,0,0

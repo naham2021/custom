@@ -1,0 +1,319 @@
+<odoo>
+    <data>
+        <record id="register_payment" model="res.groups">
+            <field name="name">Register Payment</field>
+        </record>
+        <record id="add_credit_note" model="res.groups">
+            <field name="name">Add Credit Note</field>
+        </record>
+        <record id="account_move_form" model="ir.ui.view">
+            <field name="name">account_move_form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_invoice_register_payment']" position="attributes">
+                    <attribute name="groups">nakham_security_groups.register_payment</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_reverse']" position="attributes">
+                    <attribute name="groups">nakham_security_groups.add_credit_note</attribute>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="res_users_form_inherit" model="ir.ui.view">
+            <field name="name">res.users.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[last()]" position="after">
+                    <page name="area" string="Area">
+                        <group>
+                            <field name="area_ids" widget="many2many_tags"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="res_partner_area_group" model="res.groups">
+            <field name="name">Partner Area</field>
+        </record>
+        <record id="area_partner_rule" model="ir.rule">
+            <field name="name">Area Partners</field>
+            <field ref="base.model_res_partner" name="model_id"/>
+            <field name="domain_force">['|',('area_id','=',False),('area_id','in',user.area_ids.ids)]</field>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" eval="[(4, ref('res_partner_area_group'))]"/>
+        </record>
+        <record id="account_move_line_partner_ledger" model="ir.ui.view">
+            <field name="name">account.move.line.partner.ledger</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree_grouped"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='credit']" position="after">
+                    <field name="balance" sum="Total Balance"/>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="customers" model="ir.module.category">
+            <field name="name">Customers</field>
+        </record>
+        <record id="customer_credit_note" model="res.groups">
+            <field name="name">Customer Credit Note</field>
+            <field name="category_id" ref="customers"/>
+        </record>
+        <record id="account.menu_action_move_out_refund_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('customer_credit_note')])]"/>
+        </record>
+        <record id="customer_payments" model="res.groups">
+            <field name="name">Customer Payments</field>
+            <field name="category_id" ref="customers"/>
+        </record>
+        <record id="account.menu_action_account_payments_receivable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('customer_payments')])]"/>
+        </record>
+        <record id="vendors" model="ir.module.category">
+            <field name="name">Vendors</field>
+        </record>
+        <record id="vendor_refund" model="res.groups">
+            <field name="name">Vendor Refund</field>
+            <field name="category_id" ref="vendors"/>
+        </record>
+        <record id="account.menu_action_move_in_refund_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('vendor_refund')])]"/>
+        </record>
+        <record id="vendor_payments" model="res.groups">
+            <field name="name">Vendor Payments</field>
+            <field name="category_id" ref="vendors"/>
+        </record>
+        <record id="account.menu_action_account_payments_payable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('vendor_payments')])]"/>
+        </record>
+        <record id="accounting_accounting" model="ir.module.category">
+            <field name="name">Accounting Accounting</field>
+        </record>
+        <record id="sales" model="res.groups">
+            <field name="name">Sales</field>
+            <field name="category_id" ref="accounting_accounting"/>
+        </record>
+        <record id="account.menu_action_account_moves_journal_sales" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('sales')])]"/>
+        </record>
+        <record id="purchases" model="res.groups">
+            <field name="name">Purchases</field>
+            <field name="category_id" ref="accounting_accounting"/>
+        </record>
+        <record id="account.menu_action_account_moves_journal_purchase" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('purchases')])]"/>
+        </record>
+        <record id="bank_and_cash" model="res.groups">
+            <field name="name">Bank And Cash</field>
+            <field name="category_id" ref="accounting_accounting"/>
+        </record>
+        <record id="account.menu_action_account_moves_journal_bank_cash" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('bank_and_cash')])]"/>
+        </record>
+        <record id="general_ledger" model="res.groups">
+            <field name="name">General Ledger</field>
+            <field name="category_id" ref="accounting_accounting"/>
+        </record>
+        <record id="account.menu_action_account_moves_ledger_general" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('general_ledger')])]"/>
+        </record>
+        <record id="partner_ledger" model="res.groups">
+            <field name="name">Partner Ledger</field>
+            <field name="category_id" ref="accounting_accounting"/>
+        </record>
+        <record id="account.menu_action_account_moves_ledger_partner" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('partner_ledger')])]"/>
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                        eval="[('module', '=', 'account_reports'), ('name', '=', 'account_financial_html_report_menu_1')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                        eval="[('module', '=', 'account_reports'), ('name', '=', 'account_financial_html_report_menu_2')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        <record id="accounting_reporting" model="ir.module.category">
+            <field name="name">Accounting Reporting</field>
+        </record>
+        <record id="profit_and_loss" model="res.groups">
+            <field name="name">Profit And Loss</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.account_financial_html_report_menu_1" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('profit_and_loss')])]"/>
+        </record>
+        <record id="balance_sheet" model="res.groups">
+            <field name="name">Balance Sheet</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.account_financial_html_report_menu_2" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('balance_sheet')])]"/>
+        </record>
+         <record id="partner_ledger_reporting" model="res.groups">
+            <field name="name">Partner Ledger Reporting</field>
+             <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_partner_ledger" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('partner_ledger_reporting')])]"/>
+        </record>
+        <record id="aged_receivable" model="res.groups">
+            <field name="name">Aged Receivable</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_aged_receivable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('aged_receivable')])]"/>
+        </record>
+        <record id="aged_payable" model="res.groups">
+            <field name="name">Aged Payable</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_aged_payable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('aged_payable')])]"/>
+        </record>
+        <record id="general_ledger_reporting" model="res.groups">
+            <field name="name">General Ledger Reporting</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_general_ledger" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('general_ledger_reporting')])]"/>
+        </record>
+        <record id="trial_balance" model="res.groups">
+            <field name="name">Trial Balance</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_coa" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('trial_balance')])]"/>
+        </record>
+        <record id="invoices" model="res.groups">
+            <field name="name">Invoices</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account.menu_action_account_invoice_report_all" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('invoices')])]"/>
+        </record>
+        <record id="analytic_report" model="res.groups">
+            <field name="name">Analytic Report</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.menu_action_report_account_analytic" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('analytic_report')])]"/>
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                        eval="[('module', '=', 'account_reports'), ('name', '=', 'account_financial_html_report_menu_3')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        <record id="executive_summary" model="res.groups">
+            <field name="name">Executive Summary</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.account_financial_html_report_menu_3" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('executive_summary')])]"/>
+        </record>
+         <record id="cash_flow_statement" model="res.groups">
+            <field name="name">Cash Flow Statement</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_cash_flow" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('cash_flow_statement')])]"/>
+        </record>
+         <record id="consolidated_journals" model="res.groups">
+            <field name="name">Consolidated Journals</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_cj" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('consolidated_journals')])]"/>
+        </record>
+         <record id="tax_report" model="res.groups">
+            <field name="name">Tax Report</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_gt" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('tax_report')])]"/>
+        </record>
+         <record id="journals_audit" model="res.groups">
+            <field name="name">Journals Audit</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_reports.menu_print_journal" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('journals_audit')])]"/>
+        </record>
+         <record id="assets_report" model="res.groups">
+            <field name="name">Assets Report</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account_asset.menu_action_account_report_assets" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('assets_report')])]"/>
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                        eval="[('module', '=', 'account'), ('name', '=', 'menu_finance_configuration')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        <record id="configuration" model="res.groups">
+            <field name="name">Configuration</field>
+            <field name="category_id" ref="accounting_reporting"/>
+        </record>
+        <record id="account.menu_finance_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('configuration')])]"/>
+        </record>
+         <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                        eval="[('module', '=', 'base'), ('name', '=', 'res_partner_portal_public_rule')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        <record id="base.res_partner_portal_public_rule" model="ir.rule">
+         <field name="active" eval="0"/>
+        </record>
+         <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                        eval="[('module', '=', 'base'), ('name', '=', 'res_partner_rule_private_employee')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        <record id="base.res_partner_rule_private_employee" model="ir.rule">
+         <field name="active" eval="0"/>
+        </record>
+         <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                        eval="[('module', '=', 'base'), ('name', '=', 'res_partner_rule_private_group')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        <record id="base.res_partner_rule_private_group" model="ir.rule">
+         <field name="active" eval="0"/>
+        </record>
+    </data>
+</odoo>

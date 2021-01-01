@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <record id="group_reset_to_draft_invoice" model="res.groups">
+            <field name="name">Reset To Draft ( Invoice )</field>
+        </record>
+    </data>
+</odoo>

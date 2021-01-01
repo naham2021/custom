@@ -1,0 +1,32 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="wizard_unreserved_stock_report_view">
+        <field name="name">Unreserved Qty</field>
+        <field name="model">unreserved.stock.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Apple Stock Excel">
+              <sheet>
+                  <group>
+                      <field name="location_ids" widget="many2many_tags"/>
+                  </group>
+              </sheet>
+              <footer>
+                  <button name="unreseve_qty" string="Unreserved Qty" type="object" class="oe_highlight"/>
+              </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="unreserved_report_action"
+                  name="Unreserved Qty"
+                  res_model="unreserved.stock.report.wizard"
+                  view_mode="form"
+                  target="new"
+    />
+
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="menu_unreserved_qty_action" name="Unreserved Qty" parent="stock.menu_warehouse_report" action="unreserved_report_action" sequence="11"/>
+  </data>
+</odoo>

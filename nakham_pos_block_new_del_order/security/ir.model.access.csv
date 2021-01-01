@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nakham_pos_block_new_del_order_nakham_pos_block_new_del_order,nakham_pos_block_new_del_order.nakham_pos_block_new_del_order,model_nakham_pos_block_new_del_order_nakham_pos_block_new_del_order,,1,0,0,0

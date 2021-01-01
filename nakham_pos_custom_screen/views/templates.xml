@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+        <template id="assets" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/css" href="/nakham_pos_custom_screen/static/src/css/pos.css" id='asset_css' />
+                <script type="text/javascript" src="/nakham_pos_custom_screen/static/src/js/models.js"></script>
+                <script type="text/javascript" src="/nakham_pos_custom_screen/static/src/js/screens.js"></script>
+            
+             </xpath>
+        </template>
+
+    </data>
+</odoo>

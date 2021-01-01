@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+      <!-- Inherit Form View to Modify it -->
+      <record id="" model="ir.ui.view">
+          <field name="name">pos.order.group_return</field>
+          <field name="model">pos.order</field>
+          <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+          <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='refund']" position="attributes">
+                <attribute name="groups">nakham_group_to_draft_pos_order.group_return_product_payment</attribute>
+            </xpath>
+
+          </field>
+      </record>
+  </data>
+</odoo>

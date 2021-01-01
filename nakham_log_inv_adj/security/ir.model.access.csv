@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nakham_log_inv_adj_nakham_log_inv_adj,nakham_log_inv_adj.nakham_log_inv_adj,model_nakham_log_inv_adj_nakham_log_inv_adj,base.group_user,1,1,1,1

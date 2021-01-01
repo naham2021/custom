@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="location_archive">
+      <field name="name">location archive</field>
+      <field name="model">stock.location</field>
+      <field name="inherit_id" ref="stock.view_location_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//group[@name='localization']" position="after">
+          <field name="user_location_ids"
+                                     attrs="{'invisible': [('usage', '!=', 'transit')]}"/>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>
