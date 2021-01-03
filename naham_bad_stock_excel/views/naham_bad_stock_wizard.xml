@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="excel_Dowload" model="ir.ui.view">
+            <field name="name">Dowload</field>
+            <field name="model">report.excel</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="file_name" invisible="1"/>
+                            <field name="excel_file" widget="binary" filename="file_name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_bad_stock_wizard_wizard_form" model="ir.ui.view">
+            <field name="name">bad.stock.wizard.form</field>
+            <field name="model">bad.stock.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_from" required="1" />
+                                <field name="date_to" required="1" />
+                            </group>
+                             <group>
+                                <field name="search_by" />
+                                <field name="product_id" attrs="{'invisible': [('search_by','!=', 'product')],'required': [('search_by','=', 'product')]}" />
+                                <field name="product_categ_ids" widget="many2many_tags" attrs="{'invisible': [('search_by','!=','categ')],'required': [('search_by','=', 'categ')]}" />
+                                <field name="location_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_bad_stock_search"  string="Generate Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_bad_stock_wizard_action" model="ir.actions.act_window">
+            <field name="name">bad Stock Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bad.stock.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="bad_stock_wizard_menu" name="Bad Stock Wizard" parent="stock.menu_warehouse_report" action="view_bad_stock_wizard_action" />
+
+
+    </data>
+</odoo>
