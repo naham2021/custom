@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sv_asset_confirm_sv_asset_confirm,sv_asset_confirm.sv_asset_confirm,model_sv_asset_confirm_sv_asset_confirm,,1,0,0,0
