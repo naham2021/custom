@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="excel_Dowload" model="ir.ui.view">
+            <field name="name">Dowload</field>
+            <field name="model">report.excel</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="file_name" invisible="1"/>
+                            <field name="excel_file" widget="binary" filename="file_name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_inventory_not_invoice_wizard_form" model="ir.ui.view">
+            <field name="name">inventory.not.invoice.wizard.form</field>
+            <field name="model">inventory.not.invoice.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="type" invisible="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_inventory_not_invoice_search" attrs="{'invisible':[('type','!=','sale')]}" string="Generate Report" type="object" class="btn-primary"/>
+                        <button name="action_inventory_not_invoice_search_purchase" attrs="{'invisible':[('type','!=','purchase')]}" string="Generate Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_inventory_does_not_wizard_action" model="ir.actions.act_window">
+            <field name="name">Inventory Does Not Invoiced</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">inventory.not.invoice.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_type': 'sale'}</field>
+        </record>
+        <record id="view_inventory_does_not_billed_wizard_action" model="ir.actions.act_window">
+            <field name="name">Inventory Does Not Billed</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">inventory.not.invoice.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_type': 'purchase'}</field>
+
+        </record>
+
+        <menuitem id="inventory_does_not_invoiced_menu" name="Inventory Does Not Invoiced" parent="sale.menu_sale_report" action="view_inventory_does_not_wizard_action" />
+        <menuitem id="inventory_does_not_billed_invoiced_menu" name="Inventory Does Not Billed" parent="purchase.purchase_report" action="view_inventory_does_not_billed_wizard_action" />
+
+
+    </data>
+</odoo>

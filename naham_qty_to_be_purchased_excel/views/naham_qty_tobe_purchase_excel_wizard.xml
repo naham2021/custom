@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="excel_Dowload" model="ir.ui.view">
+            <field name="name">Dowload</field>
+            <field name="model">report.excel</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="file_name" invisible="1"/>
+                            <field name="excel_file" widget="binary" filename="file_name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_qty_tobe_purchased_wizard_form" model="ir.ui.view">
+            <field name="name">qty.tobe.purchased.form</field>
+            <field name="model">qty.tobe.purchased.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_from" required="1" />
+                                <field name="date_to" required="1" />
+                            </group>
+                             <group>
+                                <field name="search_by" />
+                                <field name="product_id" attrs="{'invisible': [('search_by','!=', 'product')],'required': [('search_by','=', 'product')]}" />
+                                <field name="product_categ_ids" widget="many2many_tags" attrs="{'invisible': [('search_by','!=','categ')],'required': [('search_by','=', 'categ')]}" />
+                                <field name="number_of_month"/>
+                                <field name="computed_months"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="qty_tobe_purchased_search"  string="Generate Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_qty_tobe_purchased_wizard_action" model="ir.actions.act_window">
+            <field name="name">Qty To Be Purchased Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">qty.tobe.purchased.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="qty_tobe_purchased_wizard_menu" name="Qty Tobe Purchased" parent="stock.menu_warehouse_report" action="view_qty_tobe_purchased_wizard_action" />
+
+
+    </data>
+</odoo>
