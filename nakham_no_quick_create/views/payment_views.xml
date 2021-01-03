@@ -1,0 +1,32 @@
+<odoo>
+  <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_account_payment_form_quick" model="ir.ui.view">
+            <field name="name">account.payment</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="replace">
+                                <field name="partner_id" options='{"no_create": True,"no_create_edit": True, "no_quick_create": True}' attrs="{'required': [('state', '=', 'draft'), ('payment_type', 'in', ('inbound', 'outbound'))], 'invisible': [('payment_type', 'not in', ('inbound', 'outbound'))]}" context="{'default_is_company': True}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+      <record id="view_account_payment_form_quick_group" model="ir.ui.view">
+            <field name="name">account.payment</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+                <field name="groups_id" eval="[(6,0,[ref('nakham_no_quick_create.group_quick_create')])]"/>
+
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="replace">
+                                <field name="partner_id"  attrs="{'required': [('state', '=', 'draft'), ('payment_type', 'in', ('inbound', 'outbound'))], 'invisible': [('payment_type', 'not in', ('inbound', 'outbound'))]}" context="{'default_is_company': True}"/>
+                </xpath>
+
+            </field>
+        </record>
+  </data>
+</odoo>
