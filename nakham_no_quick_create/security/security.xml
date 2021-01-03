@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+
+        <record id="group_quick_create" model="res.groups">
+            <field name="name">Quick Creation</field>
+        </record>
+
+    </data>
+</odoo>

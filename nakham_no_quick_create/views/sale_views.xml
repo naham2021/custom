@@ -1,0 +1,33 @@
+<odoo>
+  <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_order_form_quick" model="ir.ui.view">
+            <field name="name">sale.order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="replace">
+                            <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" options='{"always_reload": True,"no_create": True,"no_create_edit": True, "no_quick_create": True}'/>
+                </xpath>
+
+            </field>
+        </record>
+
+              <!-- Inherit Form View to Modify it -->
+        <record id="view_order_form_quick_group" model="ir.ui.view">
+            <field name="name">sale.order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+                            <field name="groups_id" eval="[(6,0,[ref('nakham_no_quick_create.group_quick_create')])]"/>
+
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="replace">
+                            <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}'/>
+                </xpath>
+
+            </field>
+        </record>
+  </data>
+</odoo>
