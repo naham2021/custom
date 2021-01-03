@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="hide action tree options assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/rp_hide_action_tree_v12/static/src/js/hide_action_tree_optn.js"></script>
+        </xpath>
+    </template>
+</odoo>
