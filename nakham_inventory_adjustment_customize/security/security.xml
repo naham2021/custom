@@ -1,5 +1,0 @@
-<odoo>
-    <record id="group_product_adjustment" model="res.groups">
-        <field name="name">Adjustment Product</field>
-    </record>
-</odoo>
