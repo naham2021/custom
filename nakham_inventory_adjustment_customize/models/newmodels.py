@@ -7,6 +7,9 @@ from datetime import datetime
 class StockInventory(models.Model):
     _inherit = 'stock.inventory'
 
+
+
+
     name = fields.Char(
         'Inventory Reference', default="New",copy=False,
         readonly=True, required=True)
