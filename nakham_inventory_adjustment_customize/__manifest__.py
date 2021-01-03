@@ -5,7 +5,7 @@
     'website': "http://www.centione.com",
     'category': 'Uncategorized',
     'version': '0.1',
-    'depends': ['base', 'stock', 'stock_account', 'account','nakham_analytic_account'],
+    'depends': ['base', 'stock', 'stock_account', 'account'],
     'data': [
         # 'security/ir.model.access.csv',
         'security/security.xml',
