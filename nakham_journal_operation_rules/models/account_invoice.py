@@ -42,19 +42,19 @@ class AccountMove(models.Model):
         elif journal_type == "general":
             journal =  self.env['account.journal'].search([("user_ids", '=', current_user.id)], limit=1)
             return self.env['account.journal'].search([("id", '=', journal.id)], limit=1)
-    @api.model
-    def _get_default_currency_new(self):
-        journal = self._default_journal()
-        print('journal ::::',journal)
-        j = self.env['account.journal'].search([("id", '=', journal.id)], limit=1)
-        print('j ',j.name)
-        return j.currency_id or j.company_id.currency_id
-
-
-    currency_id = fields.Many2one('res.currency',  readonly=True, tracking=True, required=True,
-        states={'draft': [('readonly', False)]},
-        string='Currency',
-        default=_get_default_currency_new)
+    # @api.model
+    # def _get_default_currency_new(self):
+    #     journal = self._default_journal()
+    #     print('journal ::::',journal)
+    #     j = self.env['account.journal'].search([("id", '=', journal.id)], limit=1)
+    #     print('j ',j.name)
+    #     return j.currency_id or j.company_id.currency_id
+    #
+    #
+    # currency_id = fields.Many2one('res.currency',  readonly=True, tracking=True, required=True,
+    #     states={'draft': [('readonly', False)]},
+    #     string='Currency',
+    #     default=_get_default_currency_new)
 
     @api.model
     def _default_journal(self):
