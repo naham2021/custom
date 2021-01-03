@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>   
+    <data>
+        <record id="group_tree_archive_access" model="res.groups">
+            <field name="name">Show Archive Tree</field>
+        </record>
+        <record id="group_tree_delete_access" model="res.groups">
+            <field name="name">Show Delete Tree</field>
+        </record>
+        <record id="group_tree_export_access" model="res.groups">
+            <field name="name">Show Export Tree</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,33 @@
+<odoo>
+  <data>
+        <menuitem
+            id="stock_enterprise.stock_dashboard_menuitem"
+            name="Warehouse Analysis"
+            parent="stock.menu_warehouse_report"
+            action="stock_enterprise.stock_report_dashboard_action"
+        groups="nakham_reports_groups_inventory.group_warehouse_analysis"  />
+          <menuitem id="unreserved_qty_script.menu_unreserved_qty_action"
+                    name="Unreserved Qty"
+                    parent="stock.menu_warehouse_report"
+                    action="unreserved_qty_script.unreserved_report_action" sequence="11" groups="nakham_reports_groups_inventory.group_unreserved_qty"/>
+                  <menuitem id="stock.menu_valuation" name="Inventory Report"
+              parent="stock.menu_warehouse_report" sequence="100"
+              action="stock.action_view_quants"
+                  groups="nakham_reports_groups_inventory.group_inventory_report" />
+    <menuitem id="stock.menu_forecast_inventory" name="Forecasted Inventory"
+              parent="stock.menu_warehouse_report" sequence="101" action="stock.report_stock_quantity_action"
+    groups="nakham_reports_groups_inventory.group_forecasted_inventory"/>
+        <menuitem id="stock_account.menu_valuation" name="Inventory Valuation" parent="stock.menu_warehouse_report"
+                  sequence="110" action="stock_account.action_stock_inventory_valuation"
+        groups="nakham_reports_groups_inventory.group_inventory_valuation"/>
+
+<menuitem action="stock.stock_move_action" id="stock.stock_move_menu" parent="stock.menu_warehouse_report" sequence="140" groups="nakham_reports_groups_inventory.group_stock_moves"/>
+    <menuitem
+        action="stock.stock_move_line_action"
+        id="stock.stock_move_line_menu"
+        parent="stock.menu_warehouse_report" sequence="150"
+    groups="nakham_reports_groups_inventory.group_product_moves"/>
+  </data>
+</odoo>
+
+<!--stock_account.menu_valuation-->

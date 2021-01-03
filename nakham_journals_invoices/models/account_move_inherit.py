@@ -14,8 +14,8 @@ class account_invoice(models.Model):
             pos_order = self.env['pos.order'].search([('name', '=',
                                                        rec.ref)])
 
-            sale_order = self.env['sale.order'].search([('name', '=',
-                                                         rec.ref)])
+            # sale_order = self.env['sale.order'].search([('name', '=',
+            #                                              rec.ref)])
             if pos_order:
                 print("pos_order")
                 rec.journal_id_name = ''
@@ -24,10 +24,11 @@ class account_invoice(models.Model):
                     break
                 rec.journal_ids = [(6, 0, [])]
 
-            elif sale_order:
+            elif not pos_order:
                 print("sale_order")
 
-                payments = self.env['account.payment'].search([('state', 'in', ['reconciled', 'sent', 'posted'])])
+                payments = self.env['account.payment'].search([('reconciled_invoice_ids', 'in', rec.id)])
+                # payments = self.env['account.payment'].search([('state', 'in', ['reconciled', 'sent', 'posted'])])
                 print("payments :: ", payments.ids)
                 print("payments :: ", len(payments))
                 #     if rec.id in line.reconciled_invoice_ids.ids:
@@ -48,6 +49,8 @@ class account_invoice(models.Model):
                 else:
                     rec.journal_ids = [(6, 0, [])]
                     rec.journal_id_name = ''
-            else:
+
+            print("rec.journal_id_name ::",rec.journal_id_name)
+            if rec.journal_id_name == '':
                 rec.journal_ids = [(6, 0, [])]
-                rec.journal_id_name = ''
+                rec.journal_id_name = rec.invoice_type
