@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nakham_domain_action_transfer_nakham_domain_action_transfer,nakham_domain_action_transfer.nakham_domain_action_transfer,model_nakham_domain_action_transfer_nakham_domain_action_transfer,,1,0,0,0
