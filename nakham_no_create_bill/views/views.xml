@@ -1,5 +1,5 @@
 <odoo>
-  <data>
+    <data>
         <!-- Inherit Form View to Modify it -->
         <record id="purchase_order_form_count" model="ir.ui.view">
             <field name="name">purchase.order.count</field>
@@ -8,15 +8,34 @@
             <field name="arch" type="xml">
 
                 <xpath expr="//button[@name='action_view_invoice']" position="replace">
-                        <button type="object"  name="action_view_invoice_new"
+                    <button type="object"  name="action_view_invoice_new"
                             class="oe_stat_button"
                             icon="fa-pencil-square-o" attrs="{'invisible':['|', ('invoice_count', '=', 0), ('state', 'in', ('draft','sent','to approve'))]}">
-                            <field name="invoice_count" widget="statinfo" string="Vendor Bills"/>
-                            <field name='invoice_ids' invisible="1"/>
-                        </button>                </xpath>
+                        <field name="invoice_count" widget="statinfo" string="Vendor Bills"/>
+                        <field name='invoice_ids' invisible="1"/>
+                    </button>                </xpath>
 
             </field>
         </record>
-    odoo_in
-  </data>
+
+        <record id="purchase_order_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_view_invoice'][2]" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', '|', ('state', 'not in', ('purchase', 'done')), ('invoice_status', 'not in', ('no','to invoice', 'invoiced')), ('order_line', '=', [])]}</attribute>
+
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+
+    </data>
 </odoo>
+
+
