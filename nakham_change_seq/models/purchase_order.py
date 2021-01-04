@@ -10,6 +10,7 @@ class PurchaseOrderInherite(models.Model):
 
     @api.model
     def create(self, vals):
+        print("valsvals :: ",vals)
         if vals.get('name', 'New') == 'New':
             seq_date = None
             if 'date_order' in vals:
