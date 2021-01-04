@@ -10,11 +10,12 @@ class PurchaseOrderInherite(models.Model):
 
     @api.model
     def create(self, vals):
+        print("valsvals :: ",vals)
         if vals.get('name', 'New') == 'New':
             seq_date = None
             if 'date_order' in vals:
                 seq_date = fields.Datetime.context_timestamp(self, fields.Datetime.to_datetime(vals['date_order']))
-
+            print("vals['picking_type_id'] :::" ,vals['picking_type_id'])
             deliver_to	 = self.env['stock.picking.type'].search([('id', '=', vals['picking_type_id'])], limit=1)
 
             v = self.env['ir.sequence'].next_by_code('purchase.order', sequence_date=seq_date) or '/'

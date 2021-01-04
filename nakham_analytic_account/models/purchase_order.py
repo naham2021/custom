@@ -15,7 +15,7 @@ class purchase_order(models.Model):
 
 
     picking_type_id = fields.Many2one('stock.picking.type', 'Deliver To', states=Purchase.READONLY_STATES, required=True, default=_default_picking_type, domain="['|', ('warehouse_id', '=', False), ('warehouse_id.company_id', '=', company_id)]",
-        help="This will determine operation type of incoming shipment" ,readonly=True)
+        help="This will determine operation type of incoming shipment" ,readonly=False)
 
     @api.onchange('picking_type_id')
     def onchange_method_picking_type_id(self):
