@@ -11,12 +11,11 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
 
     var task;
 
-    models.load_fields('product.product', ['type','barcode','default_code']);
+    models.load_fields('product.product', ['type']);
 
     var _super_pos = models.PosModel.prototype;
     models.PosModel = models.PosModel.extend({
         initialize: function (session, attributes) {
-            console.log("here start")
 
             this.stock_location_modifier();
 
@@ -39,8 +38,6 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
             bus.startPolling();
         },
         get_model: function (_name) {
-                    console.log("get_model")
-
             var _index = this.models.map(function (e) {
                 return e.model;
             }).indexOf(_name);
@@ -50,19 +47,16 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
             return false;
         },
         load_qty_after_load_product: function () {
-            console.log("load_qty_after_load_product")
-
             var wait = this.get_model('account.fiscal.position');
             var _wait_super_loaded = wait.loaded;
             wait.loaded = function (self, fiscal_positions) {
-                console.log("loaded ----")
                 var done = $.Deferred();
                 _wait_super_loaded(self, fiscal_positions);
 
                 var ids = Object.keys(self.db.product_by_id).map(function (item) {
                     return parseInt(item);
                 });
-                //todo 30nov
+
                 rpc.query({
                     model: 'product.product',
                     method: 'read',
@@ -72,7 +66,6 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
                     res.forEach(function (product) {
                         self.db.qty_by_product_id[product.id] = product.qty_available;
                     });
-                    console.log("refresh_qty")
                     self.refresh_qty();
                     done.resolve();
                 });
@@ -81,7 +74,6 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
             }
         },
         stock_location_modifier: function () {
-            console.log("stock_location_modifier")
             this.stock_location_ids = [];
 
             var wait = this.get_model('pos.category');
@@ -92,17 +84,14 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
                 _super_loaded(self, categories);
 
                 if (!self.config.show_qty_available) {
-                    console.log("show_qty_available")
                     return done.resolve();
                 }
 
                 if (self.config.allow_out_of_stock) {
-                    console.log("allow_out_of_stock")
                     self.config.limit_qty = 0;
                 }
 
                 if (self.config.location_only) {
-                    console.log("self.config.location_only")
                     rpc.query({
                         model: 'stock.quant',
                         method: 'get_qty_available',
@@ -114,9 +103,7 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
                         self.compute_qty_in_pos_location(res);
                         done.resolve();
                     });
-                    self.refresh_qty()
                 } else {
-                    console.log("eles.config.location_only")
                     self.load_qty_after_load_product();
                     done.resolve();
                 }
@@ -124,7 +111,6 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
             };
         },
         on_stock_notification: function (stock_quant) {
-            console.log("load_qty_after_load_product")
             var self = this;
             var product_ids = stock_quant.map(function (item) {
                 return item.product_id[0];
@@ -140,7 +126,6 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
             var self = this;
             var done = new $.Deferred();
             if (this.config && this.config.show_qty_available && this.config.location_only) {
-                console.log('in location');
                 rpc.query({
                     model: 'stock.quant',
                     method: 'get_qty_available',
@@ -151,7 +136,6 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
                 });
 
             } else if (this.config && this.config.show_qty_available) {
-                console.log('qty only');
                 rpc.query({
                     model: 'product.product',
                     method: 'read',
@@ -208,14 +192,12 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
             });
         },
         refresh_qty: function () {
-//          const box = document.querySelector('.qty_pro');
-
             var self = this;
             console.log('self self',self);
-          //  $('.product-list').find('.qty-tag').each(function () {
-            $('.qty_pro').each(function () {
-
-                var $product = $(this);//.parents('.product');
+//            $('.product-list').find('.qty-tag').each(function () {
+            $('.qty-tag').each(function () {
+//                var $product = $(this);//.parents('.product');
+                var $product = $(this).parents('.product');
                 console.log('$product',$product);
                 var id = parseInt($product.attr('data-product-id'));
 
@@ -295,26 +277,20 @@ odoo.define('pos_stock_quantity.pos_stock', function (require) {
 
 
     screens.ProductListWidget.include({
-
         render_product: function (product) {
-                    console.log("dddddddddddddddd")
-
             if (this.pos.config.show_qty_available && product.type !== 'product') {
                 this.pos.db.qty_by_product_id[product.id] = false;
             }
             return this._super(product);
         },
         renderElement: function () {
-             console.log('ggggggggggggggggggggg')
             this._super();
             var self = this;
             var done = $.Deferred();
             clearInterval(task);
-                                            self.pos.refresh_qty();
-
             task = setTimeout(function () {
-
                 if (self.pos.config.show_qty_available) {
+                    self.pos.refresh_qty();
                 } else {
                     $(self.el).find('.qty-tag').hide();
                 }
