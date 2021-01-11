@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="naham_transefer_button_groups" model="ir.ui.view">
+            <field name="name">naham_transefer_button_groups</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(stock.act_stock_return_picking)d']" position="attributes">
+                    <attribute name="groups">naham_group_transfer.naham_return_group</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='button_scrap']" position="attributes">
+                    <attribute name="groups">naham_group_transfer.naham_scrap_group</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_toggle_is_locked']" position="attributes">
+                    <attribute name="groups">naham_group_transfer.naham_unlock_group</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
