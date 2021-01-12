@@ -20,7 +20,7 @@
             <record id="view_picking_tree_user_warehouse_ids" model="ir.ui.view">
           <field name="name">stock.picking.tree.user_warehouse_ids</field>
           <field name="model">stock.picking</field>
-          <field name="inherit_id" ref="stock.vpicktree"/>
+          <field name="inherit_id" ref="stock.view_picking_form"/>
           <field name="arch" type="xml">
 
               <xpath expr="//field[@name='origin']" position="after">
