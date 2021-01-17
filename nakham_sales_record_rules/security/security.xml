@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="nakham_sale_salesman_rule" model="ir.rule">
+            <field name="name">nakham sale salesman Rule</field>
+            <field ref="crm.model_crm_team" name="model_id"/>
+            <field name="domain_force">['|',('user_id', '=', user.id),('member_ids', '=', user.id)]</field>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <!-- You can attach this rule to a specific group, Or make it Global -->
+            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams')),(4, ref('nakham_sales_team_rule.group_manager_sale_teams')) ]"/>
+            <!--<field name="global" eval="1"/> -->
+        </record>
+
+    </data>
+</odoo>
