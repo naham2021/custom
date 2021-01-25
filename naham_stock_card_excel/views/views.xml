@@ -56,7 +56,7 @@
         </record>
 
         <menuitem id="naham_stock_card_report_menu" name="Stock Card" parent="stock.menu_warehouse_report"
-                  action="stock_card_wizard_action"/>
+                  action="stock_card_wizard_action" groups="naham_stock_card_excel.naham_stock_card_group"/>
 
 
     </data>
