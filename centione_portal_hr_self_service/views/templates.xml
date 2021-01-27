@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <!-- <template id="_assets_common_minimal_js" inherit_id="web._assets_common_minimal_js" name="Portal Assets" priority="15">
+            <xpath expr="//script[last()]" position="after">
+
+                <link rel="stylesheet" href="centione_portal_hr_self_service/static/src/css/bootstrap.min.css"/>
+                <script src="centione_portal_hr_self_service/static/src/js/jquery.min.js"></script>
+                <script src="centione_portal_hr_self_service/static/src/js/bootstrap.min.js"></script>
+
+            </xpath>
+
+        </template> -->
+    </data>
+</odoo>

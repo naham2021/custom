@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        explicit list view definition
+        <record model="ir.ui.view" id="custom_deductions_tree_view">
+            <field name="name">custom_deductions tree</field>
+            <field name="model">custom.deductions</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="moather_type"/>
+                    <field name="late_time"/>
+                    <field name="deduction_value"/>
+                    <field name="overtime_type"/>
+                    <field name="hour_value"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="custom_deductions_form_view">
+            <field name="name">custom_deductions form</field>
+            <field name="model">custom.deductions</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="moather_type"/>
+                        <field name="late_time" attrs="{'invisible':[('moather_type','=','overtime')]}"/>
+                        <field name="deduction_value" attrs="{'invisible':[('moather_type','=','overtime')]}"/>
+
+                    </group>
+                    <group>
+                        <field name="overtime_type" attrs="{'invisible':[('moather_type','!=','overtime')]}"/>
+                        <field name="hour_value" attrs="{'invisible':[('moather_type','!=','overtime')]}"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+        actions opening views on models
+        <record model="ir.actions.act_window" id="custom_deductions_action_window">
+            <field name="name">custom_deductions</field>
+            <field name="res_model">custom.deductions</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Custom Deductions" id="custom_deductions_menu_item"
+                  parent="hr_payroll.menu_hr_payroll_configuration"
+                  action="custom_deductions_action_window"/>
+
+
+    </data>
+</odoo>

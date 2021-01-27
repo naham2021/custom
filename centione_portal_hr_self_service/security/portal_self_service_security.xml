@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+            <record id="group_portal_excuse" model="res.groups">
+                <field name="name">Portal Employee Excuse</field>
+                <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+                <field name="comment">the user will have access to his own Excuse request in the account.</field>
+            </record>
+
+            <record id="group_portal_transport" model="res.groups">
+                <field name="name">Portal Employee Transport</field>
+                <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+                <field name="comment">the user will have access to his own Transport request in the account.</field>
+            </record>
+
+            <record id="group_portal_mission" model="res.groups">
+                <field name="name">Portal Employee Mission</field>
+                <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+                <field name="comment">the user will have access to his own Mission request in the account.</field>
+            </record>
+
+            <record id="group_portal_loan" model="res.groups">
+                <field name="name">Portal Employee Loan</field>
+                <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+                <field name="comment">the user will have access to his own Loan request in the account.</field>
+            </record>
+
+            <record id="group_portal_over_time" model="res.groups">
+                <field name="name">Portal Employee Overtime</field>
+                <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+                <field name="comment">the user will have access to his own Overtime request in the account.</field>
+            </record>
+
+            <record id="group_all_portal_access" model="res.groups">
+                <field name="name">All Portal Employee Access</field>
+                <field name="implied_ids" eval="[
+                (4, ref('centione_portal_hr_self_service.group_portal_excuse')),
+                (4, ref('centione_portal_hr_self_service.group_portal_transport')),
+                (4, ref('centione_portal_hr_self_service.group_portal_mission')),
+                (4, ref('centione_portal_hr_self_service.group_portal_loan')),
+                (4, ref('odoo_portal_attendance.portal_user_employee_attendance')),
+                (4, ref('centione_portal_hr_self_service.group_portal_over_time'))]"/>
+                <field name="comment">the user will have all access to his Portal in the account.</field>
+                
+            </record>
+
+    </data>
+</odoo>
+

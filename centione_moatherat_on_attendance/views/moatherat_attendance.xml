@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+        explicit list view definition
+        <record model="ir.ui.view" id="moatherat_attendance_tree_view">
+            <field name="name">moatherat_attendance tree</field>
+            <field name="model">moatherat.attendance</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="moather_type"/>
+                    <field name="employee_id"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="job_id"/>
+                    <field name="num_of_times"/>
+                    <field name="num_of_hours"/>
+                    <field name="value"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="moatherat_attendance_form_view">
+            <field name="name">moatherat_attendance form</field>
+            <field name="model">moatherat.attendance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="moather_type"/>
+                        <field name="overtime_type"  attrs="{'invisible':[('moather_type','!=','overtime')]}"/>
+                        <field name="employee_id"/>
+                        <field name="job_id"/>
+                    </group>
+                    <group>
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                    </group>
+                    <group>
+
+                        <field name="num_of_times"
+                                attrs="{'invisible': [('moather_type', '=', 'overtime')]}"/>
+
+
+                        <field name="num_of_hours" attrs="{'invisible':[('moather_type','!=','overtime')]}"/>
+                        <field name="value"/>
+                    </group>
+
+                </form>
+            </field>
+        </record>
+
+
+        actions opening views on models
+        <record model="ir.actions.act_window" id="moatherat_attendance_action_window">
+            <field name="name">moatherat_attendance</field>
+            <field name="res_model">moatherat.attendance</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Moatherat_Attendance" id="moatherat_attendance_menu_item"
+                  parent="hr_payroll.menu_hr_payroll_configuration"
+                  action="moatherat_attendance_action_window"/>
+
+
+    </data>
+</odoo>

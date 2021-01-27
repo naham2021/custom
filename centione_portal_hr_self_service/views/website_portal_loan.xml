@@ -1,0 +1,500 @@
+<odoo>
+    <data>
+
+
+        <record id="view_hr_loan_form" model="ir.ui.view">
+            <field name="name">Employees Loans Form</field>
+            <field name="model">hr.loan</field>
+            <field name="arch" type="xml">
+                <form string="Employees Loans">
+                    <header>
+                        <!-- <button name="action_approved" states="draft" string="Approve" type="object" class="oe_highlight" groups="hr.group_hr_manager"/>
+                        <button name="action_cancel" states="draft" string="Cancel" type="object" class="oe_highlight" groups="hr.group_hr_manager"/> -->
+
+
+
+
+                        <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,confirm,approved,validate,refuse"/>
+                        <button name="confirm" type="object" string="Confirm" states="draft"/>
+                        <button name="approve" type="object" string="Approve" class="oe_highlight" states="confirm"/>
+                        <button name="validate" type="object" string="Validate" class="oe_highlight" states="approved"/>
+
+                        <button name="refuse" type="object" string="Refuse" states="confirm,approved"/>
+
+                        <button name="draft" type="object" string="Draft" states="confirm,approved"/>
+                        <button name="%(centione_hr_loan.view_loan_payment_wizard_action)d" states="validate" string="Make Payment" type="action" class="oe_highlight" groups="hr.group_hr_manager"/>
+                        <button name="%(centione_hr_loan.view_payment_delay_wizard_action)d" states="validate" string="Delay Payments" type="action" class="oe_highlight" groups="hr.group_hr_manager"/>
+
+
+                    </header>
+                    <group>
+                        <group>
+                            <field name="journal_created" invisible="True"/>
+                            <field name="loan_type"/>
+                            <field name="name" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="employee_id" required="1" readonly="1"/>
+                            <field name="company_id" readonly="1"/>
+                            <field name="requested_amount" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+
+                            <!--<field name="installment" required="1"-->
+                            <!--attrs="{'readonly':[('state','in',['cancel','approved','sent','closed'])]}"/>-->
+                            <field name="installment_amount" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+
+                        </group>
+
+                        <group>
+                            <field name="requested_date" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="settlement_date" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="remaining_budget" attrs="{'readonly':[('state','!=','draft')]}"/>
+
+                        </group>
+
+
+                    </group>
+                    <notebook>
+                        <page string="Payments Details">
+                            <div class="oe_inline oe_stat_button">
+                                <button name="action_populate" attrs="{'invisible': [('state', '!=', 'draft')]}" string="Populate Lines" type="object" class="oe_stat_button" confirm="Sure To Create New Lines ?">
+                                </button>
+                            </div>
+                            <!--attrs="{'readonly':[('state','in',['cancel','approved','closed'])]}"-->
+                            <field name="loan_line" attrs="{'readonly':[('state','!=','draft')]}">
+                                <tree string="Payments Details" editable="bottom">
+                                    <field name="date" required="1"/>
+                                    <field name="amount" required="1" sum="Total Amount"/>
+                                    <field name="paid_amount" required="1" sum="Total Paid"/>
+                                    <field name="state" readonly="1"/>
+                                    <field name="payslip_id" readonly="1"/>
+                                    <field name="loan_type" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_hr_loan_request">
+            <field name="name">Loans</field>
+            <field name="res_model">hr.loan</field>
+            <field name="view_id" ref="view_hr_loan_form"/>
+            <field name="context">{}</field>
+            <field name="name">Employees Loans</field>
+            <!-- <field name="type">ir.actions.act_window</field> -->
+        </record>
+
+
+        <template id="portal_my_loan" name="Portal My Loan: project entries" inherit_id="portal.portal_my_home" priority="30">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-if="request.env['res.users'].browse(request.session.uid).user_has_groups('centione_portal_hr_self_service.group_portal_loan')">
+
+
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="title">Your Loans</t>
+                        <t t-set="url" t-value="'/my/loan_request'"/>
+                        <t t-set="count" t-value="loan_count"/>
+                    </t>
+
+                </t>
+            </xpath>
+        </template>
+
+
+
+        <template id="display_loans" name="Display Loans">
+
+            <t t-call="portal.portal_layout">
+
+                <h3 class="page-header">
+                        Loan Requests
+                </h3>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-12">
+                            <!-- action=hr_holidays.hr_leave_action_action_approve_department -->
+                            <a t-attf-href="/web#view_type=form&amp;model=hr.loan&amp;&amp;action=centione_portal_hr_self_service.action_hr_loan_request" class="btn btn-info">New Loan Request</a>
+                        </div>
+                        <div class="dropdown pull-right mr8 col-sm-6">
+                            <ul class="dropdown-menu" aria-labelledby="sortby">
+                                <li t-foreach="sortings" t-as="option" t-attf-class="#{sortby == option and 'active'}">
+                                    <a t-att-href="default_url + '?' + keep_query('date_begin', 'date_end', sortby=option)">
+                                        <span t-esc="sortings.get(option).get('label')"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <!-- <t t-set="o_portal_search_panel" t-value="True"/> -->
+
+                <!-- <t t-set="searchbar_inputs" t-value="True"/> -->
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+                <t t-call="portal.portal_searchbar">
+                    <!-- <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <t t-set="o_portal_search_panel" t-value="True"/>
+                <t t-set="searchbar_inputs" t-value="True"/> -->
+
+                    <t t-set="title">Excuces</t>
+                </t>
+
+
+
+                <div class="tab">
+                    <button class="tablinks" onclick="openCity(event, 'my_request')" id="defaultOpen">My Request</button>
+                    <button class="tablinks" onclick="openCity(event, 'my_couch_request')">Couch Request</button>
+                    <button class="tablinks" onclick="openCity(event, 'my_manager_request')">Manager Request</button>
+                </div>
+
+
+                <div id="my_request" class="tabcontent">
+                    <t t-if="not loans">
+                        <p>There are currently no mission.</p>
+                    </t>
+                    <t t-if="loans" t-call="portal.portal_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Name</th>
+                                <th>Loan Type</th>
+                                <th>Requested Date</th>
+                                <th>Requested Amount</th>
+                                <th>Installment Amount</th>
+                                <th>State</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="loans" t-as="loan">
+                            <tr>
+                                <td class="text-left">
+                                    <span t-field="loan.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="loan.loan_type"/>
+                                </td>
+                                <td>
+                                    <span t-field="loan.requested_date"/>
+                                </td>
+                                
+
+                                <td>
+                                    <span t-field="loan.requested_amount"/>
+                                </td>
+                                <td>
+                                    <span t-field="loan.installment_amount"/>
+                                </td>
+                                <td class="tx_status">
+                                        <t t-if="loan.state == 'draft'">
+                                            <span class="badge badge-pill badge-light">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i>
+                                                <span class="d-none d-md-inline"> Draft</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="loan.state == 'confirm'">
+                                            <span class="badge badge-pill badge-info">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Confirm" title="Confirm" role="img"></i>
+                                                <span class="d-none d-md-inline">Confirm</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="loan.state == 'approved'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Approve" title="Approve" role="img"></i>
+                                                <span class="d-none d-md-inline"> Approved</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="loan.state == 'validate'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Validate" title="Validate" role="img"></i>
+                                                <span class="d-none d-md-inline"> Validated</span>
+                                            </span>
+                                        </t>
+
+                                        <t t-if="loan.state == 'refuse'">
+                                            <span class="badge badge-pill badge-danger">
+                                                <i class="fa fa-fw fa-remove" aria-label="Refuse" title="Refuse" role="img"></i>
+                                                <span class="d-none d-md-inline"> Refuse</span>
+                                            </span>
+                                        </t>
+                                    </td>
+                                <td>
+                                    <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=hr.loan&amp;action=centione_portal_hr_self_service.action_hr_loan_request&amp;id=%s&amp;view_type=form' % (loan.id)" groups="centione_portal_hr_self_service.group_portal_loan">Edit</a>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </div>
+
+
+
+
+                <div id="my_couch_request" class="tabcontent">
+                    <t t-if="not loans_coach">
+                        <p>There are currently no mission.</p>
+                    </t>
+                    <t t-if="loans_coach" t-call="portal.portal_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Employee</th>
+                                <th>Name</th>
+                                <th>Loan Type</th>
+                                <th>Requested Date</th>
+                                <th>Requested Amount</th>
+                                <th>Installment Amount</th>
+                                <th>State</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="loans_coach" t-as="loan_coach">
+                            <tr>
+                                <td >
+                                    <span t-field="loan_coach.employee_id"/>
+                                </td>
+                                <td class="text-left">
+                                    <span t-field="loan_coach.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="loan_coach.loan_type"/>
+                                </td>
+                                <td>
+                                    <span t-field="loan_coach.requested_date"/>
+                                </td>
+                               
+
+                                <td>
+                                    <span t-field="loan_coach.requested_amount"/>
+                                </td>
+                                <td>
+                                    <span t-field="loan_coach.installment_amount"/>
+                                </td>
+                                <td class="tx_status">
+                                        <t t-if="loan_coach.state == 'draft'">
+                                            <span class="badge badge-pill badge-light">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i>
+                                                <span class="d-none d-md-inline"> Draft</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="loan_coach.state == 'confirm'">
+                                            <span class="badge badge-pill badge-info">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Confirm" title="Confirm" role="img"></i>
+                                                <span class="d-none d-md-inline">Confirm</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="loan_coach.state == 'approved'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Approve" title="Approve" role="img"></i>
+                                                <span class="d-none d-md-inline"> Approved</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="loan_coach.state == 'validate'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Validate" title="Validate" role="img"></i>
+                                                <span class="d-none d-md-inline"> Validated</span>
+                                            </span>
+                                        </t>
+
+                                        <t t-if="loan_coach.state == 'refuse'">
+                                            <span class="badge badge-pill badge-danger">
+                                                <i class="fa fa-fw fa-remove" aria-label="Refuse" title="Refuse" role="img"></i>
+                                                <span class="d-none d-md-inline"> Refuse</span>
+                                            </span>
+                                        </t>
+                                    </td>
+                                <td>
+                                    <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=hr.loan&amp;action=centione_portal_hr_self_service.action_hr_loan_request&amp;id=%s&amp;view_type=form' % (loan_coach.id)" groups="centione_portal_hr_self_service.group_portal_loan">Edit</a>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </div>
+
+
+                <div id="my_manager_request" class="tabcontent">
+                    <t t-if="not loans_coach">
+                        <p>There are currently no mission.</p>
+                    </t>
+                    <t t-if="loans_manager" t-call="portal.portal_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Employee</th>
+                                <th>Name</th>
+                                <th>Loan Type</th>
+                                <th>Requested Date</th>
+                                <th>Requested Amount</th>
+                                <th>Installment Amount</th>
+                                <th>State</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="loans_manager" t-as="loan_manager">
+                            <tr>
+                                <td >
+                                    <span t-field="loan_manager.employee_id"/>
+                                </td>
+                                <td class="text-left">
+                                    <span t-field="loan_manager.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="loan_manager.loan_type"/>
+                                </td>
+                                <td>
+                                    <span t-field="loan_manager.requested_date"/>
+                                </td>
+                               
+
+                                <td>
+                                    <span t-field="loan_manager.requested_amount"/>
+                                </td>
+                                <td>
+                                    <span t-field="loan_manager.installment_amount"/>
+                                </td>
+                                <td class="tx_status">
+                                        <t t-if="loan_manager.state == 'draft'">
+                                            <span class="badge badge-pill badge-light">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i>
+                                                <span class="d-none d-md-inline"> Draft</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="loan_manager.state == 'confirm'">
+                                            <span class="badge badge-pill badge-info">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Confirm" title="Confirm" role="img"></i>
+                                                <span class="d-none d-md-inline">Confirm</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="loan_manager.state == 'approved'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Approve" title="Approve" role="img"></i>
+                                                <span class="d-none d-md-inline"> Approved</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="loan_manager.state == 'validate'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Validate" title="Validate" role="img"></i>
+                                                <span class="d-none d-md-inline"> Validated</span>
+                                            </span>
+                                        </t>
+
+                                        <t t-if="loan_manager.state == 'refuse'">
+                                            <span class="badge badge-pill badge-danger">
+                                                <i class="fa fa-fw fa-remove" aria-label="Refuse" title="Refuse" role="img"></i>
+                                                <span class="d-none d-md-inline"> Refuse</span>
+                                            </span>
+                                        </t>
+                                    </td>
+                                <td>
+                                    <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=hr.loan&amp;action=centione_portal_hr_self_service.action_hr_loan_request&amp;id=%s&amp;view_type=form' % (loan_manager.id)" groups="centione_portal_hr_self_service.group_portal_loan">Edit</a>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </div>
+            </t>
+
+
+
+            <script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i &lt; tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i &lt; tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+  
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+            </script>
+
+            <style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  border: none;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: none;
+  border-top: none;
+   -webkit-animation: fadeEffect 1s;
+animation: fadeEffect 1s; /* Fading effect takes 1 second */
+
+}
+
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+            </style>
+
+
+        </template>
+
+
+        <template id="not_allowed_loan_request" name="Access Denied">
+
+            <t t-call="portal.portal_layout">
+                <div id="wrap">
+                    <div class="oe_structure"/>
+                    <div class="container">
+                        <h1>You are not Allowed Access This Document</h1>
+                        <div>
+                            <a t-attf-href="/my/home" class="btn btn-lg btn-primary">
+                                    Back
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
