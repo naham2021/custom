@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+         <report
+            id="action_report_absence_report"
+            model="report.interface"
+            string="Absence Report"
+            name="centione_hr_attendance_report.report_attendance_template"
+            file="centione_hr_attendance_report.report_attendance_template"
+            report_type="qweb-pdf"
+        />
+    </data>
+</odoo>

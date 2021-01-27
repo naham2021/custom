@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_deductions,access_custom_deductions,model_custom_deductions,base.group_user,1,1,1,1
+access_moatherat_attendance,access_moatherat_attendance,model_moatherat_attendance,base.group_user,1,1,1,1
