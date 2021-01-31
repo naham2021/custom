@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+
+        <!-- <record id="view_employee_portal_wizard_action" model="ir.actions.act_window">
+            <field name="name">employee.portal.wizard.action</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="src_model">employee.portal.wizard</field>
+            <field name="res_model">employee.portal.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record> -->
+
+        <record id="view_employee_portal_wizard_form" model="ir.ui.view">
+            <field name="name">Employee Portal</field>
+            <field name="model">employee.portal.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Employee Portal">
+                    <sheet>
+
+                        <group>
+                            <field name="name" required="True"/>
+                            <field name="email" required="True"/>
+
+                        </group>
+
+                    </sheet>
+                    <footer>
+                        <button name='allow_portal_access' string='Allow Portal Access' class='oe_highlight' type='object'/>
+                        <button special="cancel" string="Cancel" type="object" class="btn btn-default oe_inline"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

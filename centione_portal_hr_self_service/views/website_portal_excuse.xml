@@ -1,0 +1,483 @@
+<odoo>
+    <data>
+
+        <record id="view_hr_excuse_form" model="ir.ui.view">
+            <field name="name">hr excuse form</field>
+            <field name="model">hr.excuse</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,confirm,approve,validate,refuse"/>
+                        <button name="confirm" type="object" string="Confirm" states="draft"/>
+                        <button name="approve" type="object" string="Approve" class="oe_highlight" states="confirm"/>
+                        <button name="validate" type="object" string="Validate" class="oe_highlight" states="approve"/>
+
+                        <button name="refuse" type="object" string="Refuse" states="confirm,approve"/>
+
+                        <button name="draft" type="object" string="Draft" states="confirm,approve"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="employee_id" required="1" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="start_date" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="end_date" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="period" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="comment" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_hr_excuse_request">
+            <field name="name">Excuses</field>
+            <field name="res_model">hr.excuse</field>
+            <field name="view_id" ref="view_hr_excuse_form"/>
+            <field name="context">{}</field>
+        </record>
+
+        <template id="portal_my_excuse" name="Portal My Excuse: project entries" inherit_id="portal.portal_my_home" priority="30">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-if="request.env['res.users'].browse(request.session.uid).user_has_groups('centione_portal_hr_self_service.group_portal_excuse')">
+
+
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="title">Your Excuses</t>
+                        <t t-set="url" t-value="'/my/excuse_request'"/>
+                        <t t-set="count" t-value="excuse_count"/>
+                    </t>
+
+                </t>
+            </xpath>
+        </template>
+
+
+
+        <template id="display_excuses" name="Display Excuses">
+
+
+
+
+
+            <t t-call="portal.portal_layout">
+                <h3 class="page-header">
+                        Excuse Requests
+                </h3>
+
+
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-12">
+                            <!-- action=hr_holidays.hr_leave_action_action_approve_department -->
+                            <a t-attf-href="/web#view_type=form&amp;model=hr.excuse&amp;&amp;action=centione_portal_hr_self_service.action_hr_excuse_request" class="btn btn-info">New Excuse Request</a>
+                        </div>
+
+                        <div class="dropdown pull-right mr8 col-sm-6">
+                            <ul class="dropdown-menu" aria-labelledby="sortby">
+                                <li t-foreach="sortings" t-as="option" t-attf-class="#{sortby == option and 'active'}">
+                                    <a t-att-href="default_url + '?' + keep_query('date_begin', 'date_end', sortby=option)">
+                                        <span t-esc="sortings.get(option).get('label')"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <!-- <t t-set="o_portal_search_panel" t-value="True"/> -->
+
+                <!-- <t t-set="searchbar_inputs" t-value="True"/> -->
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+                <t t-call="portal.portal_searchbar">
+                    <!-- <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <t t-set="o_portal_search_panel" t-value="True"/>
+                <t t-set="searchbar_inputs" t-value="True"/> -->
+
+                    <t t-set="title">Excuces</t>
+                </t>
+
+
+
+                <div class="tab">
+                    <button class="tablinks" onclick="openCity(event, 'my_request')" id="defaultOpen">My Request</button>
+                    <button class="tablinks" onclick="openCity(event, 'my_couch_request')">Couch Request</button>
+                    <button class="tablinks" onclick="openCity(event, 'my_manager_request')">Manager Request</button>
+                </div>
+
+
+
+
+
+
+
+
+                <div id="my_request" class="tabcontent">
+                    <t t-if="not excuses">
+                        <p>There are currently no excuses.</p>
+                    </t>
+                    <t t-if="excuses" t-call="portal.portal_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Period</th>
+                                <th>Comment</th>
+                                <th>State</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="excuses" t-as="excuse">
+                                <tr>
+
+                                    <td>
+                                        <span t-field="excuse.start_date"/>
+                                    </td>
+                                    <td class='d-none d-md-table-cell'>
+                                        <span t-field="excuse.end_date"/>
+                                    </td>
+                                    <td>
+
+                                        <span t-esc="round(excuse.period,2)"/>
+
+                                    </td>
+                                    <td>
+
+                                        <span t-field="excuse.comment"/>
+
+                                    </td>
+                                    <td class="tx_status">
+                                        <t t-if="excuse.state == 'draft'">
+                                            <span class="badge badge-pill badge-light">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i>
+                                                <span class="d-none d-md-inline"> Draft</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="excuse.state == 'confirm'">
+                                            <span class="badge badge-pill badge-info">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Confirm" title="Confirm" role="img"></i>
+                                                <span class="d-none d-md-inline">Confirm</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="excuse.state == 'approve'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Approve" title="Approve" role="img"></i>
+                                                <span class="d-none d-md-inline"> Approved</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="excuse.state == 'validate'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Validate" title="Validate" role="img"></i>
+                                                <span class="d-none d-md-inline"> Validated</span>
+                                            </span>
+                                        </t>
+
+                                        <t t-if="excuse.state == 'refuse'">
+                                            <span class="badge badge-pill badge-danger">
+                                                <i class="fa fa-fw fa-remove" aria-label="Refuse" title="Refuse" role="img"></i>
+                                                <span class="d-none d-md-inline"> Refuse</span>
+                                            </span>
+                                        </t>
+                                    </td>
+                                    <td class="text-right">
+                                        <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=hr.excuse&amp;id=%s&amp;action=centione_portal_hr_self_service.action_hr_excuse_request&amp;view_type=form' % (excuse.id)" groups="centione_portal_hr_self_service.group_portal_excuse">Edit</a>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </t>
+                </div>
+
+                <div id="my_couch_request" class="tabcontent">
+
+                    <t t-if="not excuses_coach">
+                        <p>There are currently no excuses.</p>
+                    </t>
+                    <t t-if="excuses_coach" t-call="portal.portal_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Employee</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Period</th>
+                                <th>Comment</th>
+                                <th>State</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="excuses_coach" t-as="excuse_coach">
+                                <tr>
+
+                                    <td>
+                                        <span t-field="excuse_coach.employee_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse_coach.start_date"/>
+                                    </td>
+                                    <td class='d-none d-md-table-cell'>
+                                        <span t-field="excuse_coach.end_date"/>
+                                    </td>
+                                    <td>
+
+                                        <span t-esc="round(excuse_coach.period,2)"/>
+
+                                    </td>
+                                    <td>
+
+                                        <span t-field="excuse_coach.comment"/>
+
+                                    </td>
+                                    <td class="tx_status">
+                                        <t t-if="excuse_coach.state == 'draft'">
+                                            <span class="badge badge-pill badge-light">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i>
+                                                <span class="d-none d-md-inline"> Draft</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="excuse_coach.state == 'confirm'">
+                                            <span class="badge badge-pill badge-info">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Confirm" title="Confirm" role="img"></i>
+                                                <span class="d-none d-md-inline">Confirm</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="excuse_coach.state == 'approve'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Approve" title="Approve" role="img"></i>
+                                                <span class="d-none d-md-inline"> Approved</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="excuse_coach.state == 'validate'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Validate" title="Validate" role="img"></i>
+                                                <span class="d-none d-md-inline"> Validated</span>
+                                            </span>
+                                        </t>
+
+                                        <t t-if="excuse_coach.state == 'refuse'">
+                                            <span class="badge badge-pill badge-danger">
+                                                <i class="fa fa-fw fa-remove" aria-label="Refuse" title="Refuse" role="img"></i>
+                                                <span class="d-none d-md-inline"> Refuse</span>
+                                            </span>
+                                        </t>
+                                    </td>
+                                    <td class="text-right">
+                                        <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=hr.excuse&amp;id=%s&amp;action=centione_portal_hr_self_service.action_hr_excuse_request&amp;view_type=form' % (excuse_coach.id)" groups="centione_portal_hr_self_service.group_portal_excuse">Edit</a>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </t>
+                </div>
+
+                <div id="my_manager_request" class="tabcontent">
+                    <t t-if="not my_manager_request">
+                        <p>There are currently no excuses.</p>
+                    </t>
+
+                    <t t-if="excuses_manager" t-call="portal.portal_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Employee</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Period</th>
+                                <th>Comment</th>
+                                <th>State</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="excuses_manager" t-as="excuse_manager">
+                                <tr>
+                                    <td>
+                                        <span t-field="excuse_manager.employee_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse_manager.start_date"/>
+                                    </td>
+                                    <td class='d-none d-md-table-cell'>
+                                        <span t-field="excuse_manager.end_date"/>
+                                    </td>
+                                    <td>
+
+                                        <span t-esc="round(excuse_manager.period,2)"/>
+
+                                    </td>
+                                    <td>
+
+                                        <span t-field="excuse_manager.comment"/>
+
+                                    </td>
+                                    <td class="tx_status">
+                                        <t t-if="excuse_manager.state == 'draft'">
+                                            <span class="badge badge-pill badge-light">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i>
+                                                <span class="d-none d-md-inline"> Draft</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="excuse_manager.state == 'confirm'">
+                                            <span class="badge badge-pill badge-info">
+                                                <i class="fa fa-fw fa-clock-o" aria-label="Confirm" title="Confirm" role="img"></i>
+                                                <span class="d-none d-md-inline">Confirm</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="excuse_manager.state == 'approve'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Approve" title="Approve" role="img"></i>
+                                                <span class="d-none d-md-inline"> Approved</span>
+                                            </span>
+                                        </t>
+                                        <t t-if="excuse_manager.state == 'validate'">
+                                            <span class="badge badge-pill badge-success">
+                                                <i class="fa fa-fw fa-check" aria-label="Validate" title="Validate" role="img"></i>
+                                                <span class="d-none d-md-inline"> Validated</span>
+                                            </span>
+                                        </t>
+
+                                        <t t-if="excuse_manager.state == 'refuse'">
+                                            <span class="badge badge-pill badge-danger">
+                                                <i class="fa fa-fw fa-remove" aria-label="Refuse" title="Refuse" role="img"></i>
+                                                <span class="d-none d-md-inline"> Refuse</span>
+                                            </span>
+                                        </t>
+                                    </td>
+                                    <td class="text-right">
+                                        <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=hr.excuse&amp;id=%s&amp;action=centione_portal_hr_self_service.action_hr_excuse_request&amp;view_type=form' % (excuse_manager.id)" groups="centione_portal_hr_self_service.group_portal_excuse">Edit</a>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </t>
+                </div>
+            </t>
+
+
+            <script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i &lt; tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i &lt; tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+  
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+            </script>
+
+            <style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  border: none;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: none;
+  border-top: none;
+   -webkit-animation: fadeEffect 1s;
+animation: fadeEffect 1s; /* Fading effect takes 1 second */
+
+}
+
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+            </style>
+
+
+        </template>
+
+
+        <template id="not_allowed_excuse_request" name="Access Denied">
+
+            <t t-call="portal.portal_layout">
+                <div id="wrap">
+                    <div class="oe_structure"/>
+                    <div class="container">
+                        <h1>You are not Allowed Access This Document</h1>
+                        <div>
+                            <a t-attf-href="/my/home" class="btn btn-lg btn-primary">
+                                    Back
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+<!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+</div> -->

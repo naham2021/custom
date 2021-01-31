@@ -1,0 +1,478 @@
+<odoo>
+    <data>
+
+    
+
+        <record id="view_over_time_form_main" model="ir.ui.view">
+            <field name="name">over.time.form.inherit</field>
+            <field name="model">over.time</field>
+            <field name="inherit_id" ref="centione_over_time.view_over_time_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="replace">
+                   <header>
+                        <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,confirm,approve,validate,refuse"/>
+                        <button name="confirm" type="object" string="Confirm" states="draft"/>
+                        <button name="approve" type="object" string="Approve" class="oe_highlight" states="confirm"/>
+                        <button name="validate" type="object" string="Validate" class="oe_highlight" states="approve"/>
+
+                        <button name="refuse" type="object" string="Refuse" states="confirm,approve"/>
+
+                        <button name="draft" type="object" string="Draft" states="confirm,approve"/>
+                    </header>
+
+                </xpath>
+            </field>
+        </record>
+        <record id="view_over_time_form" model="ir.ui.view">
+            <field name="name">over.time.form</field>
+            <field name="model">over.time</field>
+            <field name="arch" type="xml">
+                <form string="MODEL">
+                    <header>
+                        <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,confirm,approve,validate,refuse"/>
+                        <button name="confirm" type="object" string="Confirm" states="draft"/>
+                        <button name="approve" type="object" string="Approve" class="oe_highlight" states="confirm"/>
+                        <button name="validate" type="object" string="Validate" class="oe_highlight" states="approve"/>
+
+                        <button name="refuse" type="object" string="Refuse" states="confirm,approve"/>
+
+                        <button name="draft" type="object" string="Draft" states="confirm,approve"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Name" readonly="True"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee_id" required="1" readonly="1"/>
+                                <field name="company_id" attrs="{'readonly':[('state','!=','draft')],'required':[('state','=','draft')]}"/>
+                                <field name="date_from" attrs="{'readonly':[('state','!=','draft')],'required':[('state','=','draft')]}"/>
+                                <field name="date_to" attrs="{'readonly':[('state','!=','draft')],'required':[('state','=','draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="holiday_type" attrs="{'readonly':[('state','!=','draft')],'required':[('state','=','draft')]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="morning_hours"/>
+                            <field name="night_hours"/>
+                            <field name="holiday_hours"/>
+                            <field name="total_hours"/>
+                        </group>
+                        <group>
+                            <field name="attendance_id" readonly="1" attrs="{'invisible': [('attendance_id', '=', False)]}"/>
+                            <field name="payslip_id" readonly="1" attrs="{'invisible': [('payslip_id', '=', False)]}"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_hr_over_time_request">
+            <field name="name">Overtime</field>
+            <field name="res_model">over.time</field>
+            <field name="view_id" ref="view_over_time_form"/>
+            <field name="context">{}</field>
+        </record>
+
+        <template id="portal_my_over_time" name="Portal My Overtime: project entries" inherit_id="portal.portal_my_home" priority="30">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-if="request.env['res.users'].browse(request.session.uid).user_has_groups('centione_portal_hr_self_service.group_portal_over_time')">
+
+
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="title">Your Overtime</t>
+                        <t t-set="url" t-value="'/my/over_time_request'"/>
+                        <t t-set="count" t-value="over_time_count"/>
+                    </t>
+
+                </t>
+            </xpath>
+        </template>
+
+
+
+        <template id="display_over_times" name="Display over_times">
+
+            <t t-call="portal.portal_layout">
+                <h3 class="page-header">
+                         Overtime Requests
+                </h3>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-12">
+                            <!-- action=hr_holidays.hr_leave_action_action_approve_department -->
+                            <a t-attf-href="/web#view_type=form&amp;model=over.time&amp;&amp;action=centione_portal_hr_self_service.action_hr_over_time_request" class="btn btn-info">New Overtime Request</a>
+                        </div>
+                        <div class="dropdown pull-right mr8 col-sm-6">
+                            <ul class="dropdown-menu" aria-labelledby="sortby">
+                                <li t-foreach="sortings" t-as="option" t-attf-class="#{sortby == option and 'active'}">
+                                    <a t-att-href="default_url + '?' + keep_query('date_begin', 'date_end', sortby=option)">
+                                        <span t-esc="sortings.get(option).get('label')"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <!-- <t t-set="o_portal_search_panel" t-value="True"/> -->
+
+                <!-- <t t-set="searchbar_inputs" t-value="True"/> -->
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+                <t t-call="portal.portal_searchbar">
+                    <!-- <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <t t-set="o_portal_search_panel" t-value="True"/>
+                <t t-set="searchbar_inputs" t-value="True"/> -->
+
+                    <t t-set="title">Excuces</t>
+                </t>
+
+
+                <div class="tab">
+                    <button class="tablinks" onclick="openCity(event, 'my_request')" id="defaultOpen">My Request</button>
+                    <button class="tablinks" onclick="openCity(event, 'my_couch_request')">Couch Request</button>
+                    <button class="tablinks" onclick="openCity(event, 'my_manager_request')">Manager Request</button>
+                </div>
+
+
+                <div id="my_request" class="tabcontent">
+                    <t t-if="not over_times">
+                        <p>There are currently no over time.</p>
+                    </t>
+                    <t t-if="over_times" t-call="portal.portal_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Holiday Type</th>
+                                <th>Date From</th>
+                                <th>Date To</th>
+
+
+                                <th>  Total Hours</th>
+
+
+
+                                <th>  State</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="over_times" t-as="over_time">
+                            <tr>
+                                <td class="text-left">
+                                    <span t-field="over_time.holiday_type"/>
+                                </td>
+                                <td>
+                                    <span t-field="over_time.date_from"/>
+                                </td>
+                                <td>
+                                    <span t-field="over_time.date_to"/>
+                                </td>
+
+                                <td>
+                                    <span t-field="over_time.total_hours"/>
+                                </td>
+                                <td class="tx_status">
+                                    <t t-if="over_time.state == 'draft'">
+                                        <span class="badge badge-pill badge-light">
+                                            <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i>
+                                            <span class="d-none d-md-inline"> Draft</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="over_time.state == 'confirm'">
+                                        <span class="badge badge-pill badge-info">
+                                            <i class="fa fa-fw fa-clock-o" aria-label="Confirm" title="Confirm" role="img"></i>
+                                            <span class="d-none d-md-inline">Confirm</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="over_time.state == 'approve'">
+                                        <span class="badge badge-pill badge-success">
+                                            <i class="fa fa-fw fa-check" aria-label="Approve" title="Approve" role="img"></i>
+                                            <span class="d-none d-md-inline"> Approved</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="over_time.state == 'validate'">
+                                        <span class="badge badge-pill badge-success">
+                                            <i class="fa fa-fw fa-check" aria-label="Validate" title="Validate" role="img"></i>
+                                            <span class="d-none d-md-inline"> Validated</span>
+                                        </span>
+                                    </t>
+
+                                    <t t-if="over_time.state == 'refuse'">
+                                        <span class="badge badge-pill badge-danger">
+                                            <i class="fa fa-fw fa-remove" aria-label="Refuse" title="Refuse" role="img"></i>
+                                            <span class="d-none d-md-inline"> Refuse</span>
+                                        </span>
+                                    </t>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=over.time&amp;id=%s&amp;action=centione_portal_hr_self_service.action_hr_over_time_request&amp;view_type=form' % (over_time.id)" groups="centione_portal_hr_self_service.group_portal_over_time">Edit</a>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </div>
+
+                <div id="my_couch_request" class="tabcontent">
+                    <t t-if="not over_times_coach">
+                        <p>There are currently no over time.</p>
+                    </t>
+                    <t t-if="over_times_coach" t-call="portal.portal_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Employee</th>
+                                <th>Holiday Type</th>
+                                <th>Date From</th>
+                                <th>Date To</th>
+
+                                <th>  Total Hours</th>
+
+                                <th>  State</th>
+
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="over_times_coach" t-as="over_time_coach">
+                            <tr>
+                                <td class="text-left">
+                                    <span t-field="over_time_coach.employee_id"/>
+                                </td>
+                                <td class="text-left">
+                                    <span t-field="over_time_coach.holiday_type"/>
+                                </td>
+                                <td>
+                                    <span t-field="over_time_coach.date_from"/>
+                                </td>
+                                <td>
+                                    <span t-field="over_time_coach.date_to"/>
+                                </td>
+                                <td>
+                                    <span t-field="over_time_coach.total_hours"/>
+                                </td>
+                                <td class="tx_status">
+                                    <t t-if="over_time_coach.state == 'draft'">
+                                        <span class="badge badge-pill badge-light">
+                                            <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i>
+                                            <span class="d-none d-md-inline"> Draft</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="over_time_coach.state == 'confirm'">
+                                        <span class="badge badge-pill badge-info">
+                                            <i class="fa fa-fw fa-clock-o" aria-label="Confirm" title="Confirm" role="img"></i>
+                                            <span class="d-none d-md-inline">Confirm</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="over_time_coach.state == 'approve'">
+                                        <span class="badge badge-pill badge-success">
+                                            <i class="fa fa-fw fa-check" aria-label="Approve" title="Approve" role="img"></i>
+                                            <span class="d-none d-md-inline"> Approved</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="over_time_coach.state == 'validate'">
+                                        <span class="badge badge-pill badge-success">
+                                            <i class="fa fa-fw fa-check" aria-label="Validate" title="Validate" role="img"></i>
+                                            <span class="d-none d-md-inline"> Validated</span>
+                                        </span>
+                                    </t>
+
+                                    <t t-if="over_time_coach.state == 'refuse'">
+                                        <span class="badge badge-pill badge-danger">
+                                            <i class="fa fa-fw fa-remove" aria-label="Refuse" title="Refuse" role="img"></i>
+                                            <span class="d-none d-md-inline"> Refuse</span>
+                                        </span>
+                                    </t>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=over.time&amp;id=%s&amp;action=centione_portal_hr_self_service.action_hr_over_time_request&amp;view_type=form' % (over_time_coach.id)" groups="centione_portal_hr_self_service.group_portal_over_time">Edit</a>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </div>
+
+                <div id="my_manager_request" class="tabcontent">
+                    <t t-if="not over_times_manager">
+                        <p>There are currently no over time.</p>
+                    </t>
+                    <t t-if="over_times_manager" t-call="portal.portal_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Employee</th>
+                                <th>Holiday Type</th>
+                                <th>Date From</th>
+                                <th>Date To</th>
+
+
+                                <th>  Total Hours</th>
+
+                                <th>  State</th>
+
+
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="over_times_manager" t-as="over_time_manager">
+                            <tr>
+                                <td class="text-left">
+                                    <span t-field="over_time_manager.holiday_type"/>
+                                </td>
+                                <td>
+                                    <span t-field="over_time_manager.date_from"/>
+                                </td>
+                                <td>
+                                    <span t-field="over_time_manager.date_to"/>
+                                </td>
+
+                                <td>
+                                    <span t-field="over_time_manager.total_hours"/>
+                                </td>
+                                <td class="tx_status">
+                                    <t t-if="over_time_manager.state == 'draft'">
+                                        <span class="badge badge-pill badge-light">
+                                            <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i>
+                                            <span class="d-none d-md-inline"> Draft</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="over_time_manager.state == 'confirm'">
+                                        <span class="badge badge-pill badge-info">
+                                            <i class="fa fa-fw fa-clock-o" aria-label="Confirm" title="Confirm" role="img"></i>
+                                            <span class="d-none d-md-inline">Confirm</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="over_time_manager.state == 'approve'">
+                                        <span class="badge badge-pill badge-success">
+                                            <i class="fa fa-fw fa-check" aria-label="Approve" title="Approve" role="img"></i>
+                                            <span class="d-none d-md-inline"> Approved</span>
+                                        </span>
+                                    </t>
+                                    <t t-if="over_time_manager.state == 'validate'">
+                                        <span class="badge badge-pill badge-success">
+                                            <i class="fa fa-fw fa-check" aria-label="Validate" title="Validate" role="img"></i>
+                                            <span class="d-none d-md-inline"> Validated</span>
+                                        </span>
+                                    </t>
+
+                                    <t t-if="over_time_manager.state == 'refuse'">
+                                        <span class="badge badge-pill badge-danger">
+                                            <i class="fa fa-fw fa-remove" aria-label="Refuse" title="Refuse" role="img"></i>
+                                            <span class="d-none d-md-inline"> Refuse</span>
+                                        </span>
+                                    </t>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=over.time&amp;id=%s&amp;action=centione_portal_hr_self_service.action_hr_over_time_request&amp;view_type=form' % (over_time_manager.id)" groups="centione_portal_hr_self_service.group_portal_over_time">Edit</a>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </div>
+            </t>
+
+
+            <script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i &lt; tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i &lt; tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+  
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+            </script>
+
+            <style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  border: none;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: none;
+  border-top: none;
+   -webkit-animation: fadeEffect 1s;
+animation: fadeEffect 1s; /* Fading effect takes 1 second */
+
+}
+
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+            </style>
+        </template>
+
+
+        <template id="not_allowed_over_time_request" name="Access Denied">
+
+            <t t-call="portal.portal_layout">
+                <div id="wrap">
+                    <div class="oe_structure"/>
+                    <div class="container">
+                        <h1>You are not Allowed Access This Document</h1>
+                        <div>
+                            <a t-attf-href="/my/home" class="btn btn-lg btn-primary">
+                                    Back
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
