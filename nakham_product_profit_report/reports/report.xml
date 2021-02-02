@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <report
+        id="nakham_report_customer_invoices"
+        string="Customer Invoices"
+        model="account.move"
+        report_type="qweb-html"
+        name="nakham_product_profit_report.customer_invoices_tmpl"
+        file="nakham_product_profit_report.customer_invoices_tmpl"/>
+
+    </data>
+</odoo>

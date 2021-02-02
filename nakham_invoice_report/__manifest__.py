@@ -14,6 +14,7 @@
         # 'security/ir.model.access.csv',
         # 'views/views_3.xml',
         'views/views.xml',
+        'views/nakham2.xml',
         'views/templates.xml',
     ]
 }
