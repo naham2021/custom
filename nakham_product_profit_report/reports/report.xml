@@ -6,7 +6,7 @@
         id="nakham_report_customer_invoices"
         string="Customer Invoices"
         model="account.move"
-        report_type="qweb-html"
+        report_type="qweb-pdf"
         name="nakham_product_profit_report.customer_invoices_tmpl"
         file="nakham_product_profit_report.customer_invoices_tmpl"/>
 

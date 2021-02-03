@@ -311,7 +311,7 @@
                             <br></br>
 
                             <table class="table table-sm o_main_table"
-                                   style="margin-top:25px;color:#243BA0;border: 1px solid #000000;">
+                                   style="margin-top:25px;color:#243BA0;border: 1px solid #000000;font-weight:bold;font-size:16px !important;">
                                 <tr style="border: 1px solid #000000;color:#243BA0;border-right:  2px solid #000000;">
                                     <td style="border-right:  2px solid  #000000;">
                                         <span style="margin-left:25px;">Customer Name:</span>
@@ -369,7 +369,7 @@
                             <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
 
                             <table class="table table-sm o_main_table"
-                                   style="direction:rtl;font-weight: bold;margin-top:-11px;color:#243BA0;border: 1px solid #fff;">
+                                   style="font-weight: bold;margin-top:-11px;color:#243BA0;border: 1px solid #fff;font-size:14px">
                                 <thead>
                                     <tr style="background-;font-size: 12px;border: 1px solid #000000;">
                                         <td name="th_no" class="text-center"
