@@ -147,10 +147,10 @@ class qtytobepurchasedwizard(models.TransientModel):
             date_to_date = self.date_to.date()
             invoices_qty = sum(self.env['account.move.line'].search([('date','>=',date_from_date),('date','<=',date_to_date),('parent_state','=','posted'),('product_id','=',rec.id),('move_id.type','=','out_invoice')]).mapped('quantity'))
             credit_qty = sum(self.env['account.move.line'].search([('date','>=',date_from_date),('date','<=',date_to_date),('parent_state','=','posted'),('product_id','=',rec.id),('move_id.type','=','out_refund')]).mapped('quantity'))
-            print('invoices_qty', invoices_qty)
-            print('credit_qty', credit_qty)
-            print('invoices_qty - credit_qty', invoices_qty - credit_qty)
-            print('computed_months', self.computed_months)
+            # print('invoices_qty', invoices_qty)
+            # print('credit_qty', credit_qty)
+            # print('invoices_qty - credit_qty', invoices_qty - credit_qty)
+            # print('computed_months', self.computed_months)
             avg_monthly_sale = (invoices_qty - credit_qty)/self.computed_months
             # avg_monthly_sale = 0.0
             needed_months = avg_monthly_sale * self.number_of_month

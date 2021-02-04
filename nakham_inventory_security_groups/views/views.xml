@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+    <record id="naham_bad_stock_excel.bad_stock_wizard_menu" model="ir.ui.menu">
+      <field name="groups_id" eval="[(4, ref('nakham_inventory_security_groups.nakham_bad_stock_wizard_menu_group'))]"/>
+    </record>
+    <record id="naham_qty_to_be_purchased_excel.qty_tobe_purchased_wizard_menu" model="ir.ui.menu">
+      <field name="groups_id" eval="[(4, ref('nakham_inventory_security_groups.nakham_qty_to_be_purchased_group'))]"/>
+    </record>
+
+<!--    <record id="stock.menu_stock_config_settings" model="ir.ui.menu">-->
+<!--      <field name="groups_id" eval="[(4, ref('nakham_inventory_security_groups.nakham_inventory_configuration_group'))]"/>-->
+<!--    </record>-->
+    <record id="stock.menu_stock_config_settings" model="ir.ui.menu">
+      <field name="groups_id" eval="[(6, 0, [ref('nakham_inventory_security_groups.nakham_inventory_configuration_group')])]"/>
+    </record>
+
+
+  </data>
+</odoo>
