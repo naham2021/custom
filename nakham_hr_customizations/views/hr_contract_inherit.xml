@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="view_centione_hr_contract_form" model="ir.ui.view">
+            <field name="name">Hr Contract Form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='salary_and_advantages']" position="after">
+                    <group name="salary_fields">
+                    <field name="movements_val"/>
+                    <field name="basic_salary"/>
+                    <field name="housing_val"/>
+                    <field name="end_of_service_val"/>
+                    <field name="air_tickets"/>
+                    <field name="vacation_salary"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,251 @@
+<odoo>
+    <data>
+
+        <record id="view_hr_excuse_form" model="ir.ui.view">
+            <field name="name">hr excuse form</field>
+            <field name="model">hr.excuse</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,confirm,approve,validate,refuse"/>
+                        <button name="confirm" type="object" string="Confirm" states="draft"/>
+
+                        <button name="draft" type="object" string="Draft" states="confirm,approve,validate,refuse"/>
+                        <button name="approve" type="object" string="Approve" class="oe_highlight" states="confirm"/>
+                        <button name="validate" type="object" string="Validate" class="oe_highlight" states="approve"/>
+                        <button name="refuse" type="object" string="Refuse" states="confirm,approve,validate"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="employee_id" required="1" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="start_date" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="end_date" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="period" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="comment" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_hr_excuse_request">
+            <field name="name">Excuses</field>
+            <field name="res_model">hr.excuse</field>
+            <field name="view_id" ref="view_hr_excuse_form"/>
+            <field name="context">{}</field>
+        </record>
+
+        <template id="portal_my_excuse" name="Portal My Excuse: project entries" inherit_id="portal.portal_my_home" priority="30">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-if="request.env['res.users'].browse(request.session.uid).user_has_groups('centione_portal_hr_self_service.group_portal_excuse')">
+
+
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="title">Your Excuses</t>
+                        <t t-set="url" t-value="'/my/excuse_request'"/>
+                        <t t-set="count" t-value="excuse_count"/>
+                    </t>
+
+                </t>
+            </xpath>
+        </template>
+
+
+
+        <template id="display_excuses" name="Display Excuses">
+
+            <t t-call="portal.portal_layout">
+                <style>
+                    #myInput {
+                      background-position: 10px 10px;
+                      background-repeat: no-repeat;
+                      width: 100%;
+                      font-size: 16px;
+                      padding: 12px 20px 12px 40px;
+                      border: 1px solid #ddd;
+                      margin-bottom: 12px;
+                    }
+                </style>
+                <h3 class="page-header">
+                        Your Excuses Requests
+                </h3>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <!-- action=hr_holidays.hr_leave_action_action_approve_department -->
+                            <a t-attf-href="/web#view_type=form&amp;model=hr.excuse&amp;&amp;action=centione_portal_hr_self_service.action_hr_excuse_request" class="btn btn-info">New Excuse Request</a>
+                        </div>
+                        <div class="dropdown pull-right mr8 col-sm-6">
+                            <ul class="dropdown-menu" aria-labelledby="sortby">
+                                <li t-foreach="sortings" t-as="option" t-attf-class="#{sortby == option and 'active'}">
+                                    <a t-att-href="default_url + '?' + keep_query('date_begin', 'date_end', sortby=option)">
+                                        <span t-esc="sortings.get(option).get('label')"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav nav-pills">
+                    <li class="active">
+                        <a data-toggle="pill" href="#my_requests">My Requests</a>
+                    </li>
+                    <li>
+                        <a data-toggle="pill" href="#my_c_emp_requests">Coach Employee Requests</a>
+                    </li>
+                    <li>
+                        <a data-toggle="pill" href="#my_m_emp_requests">Manager Employee Requests</a>
+                    </li>
+
+                </ul>
+
+
+
+
+
+
+                <div class="tab-content">
+                    <div id="my_requests" class="tab-pane in active">
+                        <table class="table table-hover o_my_status_table">
+                            <thead>
+                                <tr class="active">
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Period</th>
+                                    <th>Comment</th>
+                                    <th>State</th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <t t-foreach="excuses" t-as="excuse">
+                                <tr>
+                                    <td class="text-left">
+                                        <span t-field="excuse.start_date"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse.end_date"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse.period"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse.comment"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse.state"/>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=hr.excuse&amp;id=%s&amp;view_type=form' % (excuse.id)" groups="centione_portal_hr_self_service.group_portal_excuse">Edit</a>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                    <div id="my_c_emp_requests" class="tab-pane fade">
+                        <table class="table table-hover o_my_status_table">
+                            <thead>
+                                <tr class="active">
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Period</th>
+                                    <th>Comment</th>
+                                    <th>State</th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <t t-foreach="excuses_coach" t-as="excuse_coach">
+                                <tr>
+                                    <td class="text-left">
+                                        <span t-field="excuse_coach.start_date"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse_coach.end_date"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse_coach.period"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse_coach.comment"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse_coach.state"/>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=hr.excuse&amp;id=%s&amp;view_type=form' % (excuse_coach.id)" groups="centione_portal_hr_self_service.group_portal_excuse">Edit</a>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+
+                    <div id="my_m_emp_requests" class="tab-pane fade">
+                        <table class="table table-hover o_my_status_table">
+                            <thead>
+                                <tr class="active">
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Period</th>
+                                    <th>Comment</th>
+                                    <th>State</th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <t t-foreach="excuses_manager" t-as="excuse_manager">
+                                <tr>
+                                    <td class="text-left">
+                                        <span t-field="excuse_manager.start_date"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse_manager.end_date"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse_manager.period"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse_manager.comment"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="excuse_manager.state"/>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-info" t-att-href="'/web#return_label=Website&amp;model=hr.excuse&amp;id=%s&amp;view_type=form' % (excuse_manager.id)" groups="centione_portal_hr_self_service.group_portal_excuse">Edit</a>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+
+                </div>
+
+
+            </t>
+        </template>
+
+
+        <template id="not_allowed_excuse_request" name="Access Denied">
+
+            <t t-call="portal.portal_layout">
+                <div id="wrap">
+                    <div class="oe_structure"/>
+                    <div class="container">
+                        <h1>You are not Allowed Access This Document</h1>
+                        <div>
+                            <a t-attf-href="/my/home" class="btn btn-lg btn-primary">
+                                    Back
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="excel_download_wizard" model="ir.ui.view">
+            <field name="name">Download</field>
+            <field name="model">stock.card.report.excel</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="file_name" invisible="1"/>
+                            <field name="excel_file" widget="binary" filename="file_name"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="view_stock_card_wizard_form" model="ir.ui.view">
+            <field name="name">stock.card.wizard.form</field>
+            <field name="model">stock.card.wizard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_from" required="1"/>
+                                <field name="date_to" required="1"/>
+                            </group>
+                            <group>
+                                <field name="product_id" required="1" options="{'no_create': True}"/>
+                                <field name="location_id" required="1" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="stock_card_search" string="Generate Report" type="object"
+                                class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="stock_card_wizard_action" model="ir.actions.act_window">
+            <field name="name">Stock Card Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.card.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="naham_stock_card_report_menu" name="Stock Card" parent="stock.menu_warehouse_report"
+                  action="stock_card_wizard_action" groups="naham_stock_card_excel.naham_stock_card_group"/>
+
+
+    </data>
+</odoo>
