@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="customer_invoices_tmpl">
+            <t t-call="web.html_container">
+                <h1 style="text-align:center">موسسة النحام للتجارة</h1>
+                <p style="text-align:center">ربحية الاصناف الفعلية. كود تحليلي بالفوز</p>
+                <hr style="width:60%"/>
+                <div style="direction:ltr;width:100%;text-align:right">
+                    <div style="float:right;width:48%">
+                        <p>
+                            تاريخ من:
+                            <t t-esc="data['form']['date_from']"/>
+                        </p>
+                    </div>
+                    <div style="float:right;width:48%">
+                        <p>
+                            تاريخ الي:
+                            <t t-esc="data['form']['date_to']"/>
+                        </p>
+                    </div>
+
+                    <div style="float:right;width:48%">
+                        <p t-if="data['form']['partner_id']">
+                            العميل:
+                            <t t-esc="data['form']['partner_id'][1]"/>
+                        </p>
+                    </div>
+                    <div style="float:right;width:48%">
+                        <p t-if="data['form']['salesman_id']">
+                            البائع:
+                            <t t-esc="data['form']['salesman_id'][1]"/>
+                        </p>
+                    </div>
+                </div>
+                <table style="direction:rtl;width:90%;margin:auto;border:1px solid;">
+                    <thead style="text-align:center">
+                        <tr>
+                            <th style="border:1px solid;">فئة</th>
+                            <th style="border:1px solid;">رقم الصنف</th>
+                            <th style="border:1px solid;">اسم الصنف</th>
+                            <th style="border:1px solid;">الوحدة</th>
+                            <th style="border:1px solid;">الكمية</th>
+                            <th style="border:1px solid;">قيمة البيع</th>
+                            <th style="border:1px solid;">التكلفة</th>
+                            <th style="border:1px solid;">الربح</th>
+                            <th style="border:1px solid;">%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="total_profit" t-value="0"/>
+                        <t t-set="total_percentage" t-value="0"/>
+                        <t t-foreach="invoices" t-as="line">
+                            <tr style="text-align:right">
+                                <t t-set="line_profit" t-value="(line.price_unit - line.purchase_price) or 0"/>
+
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.product_id.categ_id.name"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.product_id.default_code"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.product_id.name"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.product_uom_id.name"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.quantity"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.price_unit"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.purchase_price"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line_profit"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.cal_percentage()"/>
+                                </td>
+                                <t t-set="total_profit" t-value="total_profit + line_profit"/>
+                                <t t-set="total_percentage" t-value="total_percentage + line.cal_percentage()"/>
+                            </tr>
+                        </t>
+                        <tr style="text-align:right">
+                            <td style="border:1px solid;text-align:left" colspan="5">الاجمالي</td>
+                            <td style="border:1px solid;">
+                                <t t-esc="total_price_unit"/>
+                            </td>
+                            <td style="border:1px solid;">
+                                <t t-esc="total_cost"/>
+                            </td>
+                            <td style="border:1px solid;">
+                                <t t-esc="total_profit"/>
+                            </td>
+                            <td style="border:1px solid;">
+                                <t t-esc="total_percentage"/>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </t>
+        </template>
+
+    </data>
+</odoo>

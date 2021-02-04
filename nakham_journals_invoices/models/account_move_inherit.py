@@ -10,14 +10,14 @@ class account_invoice(models.Model):
 
         for rec in self:
             journals = []
-            print('rec.id :: ',rec.id)
+            # print('rec.id :: ',rec.id)
             pos_order = self.env['pos.order'].search([('name', '=',
                                                        rec.ref)])
 
             # sale_order = self.env['sale.order'].search([('name', '=',
             #                                              rec.ref)])
             if pos_order:
-                print("pos_order")
+                # print("pos_order")
                 rec.journal_id_name = ''
                 for order in pos_order.payment_ids:
                     rec.journal_id_name = order.payment_method_id.name
@@ -25,12 +25,12 @@ class account_invoice(models.Model):
                 rec.journal_ids = [(6, 0, [])]
 
             elif not pos_order:
-                print("sale_order")
+                # print("sale_order")
 
                 payments = self.env['account.payment'].search([('reconciled_invoice_ids', 'in', rec.id)])
                 # payments = self.env['account.payment'].search([('state', 'in', ['reconciled', 'sent', 'posted'])])
-                print("payments :: ", payments.ids)
-                print("payments :: ", len(payments))
+                # print("payments :: ", payments.ids)
+                # print("payments :: ", len(payments))
                 #     if rec.id in line.reconciled_invoice_ids.ids:
                 #         journals.append(line.journal_id.id)
                 for line in payments:
@@ -40,7 +40,7 @@ class account_invoice(models.Model):
                 rec.journal_id_name = ''
                 if journals:
                     rec.journal_ids = journals
-                    print("journals", journals)
+                    # print("journals", journals)
                     journals_name = self.env['account.journal'].search([('id', 'in', journals)])
 
                     for j in journals_name:
@@ -50,7 +50,7 @@ class account_invoice(models.Model):
                     rec.journal_ids = [(6, 0, [])]
                     rec.journal_id_name = ''
 
-            print("rec.journal_id_name ::",rec.journal_id_name)
+            # print("rec.journal_id_name ::",rec.journal_id_name)
             if rec.journal_id_name == '':
                 rec.journal_ids = [(6, 0, [])]
                 rec.journal_id_name = rec.invoice_type

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <record id="stock.menu_stock_scrap" model="ir.ui.menu">
+         <field name="groups_id" eval="[(4, ref('nakham_inventory_scrap_cancel_groups.nakham_inventory_scrap_menu_group'))]"/>
+       </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="stock_picking_form_add_group_for_cancel_button" model="ir.ui.view">
+            <field name="name">stock.picking.form.add.group.for.cancel.button</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+              <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="groups">nakham_inventory_scrap_cancel_groups.nakham_inventory_transfer_cancel_group</attribute>
+              </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
