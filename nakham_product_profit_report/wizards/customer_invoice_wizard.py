@@ -8,8 +8,8 @@ class CustomerInvoiceReportWizard(models.TransientModel):
     product_ids = fields.Many2many('product.product', string="Products")
     date_from = fields.Date(string="Date From", required=True)
     date_to = fields.Date(string="Date To", required=True)
-    partner_id = fields.Many2one('res.partner', 'Customer', required=True)
-    salesman_id = fields.Many2one('res.users', 'Salesman', required=True)
+    partner_id = fields.Many2one('res.partner', 'Customer')
+    salesman_id = fields.Many2one('res.users', 'Salesman')
 
     @api.constrains('date_to')
     def _check_date_to(self):
@@ -23,4 +23,12 @@ class CustomerInvoiceReportWizard(models.TransientModel):
         }
         print(self.read()[0])
         return self.env.ref('nakham_product_profit_report.nakham_report_customer_invoices').report_action(self,
+                                                                                                          data=data)
+    def print_purchase_details_report(self):
+        data = {
+            'model': 'nakham.customer.invoice.report.wizard',
+            'form': self.read()[0]
+        }
+        print(self.read()[0])
+        return self.env.ref('nakham_product_profit_report.nakham_purchase_details_report').report_action(self,
                                                                                                           data=data)
