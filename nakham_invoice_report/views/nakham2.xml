@@ -453,11 +453,12 @@
                                                     <span t-field="line.product_id.default_code"/>
                                                 </td>
                                                 <td name="account_invoice_line_name" style="border: 1px solid #000000;">
-                                                    <span t-field="line.name" t-options="{'widget': 'text'}" style="display: block;
-  width: 280px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;"/>
+                                                    <span t-field="line.name" t-options="{'widget': 'text'}" />
+<!--                                                                                                        <span t-field="line.name" t-options="{'widget': 'text'}" style="display: block;-->
+<!--  width: 280px;-->
+<!--  overflow: hidden;-->
+<!--  white-space: nowrap;-->
+<!--  text-overflow: ellipsis;"/>-->
                                                 </td>
                                                 <td class="text-right"
                                                     style=" border: 1px solid #000000;padding-left:-1px;">
