@@ -30,6 +30,8 @@
         'views/templates.xml',
         'views/account_move_view.xml',
         'views/purchase_order.xml',
+        'views/views_menuitem.xml',
+        'views/crm_team_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -30,6 +30,7 @@
         'wizards/customer_invoice_wizard.xml',
         'reports/report.xml',
         'reports/templates.xml',
+        'reports/purchase_details_templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

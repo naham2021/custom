@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+            <!-- Inherit Form View to Modify it -->
+            <record id="crm_team_view_form_accountant" model="ir.ui.view">
+                <field name="name">crm.team.accountant</field>
+                <field name="model">crm.team</field>
+                <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+                <field name="arch" type="xml">
+
+                    <xpath expr="//field[@name='user_id']" position="after">
+                        <field name="Accountant_id"/>
+                    </xpath>
+
+                </field>
+            </record>
+  </data>
+</odoo>

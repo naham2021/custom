@@ -4,7 +4,7 @@
 
         <template id="customer_invoices_tmpl">
             <t t-call="web.html_container">
-                <h1 style="text-align:center">موسسة النحام للتجارة</h1>
+                <h1 style="text-align:center">مؤسسة النحام للتجارة</h1>
                 <p style="text-align:center">ربحية الاصناف الفعلية. كود تحليلي بالفوز</p>
                 <hr style="width:60%"/>
                 <div style="direction:ltr;width:100%;text-align:right">
@@ -20,21 +20,24 @@
                             <t t-esc="data['form']['date_to']"/>
                         </p>
                     </div>
-
-                    <div style="float:right;width:48%">
-                        <p t-if="data['form']['partner_id']">
-                            العميل:
-                            <t t-esc="data['form']['partner_id'][1]"/>
-                        </p>
-                    </div>
-                    <div style="float:right;width:48%">
-                        <p t-if="data['form']['salesman_id']">
-                            البائع:
-                            <t t-esc="data['form']['salesman_id'][1]"/>
-                        </p>
-                    </div>
+                    <t t-if="data['form']['partner_id']">
+                        <div style="float:right;width:48%">
+                            <p t-if="data['form']['partner_id']">
+                                العميل:
+                                <t t-esc="data['form']['partner_id'][1]"/>
+                            </p>
+                        </div>
+                    </t>
+                    <t t-if="data['form']['salesman_id']">
+                        <div style="float:right;width:48%">
+                            <p t-if="data['form']['salesman_id']">
+                                البائع:
+                                <t t-esc="data['form']['salesman_id'][1]"/>
+                            </p>
+                        </div>
+                    </t>
                 </div>
-                <table style="direction:rtl;width:90%;margin:auto;border:1px solid;">
+                <table style="border-collapse: collapse;direction:rtl;width:90%;margin:auto;border:1px solid;">
                     <thead style="text-align:center">
                         <tr>
                             <th style="border:1px solid;">فئة</th>

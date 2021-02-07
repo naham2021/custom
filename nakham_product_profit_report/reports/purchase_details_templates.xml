@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="purchase_details_tmpl">
+            <t t-call="web.html_container">
+                <h1 style="text-align:center">مؤسسة النحام للتجارة</h1>
+                <p style="text-align:center">تفاصيل مبيعات الاصناف خلال فترة</p>
+                <hr style="width:60%"/>
+                <div style="direction:ltr;width:100%;text-align:right">
+                    <div style="float:right;width:48%">
+                        <p>
+                            تاريخ من:
+                            <t t-esc="data['form']['date_from']"/>
+                        </p>
+                    </div>
+                    <div style="float:right;width:48%">
+                        <p>
+                            تاريخ الي:
+                            <t t-esc="data['form']['date_to']"/>
+                        </p>
+                    </div>
+                    <t t-if="data['form']['partner_id']">
+                        <div style="float:right;width:48%">
+                            <p t-if="data['form']['partner_id']">
+                                العميل:
+                                <t t-esc="data['form']['partner_id'][1]"/>
+                            </p>
+                        </div>
+                    </t>
+                    <t t-if="data['form']['salesman_id']">
+                        <div style="float:right;width:48%">
+                            <p t-if="data['form']['salesman_id']">
+                                البائع:
+                                <t t-esc="data['form']['salesman_id'][1]"/>
+                            </p>
+                        </div>
+                    </t>
+                </div>
+                <table style="border-collapse: collapse;direction:rtl;width:90%;margin:auto;border:1px solid;">
+                    <thead style="text-align:center">
+                        <tr>
+                            <th style="border:1px solid;">رقم المستند</th>
+                            <th style="border:1px solid;">تاريخ التحرير</th>
+                            <th style="border:1px solid;">اسم الصنف</th>
+                            <th style="border:1px solid;">الوحدة</th>
+                            <th style="border:1px solid;">الكمية</th>
+                            <th style="border:1px solid;">سعر الوحدة</th>
+                            <th style="border:1px solid;">إجمالي</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="total_profit" t-value="0"/>
+                        <t t-set="total_percentage" t-value="0"/>
+                        <t t-foreach="invoices" t-as="line">
+                            <tr style="text-align:right">
+
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.move_id.name"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.move_id.invoice_date"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.product_id.name"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.product_uom_id.name"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.quantity"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.price_unit"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line.price_subtotal"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr style="text-align:right">
+                            <td style="border:1px solid;text-align:left" colspan="4">الاجمالي</td>
+                            <td style="border:1px solid;">
+                                <t t-esc="quantity_total"/>
+                            </td>
+                            <td style="border:1px solid;"></td>
+                            <td style="border:1px solid;">
+                                <t t-esc="price_subtotal_total"/>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </t>
+        </template>
+
+    </data>
+</odoo>
