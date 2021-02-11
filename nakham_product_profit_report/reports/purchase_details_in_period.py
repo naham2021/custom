@@ -14,7 +14,8 @@ class CustomerInvoicesRepoert(models.AbstractModel):
         # print(data['form']['salesman_id'])
 
         domain = [
-            ('move_id.type', 'in', ['out_invoice', 'out_refund']), ]
+            ('move_id.type', 'in', ['out_invoice', 'out_refund']),
+            ('account_id', '=', 19)]
         if data['form']['product_ids']:
             domain.append(('product_id.id', 'in', data['form']['product_ids']))
         if data['form']['date_from']:

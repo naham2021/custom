@@ -74,7 +74,7 @@
                                     <t t-esc="line.price_unit"/>
                                 </td>
                                 <td style="border:1px solid;">
-                                    <t t-esc="line.price_subtotal"/>
+                                    <t t-esc="round(line.price_subtotal,2)"/>
                                 </td>
                             </tr>
                         </t>
