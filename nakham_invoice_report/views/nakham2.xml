@@ -109,9 +109,9 @@
                                     <td style="color:#243BA0;border: 1px solid #000000;">
                                         الخصم
                                     </td>
-                                    <td class="text-right" style="border: 1px solid #000000;color:#243BA0;">
-                                        <span t-field="o.amount_total"/>
-                                    </td>
+                                    <tdls class="text-right" style="border: 1px solid #000000;color:#243BA0;">
+                                        <span t-field="o.total_discount"/>
+                                    </tdls>
                                 </tr>
                                 <t t-foreach="o.amount_by_group" t-as="amount_by_group">
                                     <tr style="border: 1px solid #000000;color:#243BA0">
