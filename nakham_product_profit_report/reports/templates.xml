@@ -52,41 +52,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <t t-set="total_profit" t-value="0"/>
+                        <t t-set="total_profit" t-value="0.0"/>
                         <t t-set="total_percentage" t-value="0"/>
                         <t t-foreach="invoices" t-as="line">
                             <tr style="text-align:right">
-                                <t t-set="line_profit" t-value="(line.price_unit - line.purchase_price) or 0"/>
+                                <t t-set="line_profit" t-value="(line['price_unit'] - line['cost']) or 0"/>
 
                                 <td style="border:1px solid;">
-                                    <t t-esc="line.product_id.categ_id.name"/>
+                                    <t t-esc="line['category']"/>
                                 </td>
                                 <td style="border:1px solid;">
-                                    <t t-esc="line.product_id.default_code"/>
+                                    <t t-esc="line['default_code']"/>
                                 </td>
                                 <td style="border:1px solid;">
-                                    <t t-esc="line.product_id.name"/>
+                                    <t t-esc="line['product']"/>
                                 </td>
                                 <td style="border:1px solid;">
-                                    <t t-esc="line.product_uom_id.name"/>
+                                    <t t-esc="line['uom']"/>
                                 </td>
                                 <td style="border:1px solid;">
-                                    <t t-esc="line.quantity"/>
+                                    <t t-esc="line['quantity']"/>
                                 </td>
                                 <td style="border:1px solid;">
-                                    <t t-esc="line.price_unit"/>
+                                    <t t-esc="line['price_unit']"/>
                                 </td>
                                 <td style="border:1px solid;">
-                                    <t t-esc="line.purchase_price"/>
+                                    <t t-esc="line['cost']"/>
                                 </td>
                                 <td style="border:1px solid;">
-                                    <t t-esc="line_profit"/>
+                                    <t t-esc="round(line_profit, 2)"/>
                                 </td>
                                 <td style="border:1px solid;">
-                                    <t t-esc="line.cal_percentage()"/>
+                                    <t t-esc="line['percentage']"/>
                                 </td>
                                 <t t-set="total_profit" t-value="total_profit + line_profit"/>
-                                <t t-set="total_percentage" t-value="total_percentage + line.cal_percentage()"/>
+                                <t t-set="total_percentage" t-value="total_percentage + line['percentage']"/>
                             </tr>
                         </t>
                         <tr style="text-align:right">
@@ -112,3 +112,40 @@
 
     </data>
 </odoo>
+
+
+<!--<t t-foreach="invoices" t-as="line">-->
+<!--                            <tr style="text-align:right">-->
+<!--                                <t t-set="line_profit" t-value="(line.price_unit - line.purchase_price) or 0"/>-->
+
+<!--                                <td style="border:1px solid;">-->
+<!--                                    <t t-esc="line.product_id.categ_id.name"/>-->
+<!--                                </td>-->
+<!--                                <td style="border:1px solid;">-->
+<!--                                    <t t-esc="line.product_id.default_code"/>-->
+<!--                                </td>-->
+<!--                                <td style="border:1px solid;">-->
+<!--                                    <t t-esc="line.product_id.name"/>-->
+<!--                                </td>-->
+<!--                                <td style="border:1px solid;">-->
+<!--                                    <t t-esc="line.product_uom_id.name"/>-->
+<!--                                </td>-->
+<!--                                <td style="border:1px solid;">-->
+<!--                                    <t t-esc="line.quantity"/>-->
+<!--                                </td>-->
+<!--                                <td style="border:1px solid;">-->
+<!--                                    <t t-esc="line.price_unit"/>-->
+<!--                                </td>-->
+<!--                                <td style="border:1px solid;">-->
+<!--                                    <t t-esc="line.purchase_price"/>-->
+<!--                                </td>-->
+<!--                                <td style="border:1px solid;">-->
+<!--                                    <t t-esc="line_profit"/>-->
+<!--                                </td>-->
+<!--                                <td style="border:1px solid;">-->
+<!--                                    <t t-esc="line.cal_percentage()"/>-->
+<!--                                </td>-->
+<!--                                <t t-set="total_profit" t-value="total_profit + line_profit"/>-->
+<!--                                <t t-set="total_percentage" t-value="total_percentage + line.cal_percentage()"/>-->
+<!--                            </tr>-->
+<!--                        </t>-->
