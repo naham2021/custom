@@ -32,6 +32,12 @@
             </function>
             <value eval="{'noupdate': False}"/>
         </function>
+        <record id="sale_sale_order_see_all_accountant" model="ir.rule">
+            <field name="name">All Orders (For Team only) (Accountant)</field>
+            <field ref="sale.model_sale_order" name="model_id"/>
+            <field name="domain_force">[('team_id.Accountant_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_accountant_sale_teams'))]"/>
+        </record>
         <record id="sale.sale_order_see_all" model="ir.rule">
             <field name="name">All Orders (For Team only)</field>
             <field ref="sale.model_sale_order" name="model_id"/>
@@ -54,6 +60,12 @@
             </function>
             <value eval="{'noupdate': False}"/>
         </function>
+       <record id="sale_sale_order_line_see_all_Accountant" model="ir.rule">
+            <field name="name">All Orders Lines (For Team only) ( Accountant )</field>
+            <field ref="sale.model_sale_order_line" name="model_id"/>
+            <field name="domain_force">[('order_id.team_id.Accountant_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_accountant_sale_teams'))]"/>
+        </record>
         <record id="sale.sale_order_line_see_all" model="ir.rule">
             <field name="name">All Orders Lines (For Team only)</field>
             <field ref="sale.model_sale_order_line" name="model_id"/>
@@ -175,6 +187,13 @@
             <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams'))]"/>
 
         </record>
+                <record id="model_account_payment_manger_Accountant_id" model="ir.rule">
+            <field name="name">Account Payment Manager (For Team only) ( Accountant_id )</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="domain_force">[('team_id.Accountant_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_accountant_sale_teams'))]"/>
+
+        </record>
         <record id="model_account_payment_manger" model="ir.rule">
             <field name="name">Account Payment Manager (For Team only)</field>
             <field name="model_id" ref="account.model_account_payment"/>
@@ -199,6 +218,18 @@
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="True"/>
             <field name="domain_force">[('user_ids', '=', user.id)]</field>
+        </record>
+                <record id="account_journal_rule_manager_Accountant_id" model="ir.rule">
+            <field name="name">Account Journal Rule (For All) ( Accountant_id )</field>
+            <field name="model_id" ref="account.model_account_journal"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">[('user_ids', '=', user.id)]</field>
+            <!--            <field name="domain_force">[('user_ids.sale_team_id.user_id', '=', user.id)]</field>-->
+            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_accountant_sale_teams'))]"/>
+
         </record>
         <record id="account_journal_rule_manager" model="ir.rule">
             <field name="name">Account Journal Rule (For All)</field>
@@ -258,6 +289,16 @@
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="0"/>
         </record>
+                <record id="portal_purchase_order_user_rule_manager_Accountant_id" model="ir.rule">
+            <field name="name">Portal Purchase Orders (For Team Only) ( Accountant_id ) </field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="domain_force">[('team_id.Accountant_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_accountant_sale_teams'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+        </record>
         <record id="portal_purchase_order_user_rule_manager" model="ir.rule">
             <field name="name">Portal Purchase Orders (For Team Only)</field>
             <field name="model_id" ref="purchase.model_purchase_order"/>
@@ -286,6 +327,12 @@
             <field name="model_id" ref="purchase.model_purchase_order_line"/>
             <field name="domain_force">[('order_id.user_id', '=', user.id)]</field>
             <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams'))]"/>
+        </record>
+                <record id="portal_purchase_order_line_rule_manager_Accountant_id" model="ir.rule">
+            <field name="name">Portal Purhcase Orders Line (For team Only)  ( Accountant_id ) </field>
+            <field name="model_id" ref="purchase.model_purchase_order_line"/>
+            <field name="domain_force">[('order_id.team_id.Accountant_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_accountant_sale_teams'))]"/>
         </record>
         <record id="portal_purchase_order_line_rule_manager" model="ir.rule">
             <field name="name">Portal Purhcase Orders Line (For team Only)</field>
