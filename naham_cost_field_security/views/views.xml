@@ -1,0 +1,20 @@
+<odoo>
+  <data>
+    <!-- Inherit Form View to Modify it -->
+    <record id="naham_cost_field_security_form" model="ir.ui.view">
+        <field name="name">naham.cost.field.security.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="naham_cost_margin_access.view_invoice_cost"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='purchase_price']" position="attributes">
+                <attribute name="groups">naham_cost_field_security.naham_filed_cost_group</attribute>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='purchase_price']" position="attributes">
+                <attribute name="groups">naham_cost_field_security.naham_filed_cost_group</attribute>
+            </xpath>
+
+        </field>
+    </record>
+  </data>
+</odoo>
