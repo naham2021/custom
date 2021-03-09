@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_naham_invoice_print_security_naham_invoice_print_security,naham_invoice_print_security.naham_invoice_print_security,model_naham_invoice_print_security_naham_invoice_print_security,base.group_user,1,1,1,1
