@@ -85,7 +85,7 @@ class HrPayslipRun(models.Model):
                              'name':move_line.name,
                              'debit':move_line.debit,
                              'credit':move_line.credit,
-                             'purchase_price':move_line.purchase_price,
+                             # 'purchase_price':move_line.purchase_price,
                           })
                  counter+=1
                  move.unlink()
@@ -93,30 +93,30 @@ class HrPayslipRun(models.Model):
              #create new move as to be for the whole batch
              #with the all move lines of payslips
 
-             #merge move lines
-             merged_move_lines=[]
-             for line in move_lines:
-                 merged=False
-                 for merged_move in merged_move_lines:
-                    if line['account_id'] == merged_move['account_id'] and line['analytic_account_id'] == merged_move['analytic_account_id']:
-                        if merged_move['debit']!=0 and line['debit']!=0:
-                            merged_move['debit']+=line['debit']
-                            merged = True
-                            break
-                        if merged_move['credit'] != 0 and line['credit']!=0:
-                            merged_move['credit']+=line['credit']
-                            merged=True
-                            break
-                 if merged:
-                     continue
-
-                 else:
-                     merged_move_lines.append(line)
+             #merge move lines #run if need merging with analytic account and account id
+             # merged_move_lines=[]
+             # for line in move_lines:
+             #     merged=False
+             #     for merged_move in merged_move_lines:
+             #        if line['account_id'] == merged_move['account_id'] and line['analytic_account_id'] == merged_move['analytic_account_id']:
+             #            if merged_move['debit']!=0 and line['debit']!=0:
+             #                merged_move['debit']+=line['debit']
+             #                merged = True
+             #                break
+             #            if merged_move['credit'] != 0 and line['credit']!=0:
+             #                merged_move['credit']+=line['credit']
+             #                merged=True
+             #                break
+             #     if merged:
+             #         continue
+             #
+             #     else:
+             #         merged_move_lines.append(line)
 
 
 
              #create move for batch
-             batch_move_details['line_ids']=[(0,0,line_info  ) for line_info in merged_move_lines ]
+             batch_move_details['line_ids']=[(0,0,line_info  ) for line_info in move_lines ] #merged_move_lines if merged
              move_for_batch=self.env['account.move'].create(batch_move_details)
 
              rec.action_close()
@@ -361,10 +361,10 @@ class HrPayslip(models.Model):
                 if slip.move_id:
                     for rec in slip.move_id.line_ids:
                         rec.write({
-                            'analytic_account_id': analytic_account_in_contract
+                            'analytic_account_id': analytic_account_in_contract,
+                            'partner_id':slip.employee_id.address_id.id,
                         })
 
-            analytic_account_in_contract = slip.employee_id.contract_id
         ##
         ##
         return res
@@ -388,7 +388,8 @@ class HrPayslip(models.Model):
                 if slip.move_id:
                     for rec in slip.move_id.line_ids:
                         rec.write({
-                            'analytic_account_id':analytic_account_in_contract
+                            'analytic_account_id':analytic_account_in_contract,
+                            'partner_id': slip.employee_id.address_id.id,
                         })
 
 
