@@ -6,6 +6,7 @@ from io import BytesIO
 import base64
 from datetime import datetime
 from odoo.osv import expression
+from datetime import timedelta
 
 
 
@@ -32,18 +33,21 @@ class qtytobepurchasedwizard(models.TransientModel):
     product_categ_ids = fields.Many2many('product.category',string="Product Categ")
     number_of_month = fields.Integer(string="Number Of Month")
     search_by = fields.Selection([('product','Product'),('categ','Product Categ')],string="Search By")
-    computed_months = fields.Integer(string='Computed Months',compute='compute_months')
+    computed_months = fields.Float(string='Computed Months',compute='compute_months')
 
     @api.depends('date_from','date_to')
     def compute_months(self):
         for rec in self:
             if rec.date_from and rec.date_to:
-                date_from_month = rec.date_from.month
-                date_from_year = rec.date_from.year
-                date_to_month = rec.date_to.month
-                date_to_year = rec.date_to.year
-                rec.computed_months = date_to_month - date_from_month  + 12*(date_to_year - date_from_year)
+                print((rec.date_to - rec.date_from).days)
 
+                # date_from_month = rec.date_from.month
+                # date_from_year = rec.date_from.year
+                # date_to_month = rec.date_to.month
+                # date_to_year = rec.date_to.year
+                # rec.computed_months = date_to_month - date_from_month  + 12*(date_to_year - date_from_year)
+                days = (rec.date_to - rec.date_from).days
+                rec.computed_months = round(days/30, 2)
             else:
                 rec.computed_months = 0
 
