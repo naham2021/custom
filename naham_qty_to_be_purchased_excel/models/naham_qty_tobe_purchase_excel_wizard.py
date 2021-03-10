@@ -147,8 +147,8 @@ class qtytobepurchasedwizard(models.TransientModel):
             date_to_date = self.date_to.date()
             # invoices_qty = sum(self.env['account.move.line'].search([('date','>=',date_from_date),('date','<=',date_to_date),('parent_state','=','posted'),('product_id','=',rec.id),('move_id.type','=','out_invoice')]).mapped('quantity'))
             # credit_qty = sum(self.env['account.move.line'].search([('date','>=',date_from_date),('date','<=',date_to_date),('parent_state','=','posted'),('product_id','=',rec.id),('move_id.type','=','out_refund')]).mapped('quantity'))
-            invoices_qty = sum(self.env['stock.move.line'].search([('state','=','done'),('product_id','=',rec.id),('location_dest_id.usage','=','customer')]).mapped('qty_done'))
-            credit_qty = sum(self.env['stock.move.line'].search([('state','=','done'),('product_id','=',rec.id),('location_id.usage','=','customer')]).mapped('qty_done'))
+            invoices_qty = sum(self.env['stock.move.line'].search([('date','>=',date_from_date),('date','<=',date_to_date), ('state','=','done'),('product_id','=',rec.id),('location_dest_id.usage','=','customer')]).mapped('qty_done'))
+            credit_qty = sum(self.env['stock.move.line'].search([('date','>=',date_from_date),('date','<=',date_to_date),('state','=','done'),('product_id','=',rec.id),('location_id.usage','=','customer')]).mapped('qty_done'))
             print('invoices_qty ========== ', invoices_qty)
             print('credit_qty ========== ', credit_qty)
             # print('invoices_qty', invoices_qty)
@@ -166,9 +166,9 @@ class qtytobepurchasedwizard(models.TransientModel):
             sheet.write(row, col + 3, rec.categ_id.name or '', font_size_10)
             sheet.write(row, col + 4, first_balance or '', font_size_10)
             sheet.write(row, col + 5, rec.qty_available or '', font_size_10)
-            sheet.write(row, col + 6, avg_monthly_sale or '', font_size_10)
-            sheet.write(row, col + 7, needed_months or '', font_size_10)
-            sheet.write(row, col + 8, rec.qty_available - needed_months or '', font_size_10)
+            sheet.write(row, col + 6, avg_monthly_sale or '0.0', font_size_10)
+            sheet.write(row, col + 7, needed_months or '0.0', font_size_10)
+            sheet.write(row, col + 8, rec.qty_available - needed_months or '0.0', font_size_10)
 
             row += 1
             seq += 1
