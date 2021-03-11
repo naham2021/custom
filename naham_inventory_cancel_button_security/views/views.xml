@@ -1,0 +1,21 @@
+<odoo>
+  <data>
+    <record id="naham_inventory_cancel_button_group" model="res.groups">
+        <field name="name">Stock Picking Cancel Button</field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="stock_picking_cancel_button_form" model="ir.ui.view">
+        <field name="name">stock.picking.cancel.button.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+
+          <xpath expr="//button[@name='action_cancel']" position="attributes">
+            <attribute name="groups">naham_inventory_cancel_button_security.naham_inventory_cancel_button_group</attribute>
+          </xpath>
+
+        </field>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="naham_invoice_print_group" model="res.groups">
+            <field name="name">Naham Invoice 2</field>
+        </record>
+
+        <report
+                string="Naham Invoice 2"
+                id="nakham_invoice_report.naham_invoice_report2"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="nakham_invoice_report.naham_invoice_report_new2"
+                file="nakham_invoice_report.naham_invoice_report_new2"
+                groups="naham_invoice_print_security.naham_invoice_print_group"
+        />
+    </data>
+</odoo>
