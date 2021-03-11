@@ -6,6 +6,7 @@ from io import BytesIO
 import base64
 from datetime import datetime
 from odoo.osv import expression
+from datetime import timedelta
 
 
 
@@ -32,18 +33,21 @@ class qtytobepurchasedwizard(models.TransientModel):
     product_categ_ids = fields.Many2many('product.category',string="Product Categ")
     number_of_month = fields.Integer(string="Number Of Month")
     search_by = fields.Selection([('product','Product'),('categ','Product Categ')],string="Search By")
-    computed_months = fields.Integer(string='Computed Months',compute='compute_months')
+    computed_months = fields.Float(string='Computed Months',compute='compute_months')
 
     @api.depends('date_from','date_to')
     def compute_months(self):
         for rec in self:
             if rec.date_from and rec.date_to:
-                date_from_month = rec.date_from.month
-                date_from_year = rec.date_from.year
-                date_to_month = rec.date_to.month
-                date_to_year = rec.date_to.year
-                rec.computed_months = date_to_month - date_from_month  + 12*(date_to_year - date_from_year)
+                print((rec.date_to - rec.date_from).days)
 
+                # date_from_month = rec.date_from.month
+                # date_from_year = rec.date_from.year
+                # date_to_month = rec.date_to.month
+                # date_to_year = rec.date_to.year
+                # rec.computed_months = date_to_month - date_from_month  + 12*(date_to_year - date_from_year)
+                days = (rec.date_to - rec.date_from).days
+                rec.computed_months = round(days/30, 2)
             else:
                 rec.computed_months = 0
 
@@ -147,8 +151,8 @@ class qtytobepurchasedwizard(models.TransientModel):
             date_to_date = self.date_to.date()
             # invoices_qty = sum(self.env['account.move.line'].search([('date','>=',date_from_date),('date','<=',date_to_date),('parent_state','=','posted'),('product_id','=',rec.id),('move_id.type','=','out_invoice')]).mapped('quantity'))
             # credit_qty = sum(self.env['account.move.line'].search([('date','>=',date_from_date),('date','<=',date_to_date),('parent_state','=','posted'),('product_id','=',rec.id),('move_id.type','=','out_refund')]).mapped('quantity'))
-            invoices_qty = sum(self.env['stock.move.line'].search([('state','=','done'),('product_id','=',rec.id),('location_dest_id.usage','=','customer')]).mapped('qty_done'))
-            credit_qty = sum(self.env['stock.move.line'].search([('state','=','done'),('product_id','=',rec.id),('location_id.usage','=','customer')]).mapped('qty_done'))
+            invoices_qty = sum(self.env['stock.move.line'].search([('date','>=',date_from_date),('date','<=',date_to_date), ('state','=','done'),('product_id','=',rec.id),('location_dest_id.usage','=','customer')]).mapped('qty_done'))
+            credit_qty = sum(self.env['stock.move.line'].search([('date','>=',date_from_date),('date','<=',date_to_date),('state','=','done'),('product_id','=',rec.id),('location_id.usage','=','customer')]).mapped('qty_done'))
             print('invoices_qty ========== ', invoices_qty)
             print('credit_qty ========== ', credit_qty)
             # print('invoices_qty', invoices_qty)
@@ -166,9 +170,9 @@ class qtytobepurchasedwizard(models.TransientModel):
             sheet.write(row, col + 3, rec.categ_id.name or '', font_size_10)
             sheet.write(row, col + 4, first_balance or '', font_size_10)
             sheet.write(row, col + 5, rec.qty_available or '', font_size_10)
-            sheet.write(row, col + 6, avg_monthly_sale or '', font_size_10)
-            sheet.write(row, col + 7, needed_months or '', font_size_10)
-            sheet.write(row, col + 8, rec.qty_available - needed_months or '', font_size_10)
+            sheet.write(row, col + 6, avg_monthly_sale or '0.0', font_size_10)
+            sheet.write(row, col + 7, needed_months or '0.0', font_size_10)
+            sheet.write(row, col + 8, rec.qty_available - needed_months or '0.0', font_size_10)
 
             row += 1
             seq += 1
