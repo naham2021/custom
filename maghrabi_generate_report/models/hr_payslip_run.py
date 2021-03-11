@@ -152,7 +152,7 @@ class HrPayslipRun(models.Model):
         self.report = base64.encodestring(output.read())
         self.report_name = 'payslips' + str(datetime.today().strftime('%Y-%m-%d')) + '.xlsx'
 
-    @api.one
+    # @api.one
     def generate_excel(self):
         """
         Create report and export it into excel file.
