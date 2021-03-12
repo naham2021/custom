@@ -7,8 +7,11 @@
             <field name="type">ir.actions.server</field>
             <field name="state">code</field>
             <field name="code">
-                for item in records:
-                item.res_partner_area()
+if len(records) > 1:
+    raise Warning('You can not select multiple record. Because one record will update all customers.')
+
+for item in records:
+    item.res_partner_area()
             </field>
         </record>
     </data>
