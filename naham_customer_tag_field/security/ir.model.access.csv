@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_naham_customer_tag_field_naham_customer_tag_field,naham_customer_tag_field.naham_customer_tag_field,model_naham_customer_tag_field_naham_customer_tag_field,base.group_user,1,1,1,1

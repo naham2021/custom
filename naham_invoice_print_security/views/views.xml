@@ -3,6 +3,9 @@
         <record id="naham_invoice_print_group" model="res.groups">
             <field name="name">Naham Invoice 2</field>
         </record>
+        <record id="naham_invoice_1_print_group" model="res.groups">
+            <field name="name">Naham Invoice</field>
+        </record>
 
         <report
                 string="Naham Invoice 2"
@@ -13,5 +16,15 @@
                 file="nakham_invoice_report.naham_invoice_report_new2"
                 groups="naham_invoice_print_security.naham_invoice_print_group"
         />
+        <report
+                string="Naham Invoice"
+                id="nakham_invoice_report.naham_invoice_report"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="nakham_invoice_report.naham_invoice_report_new"
+                file="nakham_invoice_report.naham_invoice_report_new"
+                groups="naham_invoice_print_security.naham_invoice_1_print_group"
+        />
+
     </data>
 </odoo>

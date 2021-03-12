@@ -13,8 +13,13 @@ class PartnerArea(models.Model):
     _description = 'Area'
 
     name = fields.Char()
-    code = fields.Char()
+    code = fields.Char(required=True)
+    next_code_sequence = fields.Integer(default=1)
     area_customers = fields.Integer(string='Customers', compute='get_area_customers')
+
+    _sql_constraints = [
+        ('area_code_unique', 'UNIQUE(code)', 'Area Code must be unique.')
+    ]
 
     def get_area_customers(self):
         for rec in self:
@@ -63,16 +68,20 @@ class ResPartner(models.Model):
     def create(self, vals):
         print('in create')
         print(vals)
-        if self._context.get('default_customer_rank'):
-            print('in customer')
-            if vals.get('area_id'):
-                print('in area')
-                current_area = self.env['partner.area'].sudo().search([('id', '=', vals.get('area_id'))])
-                print('current area >> ', current_area)
-                current_area_count = self.env['res.partner'].sudo().search_count([('area_id', '=', vals.get('area_id'))])
-                print('current area count >> ', current_area)
-                vals['name_seq'] = str(current_area.code) + '00' + str(current_area_count + 1)
-                print('sequence >> ', vals['name_seq'])
+        if self._context.get('default_customer_rank') and vals.get('area_id'):
+            # print('in customer')
+            # if vals.get('area_id'):
+            #     print('in area')
+            #     current_area = self.env['partner.area'].sudo().search([('id', '=', vals.get('area_id'))])
+            #     print('current area >> ', current_area)
+            #     current_area_count = self.env['res.partner'].sudo().search_count([('area_id', '=', vals.get('area_id'))])
+            #     print('current area count >> ', current_area)
+            #     vals['name_seq'] = str(current_area.code) + '00' + str(current_area_count + 1)
+            #     print('sequence >> ', vals['name_seq'])
+            print('area ->>>>>>>>>>>>>>>>>>>>>>>>', vals.get('area_id'))
+            area_id = self.env['partner.area'].browse(vals.get('area_id'))
+            vals['name_seq'] = str(area_id.code) + str(area_id.next_code_sequence).rjust(5, '0')
+            area_id.next_code_sequence += 1
         result = super(ResPartner, self).create(vals)
         return result
 
