@@ -12,6 +12,7 @@ class PartnerArea(models.Model):
     _rec_name = 'name'
     _description = 'Area'
 
+
     name = fields.Char()
     code = fields.Char(required=True)
     next_code_sequence = fields.Integer(default=1)
