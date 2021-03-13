@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 
-# from odoo import models, fields, api
+from odoo import models, fields, api
 
 
-# class nakham_product_profit_report(models.Model):
-#     _name = 'nakham_product_profit_report.nakham_product_profit_report'
-#     _description = 'nakham_product_profit_report.nakham_product_profit_report'
+class AccountMove(models.Model):
+    _inherit = 'account.move'
 
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
+    def _cal_total_cost(self):
+        for invoice in self:
+            total_cost = 0.0
+            for line in invoice.invoice_line_ids:
+                if line.purchase_price:
+                    total_cost += line.purchase_price
+            invoice.total_cost = total_cost
+
+    total_cost = fields.Float(digits=(16, 2), compute='_cal_total_cost')

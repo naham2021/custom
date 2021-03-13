@@ -9,9 +9,9 @@
             <field name="arch" type="xml">
                 <form string="">
                     <group>
-                        <group colspan="4">
-                            <field name="product_ids" options="{'no_create': True}" widget="many2many_tags"/>
-                        </group>
+<!--                        <group colspan="4">-->
+<!--                            <field name="product_ids" options="{'no_create': True}" widget="many2many_tags"/>-->
+<!--                        </group>-->
                         <group>
                             <field name="date_from"/>
                             <field name="partner_id" domain="[('is_customer', '=', True)]" options="{'no_create': True}"/>
@@ -62,6 +62,7 @@
             <field name="res_model">nakham.customer.invoice.report.wizard</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
+<!--            <field name="context">{'no_product': True}</field>-->
             <field name="view_id" ref="nakham_customer_invoice_report_wizard_form"/>
         </record>
         <record id="nakham_purchase_details_report_wizard_action" model="ir.actions.act_window">
