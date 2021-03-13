@@ -4,7 +4,7 @@
 
         <template id="assets_backend" name="customisations assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
-                <script type="text/javascript" src="/mass_editing/static/src/js/basic_include.js"></script>
+                <script type="text/javascript" src="/mass_editing_v13/static/src/js/basic_include.js"></script>
             </xpath>
         </template>
 
