@@ -12,6 +12,7 @@ class PartnerArea(models.Model):
     _rec_name = 'name'
     _description = 'Area'
 
+
     name = fields.Char()
     code = fields.Char(required=True)
     next_code_sequence = fields.Integer(default=1)
@@ -82,6 +83,8 @@ class ResPartner(models.Model):
             area_id = self.env['partner.area'].browse(vals.get('area_id'))
             vals['name_seq'] = str(area_id.code) + str(area_id.next_code_sequence).rjust(5, '0')
             area_id.next_code_sequence += 1
+            vals['ref'] = vals['name_seq']
+            print(vals['ref'])
         result = super(ResPartner, self).create(vals)
         return result
 

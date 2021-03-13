@@ -29,5 +29,5 @@ class product_product(models.Model):
 class res_partner_inherit(models.Model):
     _inherit='res.partner'
 
-    ref = fields.Char(string='Reference', index=True,copy=False)
+    ref = fields.Char(string='Reference', index=True,copy=False, readonly=True)
 

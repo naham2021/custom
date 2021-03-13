@@ -7,16 +7,9 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     def res_partner_area(self):
-        # print(len(self.env['res.partner'].search([('customer_rank', '>', 0)])))
-        area_ids = self.env['partner.area'].search([])
-        counters = {}
-        for area in area_ids:
-            if area.code:
-                counters[area.id] = 1
-        print(counters)
         for rec in self.env['res.partner'].search([('customer_rank', '>', 0)]):
             if rec.area_id:
-                rec.name_seq = rec.area_id.code + str(rec.area_id.next_code_sequence).rjust(5, '0')
+                rec.name_seq = rec.ref = rec.area_id.code + str(rec.area_id.next_code_sequence).rjust(5, '0')
                 rec.area_id.next_code_sequence += 1
             else:
                 rec.name_seq = ''

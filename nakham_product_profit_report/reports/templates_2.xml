@@ -40,29 +40,59 @@
                 <table style="border-collapse: collapse;direction:rtl;width:90%;margin:auto;border:1px solid;">
                     <thead style="text-align:center">
                         <tr>
-                            <th style="border:1px solid;">رقم المستند</th>
-                            <th style="border:1px solid;">تاريخ الفاتورة</th>
-                            <th style="border:1px solid;">العميل</th>
-                            <th style="border:1px solid;">اجمالي الفاتورة</th>
-                            <th style="border:1px solid;">اجمالي التكلفة</th>
+                            <th style="border:1px solid;">فئة</th>
+                            <th style="border:1px solid;">رقم الصنف</th>
+                            <th style="border:1px solid;">اسم الصنف</th>
+                            <th style="border:1px solid;">الوحدة</th>
+                            <th style="border:1px solid;">الكمية</th>
+                            <th style="border:1px solid;">قيمة البيع</th>
+                            <th style="border:1px solid;">التكلفة</th>
                             <th style="border:1px solid;">الربح</th>
-                            <th style="border:1px solid;">مندوب البيع</th>
-                            <th style="border:1px solid;">الحساب</th>
+                            <th style="border:1px solid;">%</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <t t-set="total_profit" t-value="0.0"/>
+                        <t t-set="total_percentage" t-value="0"/>
                         <t t-foreach="invoices" t-as="line">
                             <tr style="text-align:right">
-                                <td t-foreach="line" t-as="field" style="border:1px solid;">
-                                    <t t-esc="line[field]"/>
-                                </td>
+                                <t t-set="line_profit" t-value="(line['price_unit'] - line['cost']) or 0"/>
 
+                                <td style="border:1px solid;">
+                                    <t t-esc="line['category']"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line['default_code']"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line['product']"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line['uom']"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line['quantity']"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line['price_unit']"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line['cost']"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="round(line_profit, 2)"/>
+                                </td>
+                                <td style="border:1px solid;">
+                                    <t t-esc="line['percentage']"/>
+                                </td>
+                                <t t-set="total_profit" t-value="total_profit + line_profit"/>
+                                <t t-set="total_percentage" t-value="total_percentage + line['percentage']"/>
                             </tr>
                         </t>
                         <tr style="text-align:right">
-                            <td style="border:1px solid;text-align:left" colspan="3">الاجمالي</td>
+                            <td style="border:1px solid;text-align:left" colspan="5">الاجمالي</td>
                             <td style="border:1px solid;">
-                                <t t-esc="total_untaxed_amount"/>
+                                <t t-esc="total_price_unit"/>
                             </td>
                             <td style="border:1px solid;">
                                 <t t-esc="total_cost"/>
@@ -70,8 +100,9 @@
                             <td style="border:1px solid;">
                                 <t t-esc="total_profit"/>
                             </td>
-                            <td style="border:1px solid;"></td>
-                            <td style="border:1px solid;"></td>
+                            <td style="border:1px solid;">
+                                <t t-esc="total_percentage"/>
+                            </td>
                         </tr>
                     </tbody>
 

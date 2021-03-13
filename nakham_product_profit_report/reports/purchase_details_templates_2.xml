@@ -4,11 +4,8 @@
 
         <template id="purchase_details_tmpl">
             <t t-call="web.html_container">
-                <style>
-                    tbody tr td{direction:ltr;}
-                </style>
                 <h1 style="text-align:center">مؤسسة النحام للتجارة</h1>
-                <p style="text-align:center">ربحية المنتجات خلال فترة</p>
+                <p style="text-align:center">تفاصيل مبيعات الاصناف خلال فترة</p>
                 <hr style="width:60%"/>
                 <div style="direction:ltr;width:100%;text-align:right">
                     <div style="float:right;width:48%">
@@ -45,17 +42,16 @@
                         <tr>
                             <th style="border:1px solid;">رقم المستند</th>
                             <th style="border:1px solid;">تاريخ التحرير</th>
-                            <th style="border:1px solid;">المنتج</th>
+                            <th style="border:1px solid;">اسم الصنف</th>
                             <th style="border:1px solid;">الوحدة</th>
                             <th style="border:1px solid;">الكمية</th>
-                            <th style="border:1px solid;">إجمالي البيع</th>
-                            <th style="border:1px solid;">إجمالي التكلفة</th>
-                            <th style="border:1px solid;">الربح</th>
+                            <th style="border:1px solid;">سعر الوحدة</th>
+                            <th style="border:1px solid;">إجمالي</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <t t-set="total_profit" t-value="0.0"/>
-                        <t t-set="total_cost" t-value="0.0"/>
+                        <t t-set="total_profit" t-value="0"/>
+                        <t t-set="total_percentage" t-value="0"/>
                         <t t-foreach="invoices" t-as="line">
                             <tr style="text-align:right">
 
@@ -75,28 +71,21 @@
                                     <t t-esc="line.quantity"/>
                                 </td>
                                 <td style="border:1px solid;">
-                                    <t t-esc="line.price_unit * line.quantity"/>
+                                    <t t-esc="line.price_unit"/>
                                 </td>
                                 <td style="border:1px solid;">
-                                    <t t-esc="line.purchase_price * line.quantity"/>
-                                </td>
-                                <td style="border:1px solid;">
-                                    <t t-esc="(line.price_unit * line.quantity) - (line.purchase_price * line.quantity)"/>
+                                    <t t-esc="round(line.price_subtotal,2)"/>
                                 </td>
                             </tr>
-                            <t t-set="total_profit" t-value="total_profit + (line.price_unit * line.quantity)"/>
-                            <t t-set="total_cost" t-value="total_cost + (line.purchase_price * line.quantity)"/>
                         </t>
                         <tr style="text-align:right">
-                            <td style="border:1px solid;text-align:left" colspan="5">الاجمالي</td>
+                            <td style="border:1px solid;text-align:left" colspan="4">الاجمالي</td>
                             <td style="border:1px solid;">
-                                <t t-esc="total_profit"/>
+                                <t t-esc="quantity_total"/>
                             </td>
+                            <td style="border:1px solid;"></td>
                             <td style="border:1px solid;">
-                                <t t-esc="total_cost"/>
-                            </td>
-                            <td style="border:1px solid;">
-                                <t t-esc="total_profit - total_cost"/>
+                                <t t-esc="price_subtotal_total"/>
                             </td>
                         </tr>
                     </tbody>
