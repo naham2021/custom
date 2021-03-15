@@ -4,8 +4,11 @@
 
         <template id="customer_invoices_tmpl">
             <t t-call="web.html_container">
+                <style>
+                    table td{padding:2px}
+                </style>
                 <h1 style="text-align:center">مؤسسة النحام للتجارة</h1>
-                <p style="text-align:center">ربحية الاصناف الفعلية. كود تحليلي بالفوز</p>
+                <p style="text-align:center">تقرير الربحية</p>
                 <hr style="width:60%"/>
                 <div style="direction:ltr;width:100%;text-align:right">
                     <div style="float:right;width:48%">
@@ -54,7 +57,7 @@
                         <t t-foreach="invoices" t-as="line">
                             <tr style="text-align:right">
                                 <td t-foreach="line" t-as="field" style="border:1px solid;">
-                                    <t t-esc="line[field]"/>
+                                    <span><t t-esc="line[field]"/></span>
                                 </td>
 
                             </tr>
@@ -68,7 +71,7 @@
                                 <t t-esc="total_cost"/>
                             </td>
                             <td style="border:1px solid;">
-                                <t t-esc="total_profit"/>
+                                <t t-esc="round(total_profit, 2)"/>
                             </td>
                             <td style="border:1px solid;"></td>
                             <td style="border:1px solid;"></td>
