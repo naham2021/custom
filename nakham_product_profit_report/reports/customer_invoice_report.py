@@ -17,9 +17,11 @@ class CustomerInvoicesReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
 
         # debit -> out_invoice
+
         domain = [
             ('type', 'in', ['out_invoice', 'out_refund']),
-            ('state', '=', 'posted')]
+            ('state', '=', 'posted'),
+            ('journal_id.user_ids', 'in', self._uid)]
         if data['form']['date_from']:
             domain.append(('invoice_date', '>=', data['form']['date_from']))
         if data['form']['date_to']:
@@ -30,6 +32,7 @@ class CustomerInvoicesReport(models.AbstractModel):
             domain.append(('invoice_user_id.id', '=', data['form']['salesman_id'][0]))
 
         invoices = self.env['account.move'].search(domain)
+        # invoices = self.env['account.move'].browse(36477)
 
         invoices_dict = []
         for invoice in invoices:
@@ -40,29 +43,33 @@ class CustomerInvoicesReport(models.AbstractModel):
             #         cost = journal_ids[0].debit
             #     if journal_ids[0].move_id.type == 'out_refund':
             #         cost = journal_ids[0].credit
-
+            untaxed_amount = invoice.amount_untaxed
+            total_cost = invoice.total_cost
+            if invoice.type == 'out_refund':
+                untaxed_amount *= -1
+                total_cost *= -1
             invoices_dict.append({
                 'default_code': invoice.name,
                 'invoice_date': invoice.invoice_date,
                 'customer': invoice.partner_id.name,
-                'untaxed_amount': invoice.amount_untaxed,
-                'total_cost': invoice.total_cost,
-                'profit': invoice.amount_untaxed - invoice.total_cost,
+                'untaxed_amount': round(untaxed_amount, 2),
+                'total_cost': round(total_cost, 2),
+                'profit': round(untaxed_amount - total_cost, 2),
                 'salesman': invoice.invoice_user_id.name,
                 'journal': invoice.journal_id.name,
             })
 
         total_untaxed_amount = sum(invoices.mapped('amount_untaxed'))
         total_cost = sum(invoices.mapped('total_cost'))
-        total_profit = total_cost - total_cost
+        total_profit = round((total_cost - total_cost), 2)
 
         return {
             'doc_model': 'account.move',
             'data': data,
             'invoices': invoices_dict,
-            'total_untaxed_amount': total_untaxed_amount,
-            'total_cost': total_cost,
-            'total_profit': total_profit,
+            'total_untaxed_amount': round(total_untaxed_amount, 2),
+            'total_cost': round(total_cost, 2),
+            'total_profit': round(total_profit, 2),
         }
 
     # @api.model

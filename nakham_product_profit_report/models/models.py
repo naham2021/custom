@@ -8,10 +8,15 @@ class AccountMove(models.Model):
 
     def _cal_total_cost(self):
         for invoice in self:
-            total_cost = 0.0
-            for line in invoice.invoice_line_ids:
-                if line.purchase_price:
-                    total_cost += line.purchase_price
-            invoice.total_cost = total_cost
+            if invoice.type in ('out_invoice', 'out_refund'):
+                total_cost = 0.0
+                account_type_id = self.env.ref('account.data_account_type_direct_costs')
+                for line in invoice.line_ids:
 
-    total_cost = fields.Float(digits=(16, 2), compute='_cal_total_cost')
+                    if line.account_id.user_type_id.id == account_type_id.id:
+                        total_cost += line.credit or line.debit
+                invoice.total_cost = total_cost
+            else:
+                invoice.total_cost = 0.0
+
+    total_cost = fields.Float( compute='_cal_total_cost')

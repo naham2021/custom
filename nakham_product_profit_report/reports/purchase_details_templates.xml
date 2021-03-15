@@ -54,49 +54,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <t t-set="total_profit" t-value="0.0"/>
-                        <t t-set="total_cost" t-value="0.0"/>
-                        <t t-foreach="invoices" t-as="line">
-                            <tr style="text-align:right">
-
-                                <td style="border:1px solid;">
-                                    <t t-esc="line.move_id.name"/>
-                                </td>
-                                <td style="border:1px solid;">
-                                    <t t-esc="line.move_id.invoice_date"/>
-                                </td>
-                                <td style="border:1px solid;">
-                                    <t t-esc="line.product_id.name"/>
-                                </td>
-                                <td style="border:1px solid;">
-                                    <t t-esc="line.product_uom_id.name"/>
-                                </td>
-                                <td style="border:1px solid;">
-                                    <t t-esc="line.quantity"/>
-                                </td>
-                                <td style="border:1px solid;">
-                                    <t t-esc="line.price_unit * line.quantity"/>
-                                </td>
-                                <td style="border:1px solid;">
-                                    <t t-esc="line.purchase_price * line.quantity"/>
-                                </td>
-                                <td style="border:1px solid;">
-                                    <t t-esc="(line.price_unit * line.quantity) - (line.purchase_price * line.quantity)"/>
-                                </td>
-                            </tr>
-                            <t t-set="total_profit" t-value="total_profit + (line.price_unit * line.quantity)"/>
-                            <t t-set="total_cost" t-value="total_cost + (line.purchase_price * line.quantity)"/>
+                        <t t-foreach="lines" t-as="line">
+                            <td style="border:1px solid;" t-foreach="line" t-as="field">
+                                <span t-esc="line[field]"/>
+                            </td>
                         </t>
                         <tr style="text-align:right">
-                            <td style="border:1px solid;text-align:left" colspan="5">الاجمالي</td>
+                            <td style="border:1px solid;text-align:left" colspan="4">الاجمالي</td>
                             <td style="border:1px solid;">
-                                <t t-esc="total_profit"/>
+                                <t t-esc="total_quantity"/>
                             </td>
                             <td style="border:1px solid;">
-                                <t t-esc="total_cost"/>
+                                <t t-esc="total_total_price"/>
                             </td>
                             <td style="border:1px solid;">
-                                <t t-esc="total_profit - total_cost"/>
+                                <t t-esc="total_total_cost"/>
+                            </td>
+                            <td style="border:1px solid;">
+                                <t t-esc="total_total_profit"/>
                             </td>
                         </tr>
                     </tbody>
