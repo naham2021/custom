@@ -12,10 +12,10 @@ class CustomerInvoicesRepoert(models.AbstractModel):
         # print(data['form']['date_to'])
         # print(data['form']['partner_id'])
         # print(data['form']['salesman_id'])
-
+        # ('account_id', '=', 19)
         domain = [
-            ('move_id.type', 'in', ['out_invoice', 'out_refund']),
-            ('account_id', '=', 19)]
+            ('move_id.state', '=', 'posted'),
+            ('move_id.type', 'in', ['out_invoice', 'out_refund'])]
         if data['form']['product_ids']:
             domain.append(('product_id.id', 'in', data['form']['product_ids']))
         if data['form']['date_from']:
@@ -27,7 +27,9 @@ class CustomerInvoicesRepoert(models.AbstractModel):
         if data['form']['salesman_id']:
             domain.append(('move_id.invoice_user_id.id', '=', data['form']['salesman_id'][0]))
 
-        lines = self.env['account.move.line'].search(domain, order='product_id')
+        # lines = self.env['account.move.line'].search(domain, order='product_id')
+        lines = self.env['account.move.line'].search(domain)
+        print(lines)
         lines_dict = []
         account_type_id = self.env.ref('account.data_account_type_direct_costs')
         total_total_price = 0.0
@@ -38,12 +40,12 @@ class CustomerInvoicesRepoert(models.AbstractModel):
             domain = [
                 ('move_id.id', '=', line.move_id.id),
                 ('exclude_from_invoice_tab', '=', True),
-                ('name', '=', line.name),
+                ('product_id.id', '=', line.product_id.id),
                 ('account_id.user_type_id.id', '=', account_type_id.id)
             ]
             move_type = line.move_id.type
             line_ids = self.env['account.move.line'].search(domain)
-            if line.move_id.type == 'out_invoice':
+            if move_type == 'out_invoice':
                 total_cost = sum(line_ids.mapped('debit')) or 0.0
             else:
                 total_cost = sum(line_ids.mapped('credit')) or 0.0
@@ -57,7 +59,7 @@ class CustomerInvoicesRepoert(models.AbstractModel):
                 'quantity': line.quantity,
                 'total_price': line.price_unit * line.quantity,
                 'total_cost': total_cost,
-                'total_profit': (line.price_unit * line.quantity) - total_cost
+                'total_profit': round((line.price_unit * line.quantity) - total_cost, 2)
             })
             total_quantity += line.quantity
             total_total_price += line.price_unit * line.quantity
@@ -77,8 +79,8 @@ class CustomerInvoicesRepoert(models.AbstractModel):
             'doc_model': 'account.move',
             'data': data,
             'lines': lines_dict,
-            'total_quantity': total_quantity,
-            'total_total_price': total_total_price,
-            'total_total_cost': total_total_cost,
-            'total_total_profit': total_total_profit
+            'total_quantity': round(total_quantity, 2),
+            'total_total_price': round(total_total_price, 2),
+            'total_total_cost': round(total_total_cost, 2),
+            'total_total_profit': round(total_total_profit, 2)
         }

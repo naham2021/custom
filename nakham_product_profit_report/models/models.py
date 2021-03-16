@@ -19,4 +19,4 @@ class AccountMove(models.Model):
             else:
                 invoice.total_cost = 0.0
 
-    total_cost = fields.Float( compute='_cal_total_cost')
+    total_cost = fields.Float(compute='_cal_total_cost', store=True)

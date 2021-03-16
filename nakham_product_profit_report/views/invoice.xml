@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="nakham_invoice_total_cost_group" model="res.groups">
+            <field name="name">Invoice Total Cost</field>
+        </record>
+
+        <record id="account_invoice_tree_total_cost" model="ir.ui.view">
+            <field name="name">account.invoice.tree.total.cost</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='amount_tax_signed']" position="after">
+                    <field name="total_cost" groups="nakham_product_profit_report.nakham_invoice_total_cost_group" sum="Total Cost"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
