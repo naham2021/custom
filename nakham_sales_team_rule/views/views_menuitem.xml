@@ -622,6 +622,17 @@
             sequence="10"/>
 
 <!--     تحليل البيانات -->
+
+      <!-- This Menu Item must have a parent and an action -->
+       <record id="sale_report_action_dashboard_2" model="ir.actions.act_window">
+            <field name="name">Sales Analysis</field>
+            <field name="res_model">sale.report</field>
+            <field name="view_mode">dashboard,pivot,graph</field>
+            <field name="search_view_id" ref="sale.view_order_product_search"/>
+            <field name="context" eval="{'search_default_Sales': 1, 'time_ranges': {'field':'date_order', 'range':'last_30_days'}}"/>
+        </record>
+      <menuitem id="sale_report_admin" name="Sales Analysis" parent="sale.menu_sale_report" action="sale_report_action_dashboard_2" groups="nakham_sales_team_rule.group_admin_system" />
+
         <record id="sale_enterprise.sale_report_action_dashboard" model="ir.actions.act_window">
             <field name="name">Sales Analysis</field>
             <field name="res_model">sale.report</field>
