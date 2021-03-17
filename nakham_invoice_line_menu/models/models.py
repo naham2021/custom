@@ -8,5 +8,6 @@ class StockLandedCost(models.Model):
 
     vendor_bill_ids = fields.Many2many(comodel_name="account.move", string="Vendor Bills",
                                        domain=[('type', '=', 'in_invoice')])
-
+    vendor_bill_id2 = fields.Many2one(comodel_name="account.move", string="Vendor Bill 2",
+                                       domain=[('type', '=', 'in_invoice')])
 
