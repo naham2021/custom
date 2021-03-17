@@ -10,6 +10,7 @@
 
               <xpath expr="//field[@name='vendor_bill_id']" position="after">
                   <field name="vendor_bill_ids" widget="many2many_tags"/>
+                  <field name="vendor_bill_id2"/>
               </xpath>
 
           </field>

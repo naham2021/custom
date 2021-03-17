@@ -12,7 +12,8 @@
             <field name="arch" type="xml">
 
                 <xpath expr="//field[@name='amount_tax_signed']" position="after">
-                    <field name="total_cost" groups="nakham_product_profit_report.nakham_invoice_total_cost_group" sum="Total Cost"/>
+                    <field name="total_cost" attrs="{'invisible': [('type', 'in', ['in_invoice', 'in_refund'])]}" groups="nakham_product_profit_report.nakham_invoice_total_cost_group" sum="Total Cost"/>
+                    <field name="total_profit" attrs="{'invisible': [('type', 'in', ['in_invoice', 'in_refund'])]}" groups="nakham_product_profit_report.nakham_invoice_total_cost_group" sum="Total Profit"/>
                 </xpath>
 
             </field>
