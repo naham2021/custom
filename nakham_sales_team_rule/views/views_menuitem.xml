@@ -128,7 +128,7 @@
             <field name="context">{'journal_type':'general', 'search_default_posted':1}</field>
             <field name="name">Journal Items ( Accountant )</field>
             <field name="res_model">account.move.line</field>
-            <field name="domain">[('display_type', 'not in', ('line_section', 'line_note')), ('move_id.state', '!=', 'cancel')]</field>
+            <field name="domain">[('move_id.team_id.Accountant_id','=',uid),('display_type', 'not in', ('line_section', 'line_note')), ('move_id.state', '!=', 'cancel')]</field>
             <field name="view_id" ref="account.view_move_line_tree"/>
             <field name="view_mode">tree,pivot,graph,form,kanban</field>
         </record>
@@ -315,7 +315,7 @@
             <field name="context">{'journal_type':'general', 'search_default_posted':1}</field>
             <field name="name">Journal Items ( Head Team )</field>
             <field name="res_model">account.move.line</field>
-            <field name="domain">[('display_type', 'not in', ('line_section', 'line_note')), ('move_id.state', '!=', 'cancel')]</field>
+            <field name="domain">[('move_id.team_id.user_id','=',uid),('display_type', 'not in', ('line_section', 'line_note')), ('move_id.state', '!=', 'cancel')]</field>
             <field name="view_id" ref="account.view_move_line_tree"/>
             <field name="view_mode">tree,pivot,graph,form,kanban</field>
         </record>
@@ -502,7 +502,7 @@
             <field name="context">{'journal_type':'general', 'search_default_posted':1}</field>
             <field name="name">Journal Items ( Member )</field>
             <field name="res_model">account.move.line</field>
-            <field name="domain">[('display_type', 'not in', ('line_section', 'line_note')), ('move_id.state', '!=', 'cancel')]</field>
+            <field name="domain">[('move_id.invoice_user_id', '=', uid),('display_type', 'not in', ('line_section', 'line_note')), ('move_id.state', '!=', 'cancel')]</field>
             <field name="view_id" ref="account.view_move_line_tree"/>
             <field name="view_mode">tree,pivot,graph,form,kanban</field>
         </record>
@@ -620,6 +620,27 @@
             parent="account.menu_finance_entries_accounting_miscellaneous"
             groups="nakham_sales_team_rule.group_admin_system"
             sequence="10"/>
+
+<!--     تحليل البيانات -->
+
+      <!-- This Menu Item must have a parent and an action -->
+       <record id="sale_report_action_dashboard_2" model="ir.actions.act_window">
+            <field name="name">Sales Analysis</field>
+            <field name="res_model">sale.report</field>
+            <field name="view_mode">dashboard,pivot,graph</field>
+            <field name="search_view_id" ref="sale.view_order_product_search"/>
+            <field name="context" eval="{'search_default_Sales': 1, 'time_ranges': {'field':'date_order', 'range':'last_30_days'}}"/>
+        </record>
+      <menuitem id="sale_report_admin" name="Sales Analysis" parent="sale.menu_sale_report" action="sale_report_action_dashboard_2" groups="nakham_sales_team_rule.group_admin_system" />
+
+        <record id="sale_enterprise.sale_report_action_dashboard" model="ir.actions.act_window">
+            <field name="name">Sales Analysis</field>
+            <field name="res_model">sale.report</field>
+            <field name="domain">['|','|',('team_id.Accountant_id', '=', uid),('team_id.user_id', '=', uid),('team_id.member_ids', '=', uid)]</field>
+            <field name="view_mode">dashboard,pivot,graph</field>
+            <field name="search_view_id" ref="sale.view_order_product_search"/>
+            <field name="context" eval="{'search_default_Sales': 1, 'time_ranges': {'field':'date_order', 'range':'last_30_days'}}"/>
+        </record>
 
   </data>
 </odoo>
