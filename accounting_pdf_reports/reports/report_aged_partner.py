@@ -11,7 +11,7 @@ from dateutil.relativedelta import relativedelta
 class ReportAgedPartnerBalance(models.AbstractModel):
     _name = 'report.accounting_pdf_reports.report_agedpartnerbalance'
 
-    def _get_partner_move_lines(self, account_type, date_from, target_move, period_length):
+    def _get_partner_move_lines(self, account_type, date_from, target_move, period_length, partners_filter=[]):
         # This method can receive the context key 'include_nullified_amount' {Boolean}
         # Do an invoice and a payment and unreconcile. The amount will be nullified
         # By default, the partner wouldn't appear in this report.
@@ -74,6 +74,13 @@ class ReportAgedPartnerBalance(models.AbstractModel):
         cr.execute(query, arg_list)
 
         partners = cr.dictfetchall()
+
+        if partners_filter:
+            partners = [partner for partner in partners if partner['partner_id'] in partners_filter]
+
+        print('---------------------------------------------')
+        print(partners_filter)
+        print(partners)
         # put a total of 0
         for i in range(7):
             total.append(0)
@@ -113,7 +120,7 @@ class ReportAgedPartnerBalance(models.AbstractModel):
                     line_amount -= ResCurrency._compute(partial_line.company_id.currency_id, user_currency, partial_line.amount)
             if not self.env.user.company_id.currency_id.is_zero(line_amount):
                 undue_amounts[partner_id] += line_amount
-                lines[partner_id].append({
+                lines.get(partner_id, []).append({
                     'line': line,
                     'amount': line_amount,
                     'period': 6,
@@ -166,7 +173,7 @@ class ReportAgedPartnerBalance(models.AbstractModel):
 
                 if not self.env.user.company_id.currency_id.is_zero(line_amount):
                     partners_amount[partner_id] += line_amount
-                    lines[partner_id].append({
+                    lines.get(partner_id, []).append({
                         'line': line,
                         'amount': line_amount,
                         'period': i + 1,
@@ -232,7 +239,7 @@ class ReportAgedPartnerBalance(models.AbstractModel):
         else:
             account_type = ['payable', 'receivable']
 
-        movelines, total, dummy = self._get_partner_move_lines(account_type, date_from, target_move, data['form']['period_length'])
+        movelines, total, dummy = self._get_partner_move_lines(account_type, date_from, target_move, data['form']['period_length'], data['form']['partner_ids'])
         return {
             'doc_ids': self.ids,
             'doc_model': model,

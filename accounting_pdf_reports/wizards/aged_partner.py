@@ -14,6 +14,7 @@ class AccountAgedTrialBalance(models.TransientModel):
     period_length = fields.Integer(string='Period Length (days)', required=True, default=30)
     journal_ids = fields.Many2many('account.journal', string='Journals', required=True)
     date_from = fields.Date(default=lambda *a: time.strftime('%Y-%m-%d'))
+    partner_ids = fields.Many2many('res.partner')
 
     def _print_report(self, data):
         res = {}
@@ -36,4 +37,7 @@ class AccountAgedTrialBalance(models.TransientModel):
             }
             start = stop - relativedelta(days=1)
         data['form'].update(res)
+        data['form'].update(self.read(['partner_ids'])[0])
+        print(self.read(['partner_ids'])[0])
+        # print(type(data['form']['partner_ids']))
         return self.env.ref('accounting_pdf_reports.action_report_aged_partner_balance').with_context(landscape=True).report_action(self, data=data)
