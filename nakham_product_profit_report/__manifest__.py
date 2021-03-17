@@ -31,6 +31,7 @@
         'reports/report.xml',
         'reports/templates.xml',
         'reports/purchase_details_templates.xml',
+        'views/invoice.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

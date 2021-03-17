@@ -75,8 +75,9 @@
         </record>
 
         <!-- This Menu Item must have a parent and an action -->
-        <menuitem id="nakham_customer_profit_menu" name="Sales Details In Period"
-                  parent="account.menu_finance_reports" action="nakham_customer_invoice_report_wizard_action"/>
+<!--        <menuitem id="nakham_customer_profit_menu" name="Sales Details In Period"-->
+<!--                  parent="account.menu_finance_reports" action="nakham_customer_invoice_report_wizard_action"/> -->
+        <delete model="ir.ui.menu" id="nakham_customer_profit_menu"/>
         <menuitem id="nakham_purchase_details_menu" name="Product Margin Report"
                   parent="account.menu_finance_reports" action="nakham_purchase_details_report_wizard_action"/>
 

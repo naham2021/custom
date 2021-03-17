@@ -54,11 +54,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <t t-foreach="lines" t-as="line">
+                        <tr t-foreach="lines" t-as="line">
                             <td style="border:1px solid;" t-foreach="line" t-as="field">
                                 <span t-esc="line[field]"/>
                             </td>
-                        </t>
+                        </tr>
                         <tr style="text-align:right">
                             <td style="border:1px solid;text-align:left" colspan="4">الاجمالي</td>
                             <td style="border:1px solid;">
