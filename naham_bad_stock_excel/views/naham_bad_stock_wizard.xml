@@ -32,7 +32,7 @@
                                 <field name="search_by" />
                                 <field name="product_id" attrs="{'invisible': [('search_by','!=', 'product')],'required': [('search_by','=', 'product')]}" />
                                 <field name="product_categ_ids" widget="many2many_tags" attrs="{'invisible': [('search_by','!=','categ')],'required': [('search_by','=', 'categ')]}" />
-                                <field name="location_id"/>
+                                <field name="location_id" widget="many2many_tags" options="{'no_create':1}"/>
                             </group>
                         </group>
                     </sheet>

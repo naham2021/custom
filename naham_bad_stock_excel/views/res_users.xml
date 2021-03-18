@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <!-- Inherit Form View to Modify it -->
+       <record id="res_user_allowed_locations" model="ir.ui.view">
+           <field name="name">res.user.allowed.locations</field>
+           <field name="model">res.users</field>
+           <field name="inherit_id" ref="tamsah_location_res_user.res_users_view_form"/>
+           <field name="arch" type="xml">
+
+               <xpath expr="//field[@name='location_id']" position="after">
+                   <field name="allowed_bad_stock_location_ids" widget="many2many_tags" options="{'no_create':1}"/>
+               </xpath>
+
+           </field>
+       </record>
+
+    </data>
+</odoo>
