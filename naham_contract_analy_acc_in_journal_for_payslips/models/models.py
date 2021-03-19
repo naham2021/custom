@@ -388,7 +388,7 @@ class HrPayslip(models.Model):
                 if slip.move_id:
                     for rec in slip.move_id.line_ids:
                         rec.write({
-                            'analytic_account_id':analytic_account_in_contract,
+                            # 'analytic_account_id':analytic_account_in_contract,
                             'partner_id': slip.employee_id.address_id.id,
                         })
 
