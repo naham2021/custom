@@ -436,14 +436,15 @@
                                         />
                                         <t t-set="subtotal" t-value="line.quantity * line.price_unit"
                                         />
-                                        <t t-set="no" t-value="no + 1"
-                                        />
+
                                         <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
                                         />
 
                                         <tr style="color:#243BA0;font-size: 14px;border: 1px solid #000000;">
+
                                             <t t-if="not line.display_type" name="account_invoice_line_accountable"
                                                style="border: 1px solid #000000;">
+                                                <t t-set="no" t-value="no + 1" />
                                                 <td name="no" style="border: 1px solid #000000;">
                                                     <span style="margin-left:-2px;">
                                                         <t t-esc="no"/>
@@ -492,7 +493,7 @@
 
                                             </t>
                                         </tr>
-                                        <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                        <tr style="border: 1px solid #000000;" t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
 <!--                                            <t t-if="not line.display_type" name="account_invoice_line_accountable">-->
 <!--&lt;!&ndash;                                                <td name="account_invoice_line_name">&ndash;&gt;-->
 <!--&lt;!&ndash;                                                    <span t-field="line.name" t-options="{'widget': 'text'}"/>&ndash;&gt;-->
