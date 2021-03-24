@@ -136,6 +136,7 @@ class qtytobepurchasedwizard(models.TransientModel):
             #     dict(self.env.context, to_date=self.date_from))
             #
             first_balance = 0
+            balance = 0
             qty_avaiable_to = 0
             qty_avaiable_from = 0
             for location in self.location_ids:
@@ -152,23 +153,28 @@ class qtytobepurchasedwizard(models.TransientModel):
                     ('location_id', '=', location.id)
                 ]).mapped('qty_done'))
                 first_balance += qty_to - qty_from
-                qty_to = sum(self.env['stock.move.line'].search([
-                    ('state', '=', 'done'),
-                    ('date', '>=', self.date_from),
-                    ('date', '<=', self.date_to),
-                    ('product_id', '=', rec.id),
-                    ('location_dest_id', '=', location.id)
-                ]).mapped('qty_done'))
-                qty_from = sum(self.env['stock.move.line'].search([
-                    ('state', '=', 'done'),
-                    ('date', '>=', self.date_from),
-                    ('date', '<=', self.date_to),
+                # qty_to = sum(self.env['stock.move.line'].search([
+                #     ('state', '=', 'done'),
+                #     ('date', '>=', self.date_from),
+                #     ('date', '<=', self.date_to),
+                #     ('product_id', '=', rec.id),
+                #     ('location_dest_id', '=', location.id)
+                # ]).mapped('qty_done'))
+                # qty_from = sum(self.env['stock.move.line'].search([
+                #     ('state', '=', 'done'),
+                #     ('date', '>=', self.date_from),
+                #     ('date', '<=', self.date_to),
+                #     ('product_id', '=', rec.id),
+                #     ('location_id', '=', location.id)
+                # ]).mapped('qty_done'))
+                # qty_avaiable_to += qty_to
+                # qty_avaiable_from += qty_from
+                balance_tmp = sum(self.env['stock.quant'].search([
                     ('product_id', '=', rec.id),
                     ('location_id', '=', location.id)
-                ]).mapped('qty_done'))
-                qty_avaiable_to += qty_to
-                qty_avaiable_from += qty_from
-            qty_avaiable = qty_avaiable_to - qty_avaiable_from
+                ]).mapped('quantity'))
+                balance += balance_tmp
+            qty_avaiable = balance
 
             date_from_date = self.date_from.date()
             date_to_date = self.date_to.date()

@@ -156,11 +156,11 @@ class badstockwizard(models.TransientModel):
                 ]).mapped('qty_done'))
                 first_balance += qty_to - qty_from
             for location in self.location_id:
-                x = self.env['stock.quant'].search([
-                    ('product_id', '=', rec.id),
-                    ('location_id', '=', location.id)
-                ])
-                print(x)
+                # x = self.env['stock.quant'].search([
+                #     ('product_id', '=', rec.id),
+                #     ('location_id', '=', location.id)
+                # ])
+                # print(x)
                 balance_tmp = sum(self.env['stock.quant'].search([
                     ('product_id', '=', rec.id),
                     ('location_id', '=', location.id)
