@@ -139,8 +139,8 @@ class badstockwizard(models.TransientModel):
         for rec in all_product_of_this_period:
             product = rec.id
             domain = ([('id', '=', product)])
-            my_products = self.env['product.product'].search(domain).with_context(
-                dict(self.env.context, to_date=self.date_from))
+            # my_products = self.env['product.product'].search(domain).with_context(
+            #     dict(self.env.context, to_date=self.date_from))
             first_balance = 0
             balance = 0
             for location in self.location_id:
