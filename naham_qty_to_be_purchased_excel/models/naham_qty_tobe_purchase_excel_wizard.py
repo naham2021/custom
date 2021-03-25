@@ -206,7 +206,8 @@ class qtytobepurchasedwizard(models.TransientModel):
             sheet.write(row, col + 5, round(qty_avaiable, 2) or '0.0', font_size_10)
             sheet.write(row, col + 6, round(avg_monthly_sale, 2) or '0.0', font_size_10)
             sheet.write(row, col + 7, round(needed_months, 2) or '0.0', font_size_10)
-            sheet.write(row, col + 8, round(first_balance - needed_months, 2) or '0.0', font_size_10)
+            # sheet.write(row, col + 8, round(first_balance - needed_months, 2) or '0.0', font_size_10)
+            sheet.write(row, col + 8, round(needed_months - qty_avaiable, 2) or '0.0', font_size_10)
 
             row += 1
             seq += 1
