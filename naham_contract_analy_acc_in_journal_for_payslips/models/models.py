@@ -384,11 +384,24 @@ class HrPayslip(models.Model):
                 analytic_account_in_contract = slip.employee_id.contract_id.analytic_account_id.id
                 # change analytic account in move lines
                 if slip.move_id:
+                    slip.move_id.ref = slip.number
                     for rec in slip.move_id.line_ids:
                         rec.write({
                             # 'analytic_account_id':analytic_account_in_contract,
                             'partner_id': slip.employee_id.address_id.id,
                         })
+
+            for slip in self:
+                # slip.write({'move_id': move.id, 'date': date})
+                if slip.employee_id.contract_id and slip.employee_id.contract_id.analytic_account_id:
+                    analytic_account_in_contract = slip.employee_id.contract_id.analytic_account_id.id
+                    # change analytic account in move lines
+                    if slip.move_id:
+                        for rec in slip.move_id.line_ids:
+                            rec.write({
+                                'analytic_account_id':analytic_account_in_contract,
+                                # 'partner_id': slip.employee_id.address_id.id,
+                            })
 
             analytic_account_in_contract = slip.employee_id.contract_id
         ##
