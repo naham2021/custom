@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payment,access_payment,model_payment,,1,1,1,1
+access_payment_way,access_payment_way,model_payment_way,,1,1,1,1
+access_installation,access_installation,model_installation,,1,1,1,1
+access_delivery_sale,access_delivery_sale,model_delivery_sale,,1,1,1,1
+access_operation_requirment,access_operation_requirment,model_operation_requirment,,1,1,1,1
+access_travel_civil_work,access_travel_civil_work,model_travel_civil_work,,1,1,1,1
+access_warranty,access_warranty,model_warranty,,1,1,1,1
+access_warranty_location,access_warranty_location,model_warranty_location,,1,1,1,1
+access_duration_of_technical_support,access_duration_of_technical_support,model_duration_of_technical_support,,1,1,1,1
+access_training,access_training,model_training,,1,1,1,1
+access_software,access_software,model_software,,1,1,1,1
+access_delivery_place,access_delivery_place,model_delivery_place,,1,1,1,1
+access_quote_type,access_quote_type,model_quote_type,,1,1,1,1
+access_quote_stage,access_quote_stage,model_quote_stage,,1,1,1,1
