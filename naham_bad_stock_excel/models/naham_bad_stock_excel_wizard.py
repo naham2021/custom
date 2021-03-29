@@ -145,11 +145,13 @@ class badstockwizard(models.TransientModel):
             balance = 0
             for location in self.location_id:
                 qty_to = sum(self.env['stock.move.line'].search([
+                    ('state', '=', 'done'),
                     ('date', '<', self.date_from),
                     ('product_id', '=', rec.id),
                     ('location_dest_id', '=', location.id)
                 ]).mapped('qty_done'))
                 qty_from = sum(self.env['stock.move.line'].search([
+                    ('state', '=', 'done'),
                     ('date', '<', self.date_from),
                     ('product_id', '=', rec.id),
                     ('location_id', '=', location.id)

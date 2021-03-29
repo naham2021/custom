@@ -88,10 +88,10 @@ class StockCardWizard(models.TransientModel):
         sheet.write('D8', 'الوحدة', format1)
         sheet.write('C8', self.product_id.uom_id.name, format1)
         # sheet.set_column()
-        transfers_to_date = self.env['stock.move.line'].search([('product_id', '=', self.product_id.id),
+        transfers_to_date = self.env['stock.move.line'].search([('state', '=', 'done'),('product_id', '=', self.product_id.id),
                                                                 ('date', '<', self.date_from),
                                                                 ('location_dest_id', '=', self.location_id.id)])
-        transfers_from_date = self.env['stock.move.line'].search([('product_id', '=', self.product_id.id),
+        transfers_from_date = self.env['stock.move.line'].search([('state', '=', 'done'),('product_id', '=', self.product_id.id),
                                                                   ('date', '<', self.date_from),
                                                                   ('location_id', '=', self.location_id.id)])
         total_qty_to_date = sum(transfers_to_date.mapped('qty_done'))
@@ -115,7 +115,7 @@ class StockCardWizard(models.TransientModel):
         row = 15
         seq = 1
         col = 6
-        transfers = self.env['stock.move.line'].search([('product_id', '=', self.product_id.id),
+        transfers = self.env['stock.move.line'].search([('state', '=', 'done'),('product_id', '=', self.product_id.id),
                                                         ('date', '<=', self.date_to),
                                                         ('date', '>=', self.date_from),
                                                         '|',
