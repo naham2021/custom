@@ -1,0 +1,129 @@
+<odoo>
+    <data>
+        <record id="view_project_form" model="ir.ui.view">
+            <field name="name">project changes</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="sale_order_project" string="Sales Order"/>
+                </xpath>
+                <xpath expr="//page[@name='extra_info']" position="inside">
+                    <group>
+                    <field name="partner_project" string="فنيين" widget="many2many_tags"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="name">partner changes</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="sale.res_partner_view_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button" type="object" name="project_button" icon="fa-usd">
+                        <field string="Tasks" name="tasks_count" widget="statinfo"/>
+                    </button>
+
+
+                </xpath>
+            </field>
+        </record>
+        <record id="view_sale_edit_form" model="ir.ui.view">
+            <field name="name">sales and changes</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                        <field string="Quote Type" name="Quote_type"/>
+                        <field string="Quote Stage" name="Quote_stage"/>
+                        <field string="Sale Probability" name="sale_probability"/>
+                        <field string="Profit" name="profit"/>
+                        <field string="Buy From Us" name="buyfromus"/>
+
+                </xpath>
+            </field>
+        </record>
+                <record model="ir.ui.view" id="quote_type_view">
+            <field name="name">quote_type.form</field>
+            <field name="model">quote.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Quote Type"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="quote_type_tree_view">
+            <field name="name">quote_type.tree</field>
+            <field name="model">quote.type</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="name" string='Quote Type'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_quote_type_type" model="ir.actions.act_window">
+            <field name="name">quote_type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">quote.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_quote_type_type"
+                  action="sale_menu_config_quote_type_type"
+                  parent="sale.menu_sale_config"
+                  name="Quote Type"
+                  sequence="23"/>
+                <record model="ir.ui.view" id="quote_stage_view">
+            <field name="name">quote_stage.form</field>
+            <field name="model">quote.stage</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Quote Stage"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="quote_stage_tree_view">
+            <field name="name">quote_stage.tree</field>
+            <field name="model">quote.stage</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="name" string='Quote Stage'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_quote_stage_type" model="ir.actions.act_window">
+            <field name="name">quote_stage</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">quote.stage</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_quote_stage_type"
+                  action="sale_menu_config_quote_stage_type"
+                  parent="sale.menu_sale_config"
+                  name="Quote Stage"
+                  sequence="24"/>
+
+    </data>
+</odoo>
