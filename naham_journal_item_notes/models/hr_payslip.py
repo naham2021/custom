@@ -194,3 +194,4 @@ class HrPayslip(models.Model):
                 for slip in slip_mapped_data[journal_id][slip_date]:
                     slip.write({'move_id': move.id, 'date': date})
         return res
+
