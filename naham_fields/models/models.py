@@ -11,17 +11,19 @@ class saleorder(models.Model):
     Delivery_sale = fields.Many2one('delivery.sale')
     operation_requirment_sale = fields.Many2many('operation.requirment')
     Travel_civil_work_sale = fields.Many2one('travel.civil.work')
-    warranty_sale = fields.Many2many('warranty')
+    warranty_sale = fields.Many2one('warranty')
     warranty_location_sale = fields.Many2one('warranty.location')
     duration_of_technical_support_sale = fields.Many2one('duration.of.technical.support')
     training_sale = fields.Many2one('training')
     Software_sale = fields.Many2one('software')
-    delivery_place_sale = fields.Many2one('delivery.place')
-    Quote_type = fields.Many2one('quote.type')
+    delivery_place_sale = fields.Many2many('delivery.place')
+    Quote_type = fields.Many2many('quote.type')
     Quote_stage = fields.Many2one('quote.stage')
     sale_probability = fields.Float('')
     profit = fields.Integer()
     buyfromus = fields.Integer()
+    subject = fields.Char()
+    contact = fields.Many2one('res.partner')
 
 
 

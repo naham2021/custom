@@ -35,13 +35,17 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_id']" position="after">
-                        <field string="Quote Type" name="Quote_type"/>
+                        <field string="Quote Type" name="Quote_type" widget="many2many_tags"/>
                         <field string="Quote Stage" name="Quote_stage"/>
                         <field string="Sale Probability" name="sale_probability"/>
                         <field string="Profit" name="profit"/>
                         <field string="Buy From Us" name="buyfromus"/>
-
                 </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                        <field string="Subject" name="subject"/>
+                        <field string="Contact Person" name="contact"/>
+                </xpath>
+
             </field>
         </record>
                 <record model="ir.ui.view" id="quote_type_view">

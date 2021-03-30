@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_naham_journal_item_notes_naham_journal_item_notes,naham_journal_item_notes.naham_journal_item_notes,model_naham_journal_item_notes_naham_journal_item_notes,base.group_user,1,1,1,1

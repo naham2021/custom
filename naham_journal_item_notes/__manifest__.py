@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "naham_fields",
+    'name': "naham_journal_item_notes",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -20,15 +20,13 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','sale','project'],
+    'depends': ['base', 'account', 'hr_payroll_account'],
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
+        # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/project.xml',
-        'reports/naham_report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

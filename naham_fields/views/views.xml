@@ -17,12 +17,12 @@
                         </group>
                         <group class="col-6">
                         <field name="Travel_civil_work_sale" string="Travel And Civil Work"/>
-                        <field name="warranty_sale" string="Warranty" widget="many2many_tags"/>
+                        <field name="warranty_sale" string="Warranty"/>
                         <field name="warranty_location_sale" string="Warranty Location"/>
                         <field name="duration_of_technical_support_sale" string="Duration Of Technical Support"/>
                         <field name="training_sale" string="Training"/>
                         <field name="Software_sale" string="Software"/>
-                        <field name="delivery_place_sale" string="Delivery Place"/>
+                        <field name="delivery_place_sale" string="Delivery Place" widget="many2many_tags"/>
                         </group>
                     </page>
                 </xpath>
