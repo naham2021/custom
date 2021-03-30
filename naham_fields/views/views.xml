@@ -1,0 +1,513 @@
+<odoo>
+    <data>
+        <record id="view_quotations_discount_form" model="ir.ui.view">
+            <field name="name">quotations discount</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='customer_signature']" position="after">
+                    <page name="terms_conditions" string="Terms and Conditions">
+                        <group class="col-6">
+                        <field name="payment_sale" string="payment"/>
+                        <field name="payment_way_sale" string="payment Way" widget="many2many_tags"/>
+                        <field name="installation_sale" string="Installation"/>
+                        <field name="valid_untill_sale" string="Valid Untill"/>
+                        <field name="Delivery_sale" string="Delivery"/>
+                        <field name="operation_requirment_sale" string="Operation Requirment" widget="many2many_tags"/>
+                        </group>
+                        <group class="col-6">
+                        <field name="Travel_civil_work_sale" string="Travel And Civil Work"/>
+                        <field name="warranty_sale" string="Warranty" widget="many2many_tags"/>
+                        <field name="warranty_location_sale" string="Warranty Location"/>
+                        <field name="duration_of_technical_support_sale" string="Duration Of Technical Support"/>
+                        <field name="training_sale" string="Training"/>
+                        <field name="Software_sale" string="Software"/>
+                        <field name="delivery_place_sale" string="Delivery Place"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="payment_form_view">
+            <field name="name">payment.form</field>
+            <field name="model">payment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="payment" string="Payment"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="payment_tree_view">
+            <field name="name">payment.tree</field>
+            <field name="model">payment</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="payment" string="Payment"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_payment_type" model="ir.actions.act_window">
+            <field name="name">payment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">payment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_payment_type"
+                  action="sale_menu_config_payment_type"
+                  parent="sale.menu_sale_config"
+                  name="Payment"
+                  sequence="10"/>
+        <record model="ir.ui.view" id="payment_way_form_view">
+            <field name="name">payment_way.form</field>
+            <field name="model">payment.way</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Payment Way"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="payment_way_tree_view">
+            <field name="name">payment_way.tree</field>
+            <field name="model">payment.way</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string="Payment_way"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_payment_way_type" model="ir.actions.act_window">
+            <field name="name">payment_way</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">payment.way</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_payment_way_type"
+                  action="sale_menu_config_payment_way_type"
+                  parent="sale.menu_sale_config"
+                  name="Payment Way"
+                  sequence="11"/>
+        <record model="ir.ui.view" id="installation_form_view">
+            <field name="name">installation.form</field>
+            <field name="model">installation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Installation"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="installation_tree_view">
+            <field name="name">installation.tree</field>
+            <field name="model">installation</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string="Installation"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_installation_type" model="ir.actions.act_window">
+            <field name="name">installation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">installation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_installation_type"
+                  action="sale_menu_config_installation_type"
+                  parent="sale.menu_sale_config"
+                  name="Installation"
+                  sequence="12"/>
+        <record model="ir.ui.view" id="Delivery_sale_form_view">
+            <field name="name">Delivery.form</field>
+            <field name="model">delivery.sale</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Delivery"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="Delivery_sale_tree_view">
+            <field name="name">Delivery.tree</field>
+            <field name="model">delivery.sale</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string="Delivery"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_Delivery_type" model="ir.actions.act_window">
+            <field name="name">Delivery_sale</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">delivery.sale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_Delivery_sale_type"
+                  action="sale_menu_config_Delivery_type"
+                  parent="sale.menu_sale_config"
+                  name="Delivery"
+                  sequence="14"/>
+        <record model="ir.ui.view" id="operation_requirment_form_view">
+            <field name="name">operation_requirment.form</field>
+            <field name="model">operation.requirment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Operation Requirment"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="operation_requirment_tree_view">
+            <field name="name">operation_requirment.tree</field>
+            <field name="model">operation.requirment</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string="Operation Requirment"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_operation_requirment_type" model="ir.actions.act_window">
+            <field name="name">operation_requirment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">operation.requirment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_operation_requirment_sale_type"
+                  action="sale_menu_config_operation_requirment_type"
+                  parent="sale.menu_sale_config"
+                  name="Operation Requirment"
+                  sequence="15"/>
+        <record model="ir.ui.view" id="Travel_civil_work_form_view">
+            <field name="name">Travel_civil_work.form</field>
+            <field name="model">travel.civil.work</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Travel And Civil Work"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="travel_civil_work_tree_view">
+            <field name="name">travel_civil_work.tree</field>
+            <field name="model">travel.civil.work</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string="Travel And Civil Work"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_travel_civil_work_type" model="ir.actions.act_window">
+            <field name="name">travel_civil_work</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">travel.civil.work</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_travel_civil_work_sale_type"
+                  action="sale_menu_config_travel_civil_work_type"
+                  parent="sale.menu_sale_config"
+                  name="Travel And Civil Work"
+                  sequence="16"/>
+        <record model="ir.ui.view" id="Warranty_form_view">
+            <field name="name">Warranty.form</field>
+            <field name="model">warranty</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Warranty"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="Warranty_tree_view">
+            <field name="name">warranty.tree</field>
+            <field name="model">warranty</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string='Warranty'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_warranty_type" model="ir.actions.act_window">
+            <field name="name">warranty</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">warranty</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_warranty_sale_type"
+                  action="sale_menu_config_warranty_type"
+                  parent="sale.menu_sale_config"
+                  name="Warranty"
+                  sequence="17"/>
+        <record model="ir.ui.view" id="warranty_location_form_view">
+            <field name="name">warranty_location.form</field>
+            <field name="model">warranty.location</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Warranty Location"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="warranty_location_tree_view">
+            <field name="name">warranty_location.tree</field>
+            <field name="model">warranty.location</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string='Warranty Location'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_warranty_location_type" model="ir.actions.act_window">
+            <field name="name">warranty_location</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">warranty.location</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_warranty_location_sale_type"
+                  action="sale_menu_config_warranty_location_type"
+                  parent="sale.menu_sale_config"
+                  name="Warranty Location"
+                  sequence="18"/>
+        <record model="ir.ui.view" id="duration_of_technical_support_form_view">
+            <field name="name">duration_of_technical_support.form</field>
+            <field name="model">duration.of.technical.support</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Duration Of Technical Support"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="duration_of_technical_support_tree_view">
+            <field name="name">duration_of_technical_support.tree</field>
+            <field name="model">duration.of.technical.support</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string='Duration Of Technical Support'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_duration_of_technical_support_type" model="ir.actions.act_window">
+            <field name="name">duration_of_technical_support</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">duration.of.technical.support</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_duration_of_technical_support_location_sale_type"
+                  action="sale_menu_config_duration_of_technical_support_type"
+                  parent="sale.menu_sale_config"
+                  name="Duration Of Technical Support"
+                  sequence="19"/>
+        <record model="ir.ui.view" id="training_view">
+            <field name="name">training.form</field>
+            <field name="model">training</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Training"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="training_tree_view">
+            <field name="name">training.tree</field>
+            <field name="model">training</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string='Training'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_training_type" model="ir.actions.act_window">
+            <field name="name">training</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">training</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_training_type"
+                  action="sale_menu_config_training_type"
+                  parent="sale.menu_sale_config"
+                  name="Training"
+                  sequence="20"/>
+        <record model="ir.ui.view" id="Software_view">
+            <field name="name">Software.form</field>
+            <field name="model">software</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Software"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="Software_tree_view">
+            <field name="name">Software.tree</field>
+            <field name="model">software</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string='Software'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_Software_type" model="ir.actions.act_window">
+            <field name="name">Software</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">software</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_Software_type"
+                  action="sale_menu_config_Software_type"
+                  parent="sale.menu_sale_config"
+                  name="Software"
+                  sequence="21"/>
+        <record model="ir.ui.view" id="delivery_place_view">
+            <field name="name">delivery_place.form</field>
+            <field name="model">delivery.place</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Delivery Place"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="delivery_place_tree_view">
+            <field name="name">delivery_place.tree</field>
+            <field name="model">delivery.place</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string='Delivery Place'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_delivery_place_type" model="ir.actions.act_window">
+            <field name="name">delivery_place</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">delivery.place</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_Software_type"
+                  action="sale_menu_config_delivery_place_type"
+                  parent="sale.menu_sale_config"
+                  name="Delivery Place"
+                  sequence="22"/>
+
+    </data>
+</odoo>
