@@ -1,60 +1,30 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="naham_journal_item_notes.list">
-      <field name="name">naham_journal_item_notes list</field>
-      <field name="model">naham_journal_item_notes.naham_journal_item_notes</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
--->
+    <!-- Inherit Form View to Modify it -->
+    <record id="account_move_line_tree_notes" model="ir.ui.view">
+        <field name="name">account.move.line.tree.notes</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="arch" type="xml">
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="naham_journal_item_notes.action_window">
-      <field name="name">naham_journal_item_notes window</field>
-      <field name="res_model">naham_journal_item_notes.naham_journal_item_notes</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
+            <xpath expr="//field[@name='credit']" position="after">
+                <field name="notes" optional="show"/>
+            </xpath>
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="naham_journal_item_notes.action_server">
-      <field name="name">naham_journal_item_notes server</field>
-      <field name="model_id" ref="model_naham_journal_item_notes_naham_journal_item_notes"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
+        </field>
     </record>
--->
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="naham_journal_item_notes" id="naham_journal_item_notes.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="naham_journal_item_notes.menu_1" parent="naham_journal_item_notes.menu_root"/>
-    <menuitem name="Menu 2" id="naham_journal_item_notes.menu_2" parent="naham_journal_item_notes.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="naham_journal_item_notes.menu_1_list" parent="naham_journal_item_notes.menu_1"
-              action="naham_journal_item_notes.action_window"/>
-    <menuitem name="Server to list" id="naham_journal_item_notes" parent="naham_journal_item_notes.menu_2"
-              action="naham_journal_item_notes.action_server"/>
--->
+    <record id="move_line_tree_grouped_misc_notes" model="ir.ui.view">
+        <field name="name">move.line.tree.grouped.misc.notes</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree_grouped_misc"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='amount_currency']" position="after">
+                <field name="notes" optional="show"/>
+            </xpath>
+
+        </field>
+    </record>
   </data>
 </odoo>
