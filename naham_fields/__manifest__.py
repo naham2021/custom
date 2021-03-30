@@ -27,7 +27,8 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/project.xml'
+        'views/project.xml',
+        'reports/naham_report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
