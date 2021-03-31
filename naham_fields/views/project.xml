@@ -13,6 +13,25 @@
                     <field name="partner_project" string="فنيين" widget="many2many_tags"/>
                     </group>
                 </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="profit" string="Profit"/>
+                    <field name="Collection_from_the_customer" string="Collection From The Customer"/>
+                    <field name="purchaseorder" string="Purchase Order"/>
+                    <field name="completion_percentage" string="Completion Percentage"/>
+                    <field name="text" string="مكان التسليم"/>
+
+<!--                    <field name="status_sale" string="Status"/>-->
+<!--                    <field name="type_sale" string="Type" widget="many2many_tags"/>-->
+<!--                    <field name="task_sale" string="Task Category"/>-->
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="status_sale" string="Status"/>
+                    <field name="type_sale" string="Type" widget="many2many_tags"/>
+                    <field name="task_sale" string="Task Category"/>
+
+
+
+                </xpath>
             </field>
         </record>
         <record id="view_partner_form" model="ir.ui.view">
@@ -128,6 +147,130 @@
                   parent="sale.menu_sale_config"
                   name="Quote Stage"
                   sequence="24"/>
+                <record model="ir.ui.view" id="status_sale_view">
+            <field name="name">status_sale.form</field>
+            <field name="model">status</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Status"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="status_sale_tree_view">
+            <field name="name">status.tree</field>
+            <field name="model">status</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string='Status'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_status_sale_type" model="ir.actions.act_window">
+            <field name="name">status</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">status</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="status_sale"
+                  action="sale_menu_config_status_sale_type"
+                  parent="project.menu_project_config"
+                  name="Status"
+                  sequence="22"/>
+        <record model="ir.ui.view" id="type_sale_view">
+
+            <field name="name">type.form</field>
+            <field name="model">project.sale.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Type"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="type_tree_view">
+            <field name="name">type.tree</field>
+            <field name="model">project.sale.type</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string='Type'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_type_type" model="ir.actions.act_window">
+            <field name="name">type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.sale.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="type_k_sale"
+                  action="sale_menu_config_type_type"
+                  parent="project.menu_project_config"
+                  name="Type"
+                  sequence="23"/>
+
+        <record model="ir.ui.view" id="task_catogary_sale_view">
+
+            <field name="name">task_catogary.form</field>
+            <field name="model">task.catogary</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Task Category"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="task_catogary_tree_view">
+            <field name="name">type.tree</field>
+            <field name="model">task.catogary</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string='Task Category'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_task_catogary_type" model="ir.actions.act_window">
+            <field name="name">type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">task.catogary</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="task_catogary_sale"
+                  action="sale_menu_config_task_catogary_type"
+                  parent="project.menu_project_config"
+                  name="Task Category"
+                  sequence="24"/>
+
 
     </data>
 </odoo>

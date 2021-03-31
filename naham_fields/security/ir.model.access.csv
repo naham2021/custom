@@ -13,3 +13,6 @@ access_software,access_software,model_software,,1,1,1,1
 access_delivery_place,access_delivery_place,model_delivery_place,,1,1,1,1
 access_quote_type,access_quote_type,model_quote_type,,1,1,1,1
 access_quote_stage,access_quote_stage,model_quote_stage,,1,1,1,1
+access_type,access_type,model_project_sale_type,,1,1,1,1
+access_status,access_status,model_status,base.group_user,1,1,1,1
+access_taskcatogary,access_taskcatogary,model_task_catogary,,1,1,1,1

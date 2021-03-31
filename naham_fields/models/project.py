@@ -4,6 +4,25 @@ class project_task(models.Model):
     _inherit = 'project.task'
     sale_order_project = fields.Many2one('sale.order')
     partner_project = fields.Many2many('res.partner')
+    profit = fields.Integer()
+    Collection_from_the_customer = fields.Integer()
+    purchaseorder = fields.Many2one('purchase.order')
+    completion_percentage = fields.Char()
+    text = fields.Char()
+    status_sale = fields.Many2one('status')
+    type_sale = fields.Many2many('project.sale.type')
+    task_sale = fields.Many2one('task.catogary')
+
+class status(models.Model):
+    _name = 'status'
+    name = fields.Char(translate=True)
+class type(models.Model):
+    _name = 'project.sale.type'
+    name = fields.Char(translate=True)
+class taskcatogary(models.Model):
+    _name = 'task.catogary'
+    name = fields.Char(translate=True)
+
 
 class partner(models.Model):
     _inherit = 'res.partner'
