@@ -1,262 +1,391 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-  <data>
+    <data>
+        <template id="naham_header_footer">
+                        <t t-if="not o and doc">
+                            <t t-set="o" t-value="doc"/>
+                        </t>
+
+                        <t t-if="o and 'company_id' in o">
+                            <t t-set="company" t-value="o.company_id.sudo()"/>
+                        </t>
+                        <t t-if="not o or not 'company_id' in o">
+                            <t t-set="company" t-value="res_company"/>
+                        </t>
+
+<!--            <div>-->
+<!--                <div class="header">-->
+<!--                    <div class="float-center">-->
+<!--                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-center"/>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+                        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <table style="width:100%">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="text-left">NAHAM TRADING EST.</div>
+                                <div class="text-left">Naham Int’l for Computer and Communication</div>
+                            </td>
+                            <td>
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="height: 110px;"
+                                     alt="Logo"/>
+                            </td>
+                            <td>
+                                <div class="text-right">مؤسســـة النحــام للتجــارة</div>
+                                <div class="text-right">النحام الدولية للكمبيوتر والاتصالات</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
 
-    <record id="action_naham_report_card" model="ir.actions.report">
-         <field name="name">Naham report</field>
-         <field name="model">sale.order</field>
-         <field name="report_type">qweb-pdf</field>
-         <field name="report_name">naham_fields.report_naham_card</field>
-         <field name="report_file">naham_fields.report_naham_card</field>
-         <field name="print_report_name">'Naham quotation - %s' % (object.name)</field>
-         <field name="binding_model_id" ref="model_sale_order"/>
-     </record>
 
 
+                <div class="footer o_background_footer">
+                    <div class="text-right page_number">
+                        <div class="text-muted">
+                            Page:
+                            <span class="page"/>
+                            of
+                            <span class="topage"/>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <ul class="list-inline">
+                            <li t-if="company.phone" style="display:inline">
+                                <i class="fa fa-phone"/>
+                                <span t-field="company.phone"/>
+                            </li>
+                            <li t-if="company.email" style="display:inline">
+                                <i class="fa fa-at"/>
+                                <span t-field="company.email"/>
+                            </li>
+                            <li t-if="company.website" style="display:inline">
+                                <i class="fa fa-globe"/>
+                                <span t-field="company.website"/>
+                            </li>
+                            <li t-if="company.vat" style="display:inline">
+                                <i class="fa fa-building-o"/>
+                                <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                                <span t-field="company.vat"/>
+                            </li>
+                        </ul>
+                        <div t-field="company.report_footer"/>
+                    </div>
+                </div>
+<!--            </div>-->
+        </template>
 
-     <template id="report_naham_card">
-          <t t-call="web.html_container">
-              <t t-foreach="docs" t-as="o">
-                  <t t-call="web.internal_layout">
-                     <t t-set="o" t-value="o.with_context(lang=lang)"/>
 
+        <template id="report_naham_card">
 
+            <t t-call="naham_fields.naham_header_footer"/>
+            <t t-call="web.external_layout">
 
-                      <div class="page">
+                <div class="oe_structure"/>
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <div class="page">
 
-                          <h5 class="text-center" style="color:blue;">Quotations</h5>
-                           <table border="1" style="width:70%;margin:auto;border:2;" >
-                              <tr>
-                                 <td style="color:white;text-align:center;background-color:blue;font-size: 20px;" border="2" colspan="2">Details</td>
-                              </tr>
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Subject</th>
-                                <td>
-                                   <t t-esc="o.subject"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Quote Number</th>
-                                <td>
-                                   <t t-esc="o.name"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;">Date</th>
-                                <td>
-                                   <t t-esc="o.date_order"/>
-                               </td>
-                             </tr>
-                              <tr>
-                                 <td style="color:white;text-align:center;background-color:blue;font-size: 20px;" border="2" colspan="2">Sent From</td>
-                              </tr>
-                             <tr>
-                               <th style="font-weight:bold;" border="1">From</th>
-                                <td>
-                                   <t t-esc="o.company_id.partner_id.name"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Salesman</th>
-                                <td>
-                                   <t t-esc="o.user_id.partner_id.name"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;">Telephone</th>
-                                <td>
-                                   <t t-esc="o.user_id.partner_id.phone"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;">Mobile</th>
-                                <td>
-                                   <t t-esc="o.user_id.partner_id.mobile"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;">E-mail</th>
-                                <td>
-                                   <t t-esc="o.user_id.partner_id.email"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;">Website</th>
-                                <td>
-                                   <t t-esc="o.user_id.partner_id.website"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;">Location</th>
-                                <td>
-                                   <t t-esc="o.user_id.partner_id.street"/>
-                               </td>
-                             </tr>
-                              <tr>
-                                 <td style="color:white;text-align:center;background-color:blue;font-size: 20px;" border="2" colspan="2">Sent From</td>
-                              </tr>
+                    <h5 class="text-center" style="color:blue;">Quotations</h5>
+                    <table class="table table-bordered" style="width:100%;margin:auto;">
+                        <tr>
+                            <td style="color:white;text-align:center;background-color:blue !important;font-size: 17px;"
+                                border="2" colspan="2">Details
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Subject</th>
+                            <td>
+                                <t t-esc="o.subject"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Quote Number</th>
+                            <td>
+                                <t t-esc="o.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;">Date</th>
+                            <td>
+                                <t t-esc="o.date_order"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br></br>
+                    <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
+                        <tr>
+                            <td style="color:white;text-align:center;background-color:blue !important;font-size: 17px;"
+                                border="2" colspan="2">Sent From
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">From</th>
+                            <td>
+                                <t t-esc="o.company_id.partner_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Salesman</th>
+                            <td>
+                                <t t-esc="o.user_id.partner_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;">Telephone</th>
+                            <td>
+                                <t t-esc="o.user_id.partner_id.phone"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;">Mobile</th>
+                            <td>
+                                <t t-esc="o.user_id.partner_id.mobile"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;">E-mail</th>
+                            <td>
+                                <t t-esc="o.user_id.partner_id.email"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;">Website</th>
+                            <td>
+                                <t t-esc="o.user_id.partner_id.website"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;">Location</th>
+                            <td>
+                                <t t-esc="o.user_id.partner_id.street"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br></br>
+                    <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
+                        <tr>
+                            <td style="color:white;text-align:center;background-color:blue !important;font-size: 17px;"
+                                border="2" colspan="2">Sent To
+                            </td>
+                        </tr>
 
-                             <tr>
-                               <th style="font-weight:bold;">Account</th>
-                                <td>
-                                   <t t-esc="o.partner_id.name"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;">Contact Person</th>
-                                <td>
-                                   <t t-esc="o.contact.name"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;">Telephone</th>
-                                <td>
-                                   <t t-esc="o.contact.phone"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;">Mobile</th>
-                                <td>
-                                   <t t-esc="o.contact.mobile"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;">E-mail</th>
-                                <td>
-                                   <t t-esc="o.contact.email"/>
-                               </td>
-                             </tr>
-                           </table>
-                          <table border="1" style="width:70%;margin:auto;border:2;">
-<!--                                  <t t-foreach="o.order_line" t-as="line">-->
-                             <tr>
+                        <tr>
+                            <th style="font-weight:bold;">Account</th>
+                            <td>
+                                <t t-esc="o.partner_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;">Contact Person</th>
+                            <td>
+                                <t t-esc="o.contact.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;">Telephone</th>
+                            <td>
+                                <t t-esc="o.contact.phone"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;">Mobile</th>
+                            <td>
+                                <t t-esc="o.contact.mobile"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;">E-mail</th>
+                            <td>
+                                <t t-esc="o.contact.email"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="page-break-before: always;">
+                    </div>
 
-                               <th style="color:white;text-align:center;background-color:blue;font-size: 20px;">#</th>
-                               <th style="color:white;text-align:center;background-color:blue;font-size: 20px;">Photo</th>
-                               <th style="color:white;text-align:center;background-color:blue;font-size: 20px;">description</th>
-                               <th style="color:white;text-align:center;background-color:blue;font-size: 20px;">QTY</th>
-                               <th style="color:white;text-align:center;background-color:blue;font-size: 20px;">Price</th>
-                               <th style="color:white;text-align:center;background-color:blue;font-size: 20px;">Total</th>
-                             </tr>
-                                     <t t-foreach="o.order_line" t-as="line">
-                             <tr>
-                               <td>
-                                   <t t-esc="line.product_id.default_code"/>
-                               </td>
-                                <td>
-                                   <img t-if="line.product_id.image_1920" t-att-src="image_data_uri(line.product_id.image_1920)" width="50px" height="50px" alt="Logo"/>
-<!--                                   <span t-field="line.product_id.image_1920" t-option="wid" style="width:30px"/>-->
-                               </td>
-                                <td>
-                                   <t t-esc="line.name"/>
-                               </td>
-                                <td>
-                                   <t t-esc="line.product_uom_qty"/>
-                               </td>
-                                <td>
-                                   <t t-esc="line.price_unit"/>
-                               </td>
-                                <td>
-                                   <t t-esc="line.price_subtotal"/>
-                               </td>
+                    <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
+                        <!--                                  <t t-foreach="o.order_line" t-as="line">-->
+                        <tr>
 
-                             </tr>
-                                  </t>
-                             <tr>
-                               <th style="font-weight:bold;" colspan="1">Total</th>
-                                <td colspan="5">
-                                   <t t-esc="o.amount_untaxed" class="text-center"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;" colspan="1">VAT</th>
-                                <td colspan="5">
-                                   <t t-esc="o.amount_tax" class="text-center"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;" colspan="1">Net total</th>
-                                <td colspan="5">
-                                   <t t-esc="o.amount_total" class="text-center"/>
-                               </td>
-                             </tr>
+                            <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
+                                #
+                            </th>
+                            <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
+                                Photo
+                            </th>
+                            <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
+                                description
+                            </th>
+                            <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
+                                QTY
+                            </th>
+                            <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
+                                Price
+                            </th>
+                            <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
+                                Total
+                            </th>
+                        </tr>
+                        <t t-foreach="o.order_line" t-as="line">
+                            <tr>
+                                <td>
+                                    <t t-esc="line.product_id.default_code"/>
+                                </td>
+                                <td>
+                                    <img t-if="line.product_id.image_1920"
+                                         t-att-src="image_data_uri(line.product_id.image_1920)" width="50px"
+                                         height="50px" alt="Logo"/>
+                                    <!--                                   <span t-field="line.product_id.image_1920" t-option="wid" style="width:30px"/>-->
+                                </td>
+                                <td>
+                                    <t t-esc="line.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="line.product_uom_qty"/>
+                                </td>
+                                <td>
+                                    <t t-esc="line.price_unit"/>
+                                </td>
+                                <td>
+                                    <t t-esc="line.price_subtotal"/>
+                                </td>
 
-                           </table>
-                         <table border="1" style="width:70%;margin:auto;border:2;" >
-                              <tr>
-                                 <td style="color:white;text-align:center;background-color:blue;font-size: 20px;" border="2" colspan="2">Terms and Conditions</td>
-                              </tr>
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Payment</th>
-                                <td>
-                                   <t t-esc="o.payment_sale.payment"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Warranty</th>
-                                <td>
-                                   <t t-esc="o.warranty_sale.name"/>
-                               </td>
-                             </tr>
+                            </tr>
+                        </t>
+                        <tr>
+                            <th style="font-weight:bold;" colspan="1">Total</th>
+                            <td colspan="5">
+                                <t t-esc="o.amount_untaxed" class="text-center"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;" colspan="1">VAT</th>
+                            <td colspan="5">
+                                <t t-esc="o.amount_tax" class="text-center"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;" colspan="1">Net total</th>
+                            <td colspan="5">
+                                <t t-esc="o.amount_total" class="text-center"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
 
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Warranty Location</th>
-                                <td>
-                                   <t t-esc="o.warranty_location_sale.name"/>
-                               </td>
-                             </tr>
+                    <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
+                        <tr>
+                            <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px;"
+                                border="2" colspan="2">Terms and Conditions
+                            </td>
+                        </tr>
 
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Delivery</th>
-                                <td>
-                                   <t t-esc="o.Delivery_sale.name"/>
-                               </td>
-                             </tr>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Payment</th>
+                            <td>
 
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Installation</th>
-                                <td>
-                                   <t t-esc="o.installation_sale.name"/>
-                               </td>
-                             </tr>
+                                <t t-esc="o.payment_sale.payment"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Warranty</th>
+                            <td>
+                                <t t-esc="o.warranty_sale.name"/>
+                            </td>
+                        </tr>
 
-                             <tr>
-                               <th style="font-weight:bold;" border="1">payment Method</th>
-                                <td>
-                                   <t t-esc="o.payment_way_sale.name"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Training</th>
-                                <td>
-                                   <t t-esc="o.training_sale.name"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Software</th>
-                                <td>
-                                   <t t-esc="o.Software_sale.name"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Operation Requirment</th>
-                                <td>
-                                   <t t-esc="o.operation_requirment_sale.name"/>
-                               </td>
-                             </tr>
-                             <tr>
-                               <th style="font-weight:bold;" border="1">Location</th>
-                                <td>
-                                   <t t-esc="o.delivery_place_sale.name"/>
-                               </td>
-                             </tr>
-                         </table>
-                      </div>
-                  </t>
-              </t>
-          </t>
-     </template>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Warranty Location</th>
+                            <td>
+                                <t t-esc="o.warranty_location_sale.name"/>
+                            </td>
+                        </tr>
 
-  </data>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Delivery</th>
+                            <td>
+                                <t t-esc="o.Delivery_sale.name"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Installation</th>
+                            <td>
+                                <t t-esc="o.installation_sale.name"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="font-weight:bold;" border="1">payment Method</th>
+
+                            <td>
+                                <t t-foreach="o.payment_way_sale" t-as="n">
+
+                                <t t-esc="n.name"/>,
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Training</th>
+                            <td>
+                                <t t-esc="o.training_sale.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Software</th>
+                            <td>
+                                <t t-foreach="o.Software_sale" t-as="n">
+
+                                <t t-esc="n.name"/> ,
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Operation Requirment</th>
+                            <td>
+                                <t t-foreach="o.operation_requirment_sale" t-as="n">
+
+                                <t t-esc="o.name"/> ,
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;" border="1">Location</th>
+                            <td>
+                                <t t-foreach="o.delivery_place_sale" t-as="n">
+
+                                <t t-esc="n.name"/> ,
+                                </t>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </t>
+        </template>
+        <template id="report_naham_card_base">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="naham_fields.report_naham_card"/>
+                </t>
+            </t>
+        </template>
+        <report
+                string="Naham report"
+                id="action_naham_report_card"
+                model="sale.order"
+                report_type="qweb-pdf"
+                name="naham_fields.report_naham_card_base"
+                file="naham_fields.report_naham_card_base"
+        />
+
+    </data>
 </odoo>
