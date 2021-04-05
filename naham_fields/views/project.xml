@@ -20,9 +20,6 @@
                     <field name="completion_percentage" string="Completion Percentage"/>
                     <field name="text" string="مكان التسليم"/>
 
-<!--                    <field name="status_sale" string="Status"/>-->
-<!--                    <field name="type_sale" string="Type" widget="many2many_tags"/>-->
-<!--                    <field name="task_sale" string="Task Category"/>-->
                 </xpath>
                 <xpath expr="//field[@name='user_id']" position="after">
                     <field name="status_sale" string="Status"/>
