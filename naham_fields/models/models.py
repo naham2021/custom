@@ -24,6 +24,32 @@ class saleorder(models.Model):
     buyfromus = fields.Integer()
     subject = fields.Char()
     contact = fields.Many2one('res.partner')
+    quotation = fields.Char(translate=True,)
+    sent_to = fields.Char(translate=True,)
+    sent_from = fields.Char(translate=True,)
+    details = fields.Char(translate=True,)
+    photo = fields.Char(translate=True,)
+    description = fields.Char(translate=True,)
+    qty = fields.Char(translate=True,)
+    price = fields.Char(translate=True,)
+    total = fields.Char(translate=True,)
+    terms = fields.Char(translate=True,)
+
+    @api.model
+    def default_get(self, fields):
+        """Method to default get."""
+        res = super(saleorder, self).default_get(fields)
+        res['quotation'] = 'Quotation'
+        res['sent_to'] = 'Sent To'
+        res['sent_from'] = 'Sent From'
+        res['details'] = 'Details'
+        res['photo'] = 'Photo'
+        res['description'] = 'Description'
+        res['qty'] = 'Quantity'
+        res['price'] = 'Price'
+        res['total'] = 'Total'
+        res['terms'] = 'Terms and Condition'
+        return res
 
 
 
