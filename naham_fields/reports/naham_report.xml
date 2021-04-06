@@ -13,13 +13,6 @@
                             <t t-set="company" t-value="res_company"/>
                         </t>
 
-<!--            <div>-->
-<!--                <div class="header">-->
-<!--                    <div class="float-center">-->
-<!--                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-center"/>-->
-<!--                    </div>-->
-
-<!--                </div>-->
                         <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
                 <table style="width:100%;">
                     <tbody>
@@ -86,30 +79,30 @@
             <t t-call="web.internal_layout">
 
                 <div class="oe_structure"/>
-                <t t-set="o" t-value="o.with_context(lang=lang)"/>
                 <div class="page">
 
-                    <h5 class="text-center" style="color:blue;">Quotations</h5>
+                    <h5 class="text-center" style="color:blue; font-size: 30px;"><span t-field="o.quotation"/></h5>
+
                     <table class="table table-bordered" style="width:100%;margin:auto;border:1px solid black;padding:5px;">
                         <tr>
-                            <td style="color:white;text-align:center;background-color:blue !important;font-size: 17px;"
-                                border="2" colspan="2">Details
+                            <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px;"
+                                border="2" colspan="2"><span t-field="o.details"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">Subject</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Subject</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.subject"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;height:5px;padding:2px !important;" border="1">Quote Number</th>
+                            <th style="font-weight:bold;width:50%;height:5px;padding:2px !important;" border="1">Quote Number</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.name"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;">Date</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;">Date</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.date_order"/>
                             </td>
@@ -118,48 +111,48 @@
                     <br></br>
                     <table class="table table-bordered" style="width:100%;margin;auto;border:1px solid black;padding:5px;">
                         <tr>
-                            <td style="color:white;text-align:center;background-color:blue !important;font-size: 17px"
-                                border="2" colspan="2">Sent From
+                            <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px"
+                                border="2" colspan="2"><span t-field="o.sent_from"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">From</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">From</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.company_id.partner_id.name"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">Salesman</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Salesman</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.user_id.partner_id.name"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;">Telephone</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;">Telephone</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.user_id.partner_id.phone"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;">Mobile</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;">Mobile</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.user_id.partner_id.mobile"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;">E-mail</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;">E-mail</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.user_id.partner_id.email"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;">Website</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;">Website</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.user_id.partner_id.website"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;">Location</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;">Location</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.user_id.partner_id.street"/>
                             </td>
@@ -168,37 +161,37 @@
                     <br></br>
                     <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
                         <tr>
-                            <td style="color:white;text-align:center;background-color:blue !important;font-size: 17px;"
-                                colspan="2">Sent To
+                            <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px;"
+                                colspan="2"><span t-field="o.sent_to"/>
                             </td>
                         </tr>
 
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;">Account</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;">Account</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.partner_id.name"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;">Contact Person</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;">Contact Person</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.contact.name"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;">Telephone</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;">Telephone</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.contact.phone"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;">Mobile</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;">Mobile</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.contact.mobile"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;">E-mail</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;">E-mail</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.contact.email"/>
                             </td>
@@ -208,32 +201,34 @@
                     </div>
 
                     <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
-                        <!--                                  <t t-foreach="o.order_line" t-as="line">-->
                         <tr>
 
                             <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
                                 #
                             </th>
                             <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
-                                Photo
+                                <span t-field="o.photo"/>
                             </th>
                             <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
-                                description
+                                <span t-field="o.description"/>
                             </th>
                             <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
-                                QTY
+                                <span t-field="o.qty"/>
                             </th>
                             <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
-                                Price
+                                <span t-field="o.price"/>
                             </th>
                             <th style="color:white;text-align:center;background-color:blue !important;font-size: 20px;">
-                                Total
+                                <span t-field="o.total"/>
                             </th>
                         </tr>
+                            <t t-set="i" t-value="1" />
+
                         <t t-foreach="o.order_line" t-as="line">
                             <tr>
                                 <td>
-                                    <t t-esc="line.product_id.default_code"/>
+                                    <span t-esc="i"/>
+                                    <t t-set="i" t-value="i+1"/>
                                 </td>
                                 <td>
                                     <img t-if="line.product_id.image_1920"
@@ -257,21 +252,21 @@
                             </tr>
                         </t>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" colspan="1">Total</th>
-                            <td colspan="5" style="padding:2px !important;">
-                                <t t-esc="o.amount_untaxed" class="text-center"/>
+                            <th style="font-weight:bold;padding:2px !important;" colspan="1">Total</th>
+                            <td colspan="5" style="padding:2px !important;text-align: right;">
+                                <t t-esc="o.amount_untaxed"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" colspan="1">VAT</th>
-                            <td colspan="5" style="padding:2px !important;">
-                                <t t-esc="o.amount_tax" class="text-center"/>
+                            <th style="font-weight:bold;padding:2px !important;" colspan="1">VAT</th>
+                            <td colspan="5" style="padding:2px !important;text-align: right;">
+                                <t t-esc="o.amount_tax"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" colspan="1">Net total</th>
-                            <td colspan="5" style="padding:2px !important;">
-                                <t t-esc="o.amount_total" class="text-center"/>
+                            <th style="font-weight:bold;padding:2px !important;" colspan="1">Net total</th>
+                            <td colspan="5" style="padding:2px !important;text-align: right;">
+                                <t t-esc="o.amount_total"/>
                             </td>
                         </tr>
                     </table>
@@ -284,47 +279,47 @@
                     <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
                         <tr>
                             <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px;"
-                                border="2" colspan="2">Terms and Conditions
+                                border="2" colspan="2"><span t-field="o.terms"/>
                             </td>
                         </tr>
 
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">Payment</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Payment</th>
                             <td style="padding:2px !important;">
 
                                 <t t-esc="o.payment_sale.payment"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">Warranty</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Warranty</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.warranty_sale.name"/>
                             </td>
                         </tr>
 
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">Warranty Location</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Warranty Location</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.warranty_location_sale.name"/>
                             </td>
                         </tr>
 
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">Delivery</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Delivery</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.Delivery_sale.name"/>
                             </td>
                         </tr>
 
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">Installation</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Installation</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.installation_sale.name"/>
                             </td>
                         </tr>
 
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">payment Method</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">payment Method</th>
 
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.payment_way_sale" t-as="n">
@@ -334,13 +329,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">Training</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Training</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.training_sale.name"/>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">Software</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Software</th>
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.Software_sale" t-as="n">
 
@@ -349,7 +344,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">Operation Requirment</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Operation Requirment</th>
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.operation_requirment_sale" t-as="n">
 
@@ -358,7 +353,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:20%;padding:2px !important;" border="1">Location</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Location</th>
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.delivery_place_sale" t-as="n">
 
@@ -378,6 +373,11 @@
                 </t>
             </t>
         </template>
+
+            <template id="action_naham_report_card_translated">
+                <t t-call="naham_fields.report_naham_card_base"
+                 t-lang="user.lang" />
+            </template>
         <report
                 string="Naham report"
                 id="action_naham_report_card"
