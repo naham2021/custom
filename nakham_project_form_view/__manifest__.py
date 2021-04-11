@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "",
+    'name': "nakham_project_form_view",
 
     'summary': """
         """,
@@ -18,7 +18,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base',],
+    'depends': ['base','project'],
 
     # always loaded
     'data': [
