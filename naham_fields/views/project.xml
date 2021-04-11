@@ -60,6 +60,7 @@
                 <xpath expr="//field[@name='payment_term_id']" position="after">
                         <field string="Subject" name="subject"/>
                         <field string="Contact Person" name="contact"/>
+                        <field string="location" name="location"/>
                 </xpath>
 
             </field>

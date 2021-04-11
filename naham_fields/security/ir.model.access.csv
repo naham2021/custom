@@ -16,3 +16,4 @@ access_quote_stage,access_quote_stage,model_quote_stage,,1,1,1,1
 access_type,access_type,model_project_sale_type,,1,1,1,1
 access_status,access_status,model_status,base.group_user,1,1,1,1
 access_taskcatogary,access_taskcatogary,model_task_catogary,,1,1,1,1
+access_sale_location,access_sale_location,model_sale_location,,1,1,1,1
