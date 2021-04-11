@@ -507,7 +507,46 @@
                   action="sale_menu_config_delivery_place_type"
                   parent="sale.menu_sale_config"
                   name="Delivery Place"
-                  sequence="22"/>
+                  sequence="22"/>  <record model="ir.ui.view" id="sale_location_view">
+            <field name="name">sale.location.form</field>
+            <field name="model">sale.location</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Location"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="sale_location_tree_view">
+            <field name="name">sale.location.tree</field>
+            <field name="model">sale.location</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                            <field name="name" string='Location'/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_menu_config_sale_location_type" model="ir.actions.act_window">
+            <field name="name">location</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.location</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="sale_Software_type"
+                  action="sale_menu_config_sale_location_type"
+                  parent="sale.menu_sale_config"
+                  name="Location"
+                  sequence="23"/>
 
     </data>
 </odoo>
