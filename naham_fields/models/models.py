@@ -102,4 +102,7 @@ class Quote_stage(models.Model):
 class sale_location(models.Model):
     _name = 'sale.location'
     name = fields.Char(translate=True)
+class product_description(models.Model):
+    _inherit = 'product.product'
+    desc = fields.Text(translate=True,string='Description')
 
