@@ -4,6 +4,33 @@
             <field name="view_mode">list,form,kanban</field>
             <field name="view_id" ref=""/>
         </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="edit_project_inherit_form_stage" model="ir.ui.view">
+            <field name="name">edit.project.inherit.stage</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
 
+                <xpath expr="//div[@name='options_active']" position="inside">
+                    <div>
+                        <label for="stage_id" class="oe_inline" string="Stage :"/>
+                        <field name="stage_id" class="oe_inline oe_input_align"/>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="view_project_tree_inherit" model="ir.ui.view">
+            <field name="name">view.project.tree.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="stage_id"/>
+                </xpath>
+
+            </field>
+        </record>
     </data>
 </odoo>
