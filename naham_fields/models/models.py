@@ -23,6 +23,7 @@ class saleorder(models.Model):
     profit = fields.Integer()
     buyfromus = fields.Integer()
     subject = fields.Char()
+    location = fields.Many2one('sale.location')
     contact = fields.Many2one('res.partner')
     quotation = fields.Char(translate=True,)
     sent_to = fields.Char(translate=True,)
@@ -98,4 +99,10 @@ class Quote_type(models.Model):
 class Quote_stage(models.Model):
     _name = 'quote.stage'
     name = fields.Char(translate=True)
+class sale_location(models.Model):
+    _name = 'sale.location'
+    name = fields.Char(translate=True)
+class product_description(models.Model):
+    _inherit = 'product.template'
+    desc = fields.Text(translate=True,string='Description')
 

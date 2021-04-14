@@ -109,6 +109,9 @@
                         </tr>
                     </table>
                     <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                     <table class="table table-bordered" style="width:100%;margin;auto;border:1px solid black;padding:5px;">
                         <tr>
                             <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px"
@@ -148,16 +151,19 @@
                         <tr>
                             <th style="font-weight:bold;width:50%;padding:2px !important;">Website</th>
                             <td style="padding:2px !important;">
-                                <t t-esc="o.user_id.partner_id.website"/>
+                                <t t-esc="o.company_id.website"/>
                             </td>
                         </tr>
                         <tr>
                             <th style="font-weight:bold;width:50%;padding:2px !important;">Location</th>
                             <td style="padding:2px !important;">
-                                <t t-esc="o.user_id.partner_id.street"/>
+                                <t t-esc="o.location.name"/>
                             </td>
                         </tr>
                     </table>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                     <br></br>
                     <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
                         <tr>
@@ -237,7 +243,7 @@
                                     <!--                                   <span t-field="line.product_id.image_1920" t-option="wid" style="width:30px"/>-->
                                 </td>
                                 <td>
-                                    <t t-esc="line.name"/>
+                                    <t t-esc="line.product_id.desc"/>
                                 </td>
                                 <td>
                                     <t t-esc="line.product_uom_qty"/>
@@ -270,11 +276,9 @@
                             </td>
                         </tr>
                     </table>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
+                    <div style="page-break-before: always;">
+                    </div>
+
 
                     <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
                         <tr>
@@ -362,6 +366,7 @@
                             </td>
                         </tr>
                     </table>
+
                 </div>
 
             </t>
