@@ -27,7 +27,7 @@ class account_invoice(models.Model):
             elif not pos_order:
                 # print("sale_order")
 
-                payments = self.env['account.payment'].search([('reconciled_invoice_ids', 'in', rec.id)])
+                payments = self.env['account.payment'].search([])
                 # payments = self.env['account.payment'].search([('state', 'in', ['reconciled', 'sent', 'posted'])])
                 # print("payments :: ", payments.ids)
                 # print("payments :: ", len(payments))
