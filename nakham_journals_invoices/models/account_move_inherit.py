@@ -59,18 +59,20 @@ class account_invoice(models.Model):
     #         print(rec._get_reconciled_info_JSON_values())
 
     def compute_journal_ids(self):
-        for move in self:
-            reconsiled_info = move._get_reconciled_info_JSON_values()
-            if not reconsiled_info:
-                move.journal_ids = [(6, 0, [])]
-                move.journal_id_name = move.invoice_type
-                continue
-            journals = []
-            for r in reconsiled_info:
-                journals.append(
-                    self.env['account.journal'].search([('name', '=', r['journal_name'])], limit=1)
-                )
-            move.journal_ids = [(6, 0, [j.id for j in journals])]
-            move.journal_id_name = reconsiled_info[0]['journal_name'] or move.invoice_type
-
+        # for move in self:
+        #     reconsiled_info = move._get_reconciled_info_JSON_values()
+        #     if not reconsiled_info:
+        #         move.journal_ids = [(6, 0, [])]
+        #         move.journal_id_name = move.invoice_type
+        #         continue
+        #     journals = []
+        #     for r in reconsiled_info:
+        #         journals.append(
+        #             self.env['account.journal'].search([('name', '=', r['journal_name'])], limit=1)
+        #         )
+        #     move.journal_ids = [(6, 0, [j.id for j in journals])]
+        #     move.journal_id_name = reconsiled_info[0]['journal_name'] or move.invoice_type
+        for rec in self:
+            rec.journal_ids =[]
+            rec.journal_id_name = ''
 
