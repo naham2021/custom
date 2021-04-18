@@ -60,7 +60,7 @@ class account_invoice(models.Model):
 
     def compute_journal_ids(self):
         for move in self:
-            reconsiled_info = move._get_reconciled_info_JSON_values()
+            reconsiled_info = move.sudo()._get_reconciled_info_JSON_values()
             if not reconsiled_info:
                 move.journal_ids = [(6, 0, [])]
                 move.journal_id_name = move.invoice_type
@@ -72,5 +72,4 @@ class account_invoice(models.Model):
                 )
             move.journal_ids = [(6, 0, [j.id for j in journals])]
             move.journal_id_name = reconsiled_info[0]['journal_name'] or move.invoice_type
-
 

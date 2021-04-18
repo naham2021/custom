@@ -2,18 +2,18 @@
 <odoo>
     <data>
         <template id="naham_header_footer">
-                        <t t-if="not o and doc">
-                            <t t-set="o" t-value="doc"/>
-                        </t>
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
 
-                        <t t-if="o and 'company_id' in o">
-                            <t t-set="company" t-value="o.company_id.sudo()"/>
-                        </t>
-                        <t t-if="not o or not 'company_id' in o">
-                            <t t-set="company" t-value="res_company"/>
-                        </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+            </t>
 
-                        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
                 <table style="width:100%;">
                     <tbody>
                         <tr>
@@ -35,41 +35,39 @@
             </div>
 
 
-
-
-                <div class="footer o_background_footer">
-                    <div class="text-right page_number">
-                        <div class="text-muted">
-                            Page:
-                            <span class="page"/>
-                            of
-                            <span class="topage"/>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <ul class="list-inline">
-                            <li t-if="company.phone" style="display:inline">
-                                <i class="fa fa-phone"/>
-                                <span t-field="company.phone"/>
-                            </li>
-                            <li t-if="company.email" style="display:inline">
-                                <i class="fa fa-at"/>
-                                <span t-field="company.email"/>
-                            </li>
-                            <li t-if="company.website" style="display:inline">
-                                <i class="fa fa-globe"/>
-                                <span t-field="company.website"/>
-                            </li>
-                            <li t-if="company.vat" style="display:inline">
-                                <i class="fa fa-building-o"/>
-                                <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
-                                <span t-field="company.vat"/>
-                            </li>
-                        </ul>
-                        <div t-field="company.report_footer"/>
+            <div class="footer o_background_footer">
+                <div class="text-right page_number">
+                    <div class="text-muted">
+                        Page:
+                        <span class="page"/>
+                        of
+                        <span class="topage"/>
                     </div>
                 </div>
-<!--            </div>-->
+                <div class="text-center">
+                    <ul class="list-inline">
+                        <li t-if="company.phone" style="display:inline">
+                            <i class="fa fa-phone"/>
+                            <span t-field="company.phone"/>
+                        </li>
+                        <li t-if="company.email" style="display:inline">
+                            <i class="fa fa-at"/>
+                            <span t-field="company.email"/>
+                        </li>
+                        <li t-if="company.website" style="display:inline">
+                            <i class="fa fa-globe"/>
+                            <span t-field="company.website"/>
+                        </li>
+                        <li t-if="company.vat" style="display:inline">
+                            <i class="fa fa-building-o"/>
+                            <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                            <span t-field="company.vat"/>
+                        </li>
+                    </ul>
+                    <div t-field="company.report_footer"/>
+                </div>
+            </div>
+            <!--            </div>-->
         </template>
 
 
@@ -83,7 +81,8 @@
 
                     <h5 class="text-center" style="color:blue; font-size: 30px;"><span t-field="o.quotation"/></h5>
 
-                    <table class="table table-bordered" style="width:100%;margin:auto;border:1px solid black;padding:5px;">
+                    <table class="table table-bordered"
+                           style="width:100%;margin:auto;border:1px solid black;padding:5px;">
                         <tr>
                             <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px;"
                                 border="2" colspan="2"><span t-field="o.details"/>
@@ -96,7 +95,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:50%;height:5px;padding:2px !important;" border="1">Quote Number</th>
+                            <th style="font-weight:bold;width:50%;height:5px;padding:2px !important;" border="1">Quote
+                                Number</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.name"/>
                             </td>
@@ -112,7 +112,8 @@
                     <br></br>
                     <br></br>
                     <br></br>
-                    <table class="table table-bordered" style="width:100%;margin;auto;border:1px solid black;padding:5px;">
+                    <table class="table table-bordered"
+                           style="width:100%;margin;auto;border:1px solid black;padding:5px;">
                         <tr>
                             <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px"
                                 border="2" colspan="2"><span t-field="o.sent_from"/>
@@ -228,7 +229,7 @@
                                 <span t-field="o.total"/>
                             </th>
                         </tr>
-                            <t t-set="i" t-value="1" />
+                        <t t-set="i" t-value="1"/>
 
                         <t t-foreach="o.order_line" t-as="line">
                             <tr>
@@ -304,7 +305,8 @@
                         </tr>
 
                         <tr>
-                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Warranty Location</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Warranty
+                                Location</th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.warranty_location_sale.name"/>
                             </td>
@@ -325,12 +327,13 @@
                         </tr>
 
                         <tr>
-                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">payment Method</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">payment
+                                Method</th>
 
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.payment_way_sale" t-as="n">
 
-                                <t t-esc="n.name"/>,
+                                    <t t-esc="n.name"/>,
                                 </t>
                             </td>
                         </tr>
@@ -345,16 +348,17 @@
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.Software_sale" t-as="n">
 
-                                <t t-esc="n.name"/> ,
+                                    <t t-esc="n.name"/> ,
                                 </t>
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Operation Requirment</th>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Operation
+                                Requirment</th>
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.operation_requirment_sale" t-as="n">
 
-                                <t t-esc="o.name"/> ,
+                                    <t t-esc="o.name"/> ,
                                 </t>
                             </td>
                         </tr>
@@ -363,7 +367,7 @@
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.delivery_place_sale" t-as="n">
 
-                                <t t-esc="n.name"/> ,
+                                    <t t-esc="n.name"/> ,
                                 </t>
                             </td>
                         </tr>
@@ -381,13 +385,13 @@
             </t>
         </template>
 
-            <template id="action_naham_report_card_translated">
-                <t t-call="naham_fields.report_naham_card_base"
-                 t-lang="user.lang" />
-            </template>
+        <template id="action_naham_report_card_translated">
+            <t t-call="naham_fields.report_naham_card_base"
+               t-lang="user.lang"/>
+        </template>
         <record id="paperformat_euro" model="report.paperformat">
             <field name="name">Naham Quotation A4</field>
-            <field name="default" eval="True" />
+            <field name="default" eval="True"/>
             <field name="format">A4</field>
             <field name="page_height">0</field>
             <field name="page_width">0</field>
@@ -396,7 +400,7 @@
             <field name="margin_bottom">20</field>
             <field name="margin_left">7</field>
             <field name="margin_right">7</field>
-            <field name="header_line" eval="False" />
+            <field name="header_line" eval="False"/>
             <field name="header_spacing">35</field>
             <field name="dpi">90</field>
         </record>
