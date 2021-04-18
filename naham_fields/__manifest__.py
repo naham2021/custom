@@ -29,6 +29,7 @@
         'views/templates.xml',
         'views/project.xml',
         'reports/naham_report.xml',
+        'reports/ar_report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
