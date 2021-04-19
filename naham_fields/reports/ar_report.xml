@@ -56,25 +56,25 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">مسئول البيع</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">مسئول مبيعات</th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.user_id.partner_id.name"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">تليفون</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">هاتف</th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.user_id.partner_id.phone"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">موبايل</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">موبيل</th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.user_id.partner_id.mobile"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">ايميل</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">البريد الالكتروني</th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.user_id.partner_id.email"/>
                         </td>
@@ -105,31 +105,31 @@
                     </tr>
 
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">الحساب</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">الساده</th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.partner_id.name"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">الشخص الذي يمكن الاتصال به</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">العناية</th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.contact.name"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">تليفون</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">هاتف</th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.contact.phone"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">موبايل</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">جوال</th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.contact.mobile"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">الايميل</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">البريدالالكتروني</th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.contact.email"/>
                         </td>
@@ -204,7 +204,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;padding:2px !important;" colspan="1">اجمالي الصافي</th>
+                        <th style="font-weight:bold;padding:2px !important;" colspan="1">اجمالي العرض</th>
                         <td colspan="5" style="padding:2px !important;text-align: right;">
                             <t t-esc="o.amount_total"/>
                         </td>
@@ -244,7 +244,7 @@
                     </tr>
 
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">التوصيل</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">التسليم</th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.Delivery_sale.name"/>
                         </td>
@@ -274,7 +274,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">برمجة</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">البرامج</th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-foreach="o.Software_sale" t-as="n">
 
@@ -284,13 +284,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">متطلبات العملية
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">متطلبات التشغيل
 
                         </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-foreach="o.operation_requirment_sale" t-as="n">
 
-                                <t t-esc="o.name"/>
+                                <t t-esc="n.name"/>
                                 ,
                             </t>
                         </td>
