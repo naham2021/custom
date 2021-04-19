@@ -13,8 +13,9 @@ class HrContract(models.Model):
 
     @api.constrains('state')
     def constrain_state(self):
-        employee_contracts = self.env['hr.contract'].search(
-            [('employee_id', '=', self.employee_id.id), ('state', '=', 'open')])
+        employee_contracts = self.env['hr.contract'].search([
+            # ('employee_id', '=', self.employee_id.id),
+             ('state', '=', 'open')])
         if len(employee_contracts) > 1:
             error_message = "Multiple running contracts for employee: " + str(self.employee_id.name)
             raise UserError(error_message)
