@@ -65,6 +65,8 @@
                 </xpath>
             </field>
         </record>
+        <menuitem id="stock.menu_action_inventory_form" groups="naham_fields.inventory_adjustment"/>
+
         <record id="view_partner_form" model="ir.ui.view">
             <field name="name">partner changes</field>
             <field name="model">res.partner</field>

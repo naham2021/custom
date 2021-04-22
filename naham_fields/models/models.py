@@ -35,6 +35,7 @@ class saleorder(models.Model):
     price = fields.Char(translate=True,)
     total = fields.Char(translate=True,)
     terms = fields.Char(translate=True,)
+    technical = fields.Many2many('res.users')
 
     @api.model
     def default_get(self, fields):
