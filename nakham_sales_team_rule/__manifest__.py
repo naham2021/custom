@@ -32,6 +32,8 @@
         'views/purchase_order.xml',
         'views/views_menuitem.xml',
         'views/crm_team_view.xml',
+        'views/views_dashboard.xml',
+        'views/views_dashboard_action.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
