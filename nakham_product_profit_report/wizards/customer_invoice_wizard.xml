@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
-
         <record id="nakham_customer_invoice_report_wizard_form" model="ir.ui.view">
             <field name="name">nakham.customer.invoice.report.wizard.form</field>
             <field name="model">nakham.customer.invoice.report.wizard</field>
