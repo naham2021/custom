@@ -24,7 +24,9 @@ class PartnerXlsx(models.AbstractModel):
 
         domain = [
             ('move_id.state', '=', 'posted'),
-            ('move_id.type', 'in', ['out_invoice', 'out_refund'])]
+            ('move_id.type', 'in', ['out_invoice', 'out_refund']),
+            ('account_id.user_type_id.name', 'in',['Cost of Revenue','Income']),
+        ]
         if data['form']['product_ids']:
             domain.append(('product_id.id', 'in', data['form']['product_ids']))
         if data['form']['date_from']:
@@ -48,14 +50,14 @@ class PartnerXlsx(models.AbstractModel):
         total_quantity = 0.0
         row=1
         for line in lines:
-                domain = [
+                domain2 = [
                     ('move_id.id', '=', line.move_id.id),
                     ('exclude_from_invoice_tab', '=', True),
                     ('product_id.id', '=', line.product_id.id),
                     ('account_id.user_type_id.id', '=', account_type_id.id)
                 ]
                 move_type = line.move_id.type
-                line_ids = self.env['account.move.line'].search(domain)
+                line_ids = self.env['account.move.line'].search(domain2)
                 if move_type == 'out_invoice':
                     total_cost = sum(line_ids.mapped('debit')) or 0.0
                 else:
