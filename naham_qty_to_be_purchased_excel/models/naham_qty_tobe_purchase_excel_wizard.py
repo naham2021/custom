@@ -163,11 +163,11 @@ class qtytobepurchasedwizard(models.TransientModel):
                 date_from_date = self.date_from.date()
                 date_to_date = self.date_to.date()
                 invcome_qty_to = sum(all_stock_move_of_period.filtered(lambda
-                                                                           l: l.product_id.id == rec.id and l.location_id.id in self.location_ids.ids and l.location_dest_id.usage == 'customer').mapped(
+                                                                           l: l.product_id.id == rec.id and l.location_id.id in locations_all.ids and l.location_dest_id.usage == 'customer').mapped(
                     'qty_done'))
                 print("invcome_qty_to :> ",invcome_qty_to)
                 invcome_qty_from = sum(all_stock_move_of_period.filtered(lambda
-                                                                             l: l.product_id.id == rec.id and l.location_dest_id.id in self.location_ids.ids and l.location_id.usage == 'customer').mapped(
+                                                                             l: l.product_id.id == rec.id and l.location_dest_id.id in locations_all.ids and l.location_id.usage == 'customer').mapped(
                     'qty_done'))
                 print("invcome_qty_from :> ",invcome_qty_from)
 
