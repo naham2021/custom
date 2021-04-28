@@ -130,6 +130,8 @@ class qtytobepurchasedwizard(models.TransientModel):
              ('product_id', 'in', products.ids)])
 
         # all System
+        locations_all = self.env['stock.location'].search([('usage', '=', 'internal')])
+
         if self.is_all_system == True:
             for rec in products:
                 print("product name : ",rec.name)
@@ -141,26 +143,31 @@ class qtytobepurchasedwizard(models.TransientModel):
                     ('state', '=', 'done'),
                     ('date', '<', self.date_from),
                     ('product_id', '=', rec.id),
+                    ('location_dest_id', 'in', locations_all.ids)
                 ]).mapped('qty_done'))
                 qty_from = sum(self.env['stock.move.line'].search([
                     ('state', '=', 'done'),
                     ('date', '<', self.date_from),
                     ('product_id', '=', rec.id),
+                    ('location_id', '=', locations_all.ids)
+
                 ]).mapped('qty_done'))
                 first_balance += qty_to - qty_from
                 balance_tmp = sum(self.env['stock.quant'].search([
                     ('product_id', '=', rec.id),
+                    ('location_id', '=', locations_all.ids)
+
                 ]).mapped('quantity'))
                 balance += balance_tmp
                 qty_avaiable = balance
                 date_from_date = self.date_from.date()
                 date_to_date = self.date_to.date()
                 invcome_qty_to = sum(all_stock_move_of_period.filtered(lambda
-                                                                           l: l.product_id.id == rec.id and l.location_id.id in self.location_ids.ids and l.location_dest_id.usage == 'customer').mapped(
+                                                                           l: l.product_id.id == rec.id and l.location_id.id in locations_all.ids and l.location_dest_id.usage == 'customer').mapped(
                     'qty_done'))
                 print("invcome_qty_to :> ",invcome_qty_to)
                 invcome_qty_from = sum(all_stock_move_of_period.filtered(lambda
-                                                                             l: l.product_id.id == rec.id and l.location_dest_id.id in self.location_ids.ids and l.location_id.usage == 'customer').mapped(
+                                                                             l: l.product_id.id == rec.id and l.location_dest_id.id in locations_all.ids and l.location_id.usage == 'customer').mapped(
                     'qty_done'))
                 print("invcome_qty_from :> ",invcome_qty_from)
 
