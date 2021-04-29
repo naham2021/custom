@@ -40,6 +40,8 @@
                         <page string="Description" name="description">
                     <group>
                           <field name="desc"/>
+                                                                          <field name="description_ar"/>
+
                     </group>
                         </page>
 
@@ -57,6 +59,8 @@
                         <page string="Description" name="description">
                     <group>
                           <field name="desc"/>
+                                                  <field name="description_ar"/>
+
                     </group>
                         </page>
 

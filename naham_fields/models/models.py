@@ -106,4 +106,5 @@ class sale_location(models.Model):
 class product_description(models.Model):
     _inherit = 'product.template'
     desc = fields.Text(translate=True,string='Description')
+    description_ar = fields.Text(string="Description (Ar)", required=False, )
 

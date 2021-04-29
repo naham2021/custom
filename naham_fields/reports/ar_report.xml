@@ -174,10 +174,10 @@
                                      height="50px" alt="Logo"/>
                                 <!--                                   <span t-field="line.product_id.image_1920" t-option="wid" style="width:30px"/>-->
                             </td>
-                            <td>
+                            <td class="text-right">
                                 <t t-esc="line.product_id.display_name"/>
                                 <br></br>
-                                <t t-esc="line.product_id.desc"/>
+                                <t t-esc="line.product_id.description_ar" dir="rtl" />
                             </td>
                             <td>
                                 <t t-esc="line.product_uom_qty"/>

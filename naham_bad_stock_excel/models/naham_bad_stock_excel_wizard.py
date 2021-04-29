@@ -28,8 +28,9 @@ class badstockwizard(models.TransientModel):
     product_id = fields.Many2one('product.product', domain=[('type', 'in', ('product', 'consu'))], string="Product")
     product_categ_ids = fields.Many2many('product.category', string="Product Categ")
     # It should be location_ids, but for dependance reason I left it.
-    location_id = fields.Many2many('stock.location', domain=_get_location_ids_domain, string="Location", required=True)
+    location_id = fields.Many2many('stock.location', domain=_get_location_ids_domain, string="Location")
     search_by = fields.Selection([('product', 'Product'), ('categ', 'Product Categ')], string="Search By")
+    is_all_system = fields.Boolean(string="All System",  )
 
     def open_at_date(self, product, inventory_date):
         tree_view_id = self.env.ref('stock.view_stock_product_tree').id
@@ -135,71 +136,129 @@ class badstockwizard(models.TransientModel):
         all_product_of_this_period = all_stock_move_of_period.mapped('product_id')
         all_from_location_this_period = all_stock_move_of_period.mapped('location_id')
         all_to_location_this_period = all_stock_move_of_period.mapped('location_dest_id')
+        locations_all = self.env['stock.location'].search([('usage', '=', 'internal')])
 
-        for rec in all_product_of_this_period:
-            product = rec.id
-            domain = ([('id', '=', product)])
-            # my_products = self.env['product.product'].search(domain).with_context(
-            #     dict(self.env.context, to_date=self.date_from))
-            first_balance = 0
-            balance = 0
-            for location in self.location_id:
+        if self.is_all_system == True:
+            for rec in all_product_of_this_period:
+                product = rec.id
+                domain = ([('id', '=', product)])
+                # my_products = self.env['product.product'].search(domain).with_context(
+                #     dict(self.env.context, to_date=self.date_from))
+                first_balance = 0
+                balance = 0
                 qty_to = sum(self.env['stock.move.line'].search([
                     ('state', '=', 'done'),
                     ('date', '<', self.date_from),
                     ('product_id', '=', rec.id),
-                    ('location_dest_id', '=', location.id)
+                    ('location_dest_id', '=', locations_all.ids)
                 ]).mapped('qty_done'))
                 qty_from = sum(self.env['stock.move.line'].search([
                     ('state', '=', 'done'),
                     ('date', '<', self.date_from),
                     ('product_id', '=', rec.id),
-                    ('location_id', '=', location.id)
+                    ('location_id', '=', locations_all.ids)
                 ]).mapped('qty_done'))
                 first_balance += qty_to - qty_from
-            for location in self.location_id:
-                # x = self.env['stock.quant'].search([
-                #     ('product_id', '=', rec.id),
-                #     ('location_id', '=', location.id)
-                # ])
-                # print(x)
                 balance_tmp = sum(self.env['stock.quant'].search([
                     ('product_id', '=', rec.id),
-                    ('location_id', '=', location.id)
+                    ('location_id', '=', locations_all.ids)
                 ]).mapped('quantity'))
                 balance += balance_tmp
 
+                invcome_qty_to = sum(all_stock_move_of_period.filtered(lambda
+                                                                           l: l.product_id.id == rec.id and l.location_id.id in locations_all.ids and l.location_dest_id.usage == 'customer').mapped(
+                    'qty_done'))
+                invcome_qty_from = sum(all_stock_move_of_period.filtered(lambda
+                                                                             l: l.product_id.id == rec.id and l.location_dest_id.id in locations_all.ids and l.location_id.usage == 'customer').mapped(
+                    'qty_done'))
+                monsaref = invcome_qty_to - invcome_qty_from
+
+                invcome_qty_to = sum(all_stock_move_of_period.filtered(lambda
+                                                                           l: l.product_id.id == rec.id and l.location_id.id in locations_all.ids and l.location_dest_id.usage == 'supplier').mapped(
+                    'qty_done'))
+                out_qty_from = sum(all_stock_move_of_period.filtered(lambda
+                                                                         l: l.product_id.id == rec.id and l.location_dest_id.id in locations_all.ids and l.location_id.usage == 'supplier').mapped(
+                    'qty_done'))
+                wared = out_qty_from - invcome_qty_to
+
+                sheet.write(row, col, str(seq) or '', font_size_10)
+                sheet.write(row, col + 1, rec.default_code or '', font_size_10)
+                sheet.write(row, col + 2, rec.name or '', font_size_10)
+                sheet.write(row, col + 3, first_balance or '', font_size_10)
+                sheet.write(row, col + 4, wared or "0.0", font_size_10)
+                sheet.write(row, col + 5, monsaref or "0.0", font_size_10)
+                sheet.write(row, col + 6, balance or '0.0', font_size_10)
+                sheet.write(row, col + 7, first_balance - monsaref or '', font_size_10)
+                sheet.write(row, col + 8, rec.standard_price or '', font_size_10)
+                sheet.write(row, col + 9, (first_balance - monsaref) * rec.standard_price or '', font_size_10)
+
+                row += 1
+                seq += 1
+        else:
+            for rec in all_product_of_this_period:
+                product = rec.id
+                domain = ([('id', '=', product)])
+                # my_products = self.env['product.product'].search(domain).with_context(
+                #     dict(self.env.context, to_date=self.date_from))
+                first_balance = 0
+                balance = 0
+                for location in self.location_id:
+                    qty_to = sum(self.env['stock.move.line'].search([
+                        ('state', '=', 'done'),
+                        ('date', '<', self.date_from),
+                        ('product_id', '=', rec.id),
+                        ('location_dest_id', '=', location.id)
+                    ]).mapped('qty_done'))
+                    qty_from = sum(self.env['stock.move.line'].search([
+                        ('state', '=', 'done'),
+                        ('date', '<', self.date_from),
+                        ('product_id', '=', rec.id),
+                        ('location_id', '=', location.id)
+                    ]).mapped('qty_done'))
+                    first_balance += qty_to - qty_from
+                for location in self.location_id:
+                    # x = self.env['stock.quant'].search([
+                    #     ('product_id', '=', rec.id),
+                    #     ('location_id', '=', location.id)
+                    # ])
+                    # print(x)
+                    balance_tmp = sum(self.env['stock.quant'].search([
+                        ('product_id', '=', rec.id),
+                        ('location_id', '=', location.id)
+                    ]).mapped('quantity'))
+                    balance += balance_tmp
 
 
-            invcome_qty_to = sum(all_stock_move_of_period.filtered(lambda
-                                                                       l: l.product_id.id == rec.id and l.location_id.id in self.location_id.ids and l.location_dest_id.usage == 'customer').mapped(
-                'qty_done'))
-            invcome_qty_from = sum(all_stock_move_of_period.filtered(lambda
-                                                                         l: l.product_id.id == rec.id and l.location_dest_id.id in self.location_id.ids and l.location_id.usage == 'customer').mapped(
-                'qty_done'))
-            monsaref = invcome_qty_to - invcome_qty_from
 
-            invcome_qty_to = sum(all_stock_move_of_period.filtered(lambda
-                                                                       l: l.product_id.id == rec.id and l.location_id.id in self.location_id.ids and l.location_dest_id.usage == 'supplier').mapped(
-                'qty_done'))
-            out_qty_from = sum(all_stock_move_of_period.filtered(lambda
-                                                                     l: l.product_id.id == rec.id and l.location_dest_id.id in self.location_id.ids and l.location_id.usage == 'supplier').mapped(
-                'qty_done'))
-            wared = out_qty_from - invcome_qty_to
+                invcome_qty_to = sum(all_stock_move_of_period.filtered(lambda
+                                                                           l: l.product_id.id == rec.id and l.location_id.id in self.location_id.ids and l.location_dest_id.usage == 'customer').mapped(
+                    'qty_done'))
+                invcome_qty_from = sum(all_stock_move_of_period.filtered(lambda
+                                                                             l: l.product_id.id == rec.id and l.location_dest_id.id in self.location_id.ids and l.location_id.usage == 'customer').mapped(
+                    'qty_done'))
+                monsaref = invcome_qty_to - invcome_qty_from
 
-            sheet.write(row, col, str(seq) or '', font_size_10)
-            sheet.write(row, col + 1, rec.default_code or '', font_size_10)
-            sheet.write(row, col + 2, rec.name or '', font_size_10)
-            sheet.write(row, col + 3, first_balance or '', font_size_10)
-            sheet.write(row, col + 4, wared or "0.0", font_size_10)
-            sheet.write(row, col + 5, monsaref or "0.0", font_size_10)
-            sheet.write(row, col + 6, balance or '0.0', font_size_10)
-            sheet.write(row, col + 7, first_balance - monsaref or '', font_size_10)
-            sheet.write(row, col + 8, rec.standard_price or '', font_size_10)
-            sheet.write(row, col + 9, (first_balance - monsaref) * rec.standard_price or '', font_size_10)
+                invcome_qty_to = sum(all_stock_move_of_period.filtered(lambda
+                                                                           l: l.product_id.id == rec.id and l.location_id.id in self.location_id.ids and l.location_dest_id.usage == 'supplier').mapped(
+                    'qty_done'))
+                out_qty_from = sum(all_stock_move_of_period.filtered(lambda
+                                                                         l: l.product_id.id == rec.id and l.location_dest_id.id in self.location_id.ids and l.location_id.usage == 'supplier').mapped(
+                    'qty_done'))
+                wared = out_qty_from - invcome_qty_to
 
-            row += 1
-            seq += 1
+                sheet.write(row, col, str(seq) or '', font_size_10)
+                sheet.write(row, col + 1, rec.default_code or '', font_size_10)
+                sheet.write(row, col + 2, rec.name or '', font_size_10)
+                sheet.write(row, col + 3, first_balance or '', font_size_10)
+                sheet.write(row, col + 4, wared or "0.0", font_size_10)
+                sheet.write(row, col + 5, monsaref or "0.0", font_size_10)
+                sheet.write(row, col + 6, balance or '0.0', font_size_10)
+                sheet.write(row, col + 7, first_balance - monsaref or '', font_size_10)
+                sheet.write(row, col + 8, rec.standard_price or '', font_size_10)
+                sheet.write(row, col + 9, (first_balance - monsaref) * rec.standard_price or '', font_size_10)
+
+                row += 1
+                seq += 1
 
         workbook.close()
         output.seek(0)
