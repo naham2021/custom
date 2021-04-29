@@ -27,12 +27,13 @@
                             <group>
                                 <field name="date_from" required="1" />
                                 <field name="date_to" required="1" />
+                                <field name="is_all_system" />
                             </group>
                              <group>
                                 <field name="search_by" />
                                 <field name="product_id" attrs="{'invisible': [('search_by','!=', 'product')],'required': [('search_by','=', 'product')]}" />
                                 <field name="product_categ_ids" widget="many2many_tags" attrs="{'invisible': [('search_by','!=','categ')],'required': [('search_by','=', 'categ')]}" />
-                                <field name="location_id" widget="many2many_tags" options="{'no_create':1}"/>
+                                <field name="location_id" widget="many2many_tags" options="{'no_create':1}" attrs="{'required': [('is_all_system','=', False)]}"/>
                             </group>
                         </group>
                     </sheet>
