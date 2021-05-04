@@ -25,7 +25,7 @@ class PartnerXlsx(models.AbstractModel):
         domain = [
             ('move_id.state', '=', 'posted'),
             ('move_id.type', 'in', ['out_invoice', 'out_refund']),
-            ('account_id.user_type_id.name', 'in',['Cost of Revenue','Income']),
+            ('account_id.user_type_id.name', 'in',['Income']),
         ]
         if data['form']['product_ids']:
             domain.append(('product_id.id', 'in', data['form']['product_ids']))
@@ -60,9 +60,18 @@ class PartnerXlsx(models.AbstractModel):
                 line_ids = self.env['account.move.line'].search(domain2)
                 if move_type == 'out_invoice':
                     total_cost = sum(line_ids.mapped('debit')) or 0.0
+                    quantity = sum(line.mapped('quantity')) or 0.0
+                    total_price = sum(line.mapped('price_unit')) or 0.0
+
                 else:
                     total_cost = sum(line_ids.mapped('credit')) or 0.0
                     total_cost *= -1
+                    quantity = sum(line.mapped('quantity')) or 0.0
+                    quantity *= -1
+                    total_price = sum(line.mapped('price_unit')) or 0.0
+                    total_price *= -1
+
+
 
                 lines_dict.append({
                     'ref': line.move_id.name,
@@ -82,10 +91,10 @@ class PartnerXlsx(models.AbstractModel):
                 sheet.write(row, 6, str(line.move_id.invoice_date), fromat2)
                 sheet.write(row, 5, line.product_id.name, fromat2)
                 sheet.write(row, 4, line.product_uom_id.name, fromat2)
-                sheet.write(row, 3, line.quantity, fromat2)
-                sheet.write(row, 2, line.price_unit * line.quantity, fromat2)
+                sheet.write(row, 3, quantity, fromat2)
+                sheet.write(row, 2, total_price * line.quantity, fromat2)
                 sheet.write(row, 1, total_cost, fromat2)
-                sheet.write(row, 0, round((line.price_unit * line.quantity) - total_cost, 2), fromat2)
+                sheet.write(row, 0, round((total_price * line.quantity) - (total_cost), 2), fromat2)
                 row += 1
         sheet.write(row, 3, round(total_quantity,2), fromat3)
         sheet.write(row, 2, round(total_total_price,2), fromat3)
