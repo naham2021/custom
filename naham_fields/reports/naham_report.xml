@@ -246,7 +246,9 @@
                                 <td>
                                     <t t-esc="line.product_id.display_name"/>
                                     <br></br>
+                                    <pre>
                                     <t t-esc="line.product_id.desc"/>
+                                    </pre>
                                 </td>
                                 <td>
                                     <t t-esc="line.product_uom_qty"/>

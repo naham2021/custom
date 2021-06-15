@@ -177,7 +177,9 @@
                             <td class="text-right">
                                 <t t-esc="line.product_id.display_name"/>
                                 <br></br>
+                                <pre>
                                 <t t-esc="line.product_id.description_ar" dir="rtl" />
+                                </pre>
                             </td>
                             <td>
                                 <t t-esc="line.product_uom_qty"/>
