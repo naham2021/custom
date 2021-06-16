@@ -41,6 +41,18 @@ class partner(models.Model):
             'domain': [('partner_project', '=', self.id)],
 
         }
+class project_project_inherit(models.Model):
+    _inherit = 'project.project'
+
+    user_id_task = fields.Many2many('res.users', compute='calc_user', store=True)
+    @api.depends('task_ids.user_id')
+    def calc_user(self):
+        for rec in self:
+            for u in rec.task_ids:
+                print('------------------------------')
+                print(u.user_id)
+                rec.user_id_task = [(4, u.user_id.id)]
+
 
 
 
