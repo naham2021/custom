@@ -3,7 +3,7 @@ from odoo import models, fields, api
 class project_task(models.Model):
     _inherit = 'project.task'
     sale_order_project = fields.Many2one('sale.order')
-    partner_project = fields.Many2many('res.partner')
+    partner_project = fields.Many2many('res.users')
     profit = fields.Integer()
     Collection_from_the_customer = fields.Integer()
     purchaseorder = fields.Many2one('purchase.order')
@@ -45,13 +45,18 @@ class project_project_inherit(models.Model):
     _inherit = 'project.project'
 
     user_id_task = fields.Many2many('res.users', compute='calc_user', store=True)
-    @api.depends('task_ids.user_id')
+
+    @api.depends('task_ids.user_id', 'task_ids.partner_project')
     def calc_user(self):
         for rec in self:
+            rec.user_id_task = [(5, 0, 0)]
             for u in rec.task_ids:
                 print('------------------------------')
                 print(u.user_id)
                 rec.user_id_task = [(4, u.user_id.id)]
+                for r in u.partner_project:
+                    rec.user_id_task = [(4, r.id)]
+            print("user_id_task:", rec.user_id_task)
 
 
 

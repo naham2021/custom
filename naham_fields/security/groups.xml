@@ -32,7 +32,7 @@
             <field name="name">Own Project View</field>
             <field ref="project.model_project_project" name="model_id"/>
             <field name="groups" eval="[(4,ref('naham_fields.ir_own_task_group'))]"/>
-            <field name="domain_force">[('user_id_task','in',user.id)]</field>
+            <field name="domain_force">[('user_id_task','=',user.id)]</field>
         </record>
 <!--        <record model="ir.rule" id="task_visibility_rule">-->
 <!--        <field name="name">Project/Task: employees: follow required for follower-only projects</field>-->
