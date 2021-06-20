@@ -53,9 +53,11 @@ class project_project_inherit(models.Model):
             for u in rec.task_ids:
                 print('------------------------------')
                 print(u.user_id)
-                rec.user_id_task = [(4, u.user_id.id)]
-                for r in u.partner_project:
-                    rec.user_id_task = [(4, r.id)]
+                if u.user_id:
+                    rec.user_id_task = [(4, u.user_id.id)]
+                for r in u:
+                    if r.partner_project:
+                       rec.user_id_task = [(4, r.partner_project.id)]
             print("user_id_task:", rec.user_id_task)
 
 
