@@ -175,9 +175,13 @@
                                 <!--                                   <span t-field="line.product_id.image_1920" t-option="wid" style="width:30px"/>-->
                             </td>
                             <td class="text-right">
-                                <t t-esc="line.product_id.display_name"/>
-                                <br></br>
-                                <t t-esc="line.product_id.description_ar" dir="rtl" />
+                                    <t t-esc="line.product_id.default_code"/>
+                                    <br></br>
+                                    <t t-esc="line.product_id.display_name" style="text-align: center;"/>
+
+                                <pre>
+                                <t t-raw="line.product_id.description_ar" dir="rtl"/>
+                                </pre>
                             </td>
                             <td>
                                 <t t-esc="line.product_uom_qty"/>
