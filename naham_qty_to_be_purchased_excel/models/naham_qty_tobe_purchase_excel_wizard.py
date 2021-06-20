@@ -20,7 +20,7 @@ class qtytobepurchasedwizard(models.TransientModel):
     _name = 'qty.tobe.purchased.wizard'
 
     def _get_location_ids_domain(self):
-        return [('id', 'in', self.env.user.allowed_bad_stock_location_id.ids)]
+        return [('id', 'in', self.env.user.allowed_bad_stock_location_ids.ids)]
 
     excel_file = fields.Binary('Download report Excel', attachment=True, readonly=True)
     file_name = fields.Char('Excel File', size=64)
