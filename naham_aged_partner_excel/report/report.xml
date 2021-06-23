@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="action_report_aged_partner_balance_excel"
+            model="res.partner"
+            string="Aged Partner Balance Excel"
+            menu="False"
+            report_type="xlsx"
+            name="naham_aged_partner_excel.report_agedpartnerbalance"
+            file="naham_aged_partner_excel.report_agedpartnerbalance"
+        />
+
+
+
+    </data>
+</odoo>
