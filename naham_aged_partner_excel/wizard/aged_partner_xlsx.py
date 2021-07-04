@@ -12,7 +12,26 @@ class AccountAgedTrialBalance(models.TransientModel):
     period_length = fields.Integer(string='Period Length (days)', required=True, default=30)
     journal_ids = fields.Many2many('account.journal', string='Journals', required=True)
     date_from = fields.Date(default=lambda *a: time.strftime('%Y-%m-%d'))
+    partner_tags = fields.Many2many('res.partner.category')
+
+
+    @api.onchange('partner_tags')
+    def _default_partner_tags(self):
+        cust = self.env['res.partner'].search([('category_id','in',self.partner_tags.ids)])
+        if self.partner_tags:
+            self.partner_ids = cust.ids
+        else:
+            print("nnnnnnnnnnn")
+            self.partner_ids =[(5,0,0)]
+        # {self.partner_ids: [(4, cust.ids)]}
+        # return cust
+
+
     partner_ids = fields.Many2many('res.partner')
+
+    tags_flag = fields.Boolean('Partner Tags Flag')
+
+
 
     def _print_report(self, data):
         res = {}
