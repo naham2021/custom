@@ -241,6 +241,8 @@ class PartnerXlsx(models.AbstractModel):
         movelines, total, dummy = self._get_partner_move_lines(account_type, date_from, target_move,
                                                                data['form']['period_length'],
                                                                data['form']['partner_ids'])
+
+
         # return {
         #     'doc_ids': self.ids,
         #     'doc_model': model,
