@@ -22,6 +22,7 @@ class PartnerXlsx(models.AbstractModel):
         # 61 - 90  : 2018-12-09 - 2018-11-10
         # 91 - 120 : 2018-11-09 - 2018-10-11
         # +120     : 2018-10-10
+        print('first')
         periods = {}
         start = datetime.strptime(date_from, "%Y-%m-%d")
         date_from = datetime.strptime(date_from, "%Y-%m-%d").date()
@@ -37,7 +38,7 @@ class PartnerXlsx(models.AbstractModel):
                 'start': (i!=0 and stop.strftime('%Y-%m-%d') or False),
             }
             start = stop
-
+        print('second')
         res = []
         total = []
         cr = self.env.cr
@@ -71,6 +72,7 @@ class PartnerXlsx(models.AbstractModel):
                 AND l.company_id IN %s
             ORDER BY UPPER(res_partner.name)'''
         cr.execute(query, arg_list)
+        print('third')
 
         partners = cr.dictfetchall()
 
@@ -101,6 +103,7 @@ class PartnerXlsx(models.AbstractModel):
                     AND ((l.partner_id IN %s) OR (l.partner_id IS NULL))
                 AND (l.date <= %s)
                 AND l.company_id IN %s'''
+        print('fourth')
         cr.execute(query, (tuple(move_state), tuple(account_type), date_from, tuple(partner_ids), date_from, tuple(company_ids)))
         aml_ids = cr.fetchall()
         aml_ids = aml_ids and [x[0] for x in aml_ids] or []
@@ -127,6 +130,7 @@ class PartnerXlsx(models.AbstractModel):
 
         # Use one query per period and store results in history (a list variable)
         # Each history will contain: history[1] = {'<partner_id>': <partner_debit-credit>}
+        print('fivth')
         history = []
         for i in range(5):
             args_list = (tuple(move_state), tuple(account_type), tuple(partner_ids),)
@@ -152,6 +156,7 @@ class PartnerXlsx(models.AbstractModel):
                         AND ''' + dates_query + '''
                     AND (l.date <= %s)
                     AND l.company_id IN %s'''
+            print('sixth')
             cr.execute(query, args_list)
             partners_amount = {}
             aml_ids = cr.fetchall()
@@ -178,6 +183,9 @@ class PartnerXlsx(models.AbstractModel):
                         'period': i + 1,
                         })
             history.append(partners_amount)
+
+        print('siventh')
+
 
         for partner in partners:
             if partner['partner_id'] is None:
