@@ -80,8 +80,8 @@ class PartnerXlsx(models.AbstractModel):
             partners = [partner for partner in partners if partner['partner_id'] in partners_filter]
 
         print('---------------------------------------------')
-        print(partners_filter)
-        print(partners)
+        print('partners_filter',partners_filter)
+        print('partners',partners)
         # put a total of 0
         for i in range(7):
             total.append(0)

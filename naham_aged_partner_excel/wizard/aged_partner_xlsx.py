@@ -57,4 +57,4 @@ class AccountAgedTrialBalance(models.TransientModel):
         data['form'].update(self.read(['partner_ids'])[0])
         print(self.read(['partner_ids'])[0])
         # print(type(data['form']['partner_ids']))
-        return self.env.ref('naham_aged_partner_excel.action_report_aged_partner_balance_excel').report_action(self, data=data)
+        return self.env.ref('naham_aged_partner_excel.action_report_aged_partner_balance_excel').sudo().report_action(self, data=data)
