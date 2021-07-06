@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','report_xlsx','account'],
+    'depends': ['base', 'report_xlsx', 'account', 'accounting_pdf_reports'],
 
     # always loaded
     'data': [
