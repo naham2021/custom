@@ -15,14 +15,14 @@ class AccountAgedTrialBalance(models.TransientModel):
     partner_tags = fields.Many2many('res.partner.category')
 
 
-    # @api.onchange('partner_tags')
-    # def _default_partner_tags(self):
-    #     cust = self.env['res.partner'].search([('category_id','in',self.partner_tags.ids)])
-    #     if self.partner_tags:
-    #         self.partner_ids = cust.ids
-    #     else:
-    #         print("nnnnnnnnnnn")
-    #         self.partner_ids =[(5,0,0)]
+    @api.onchange('partner_tags')
+    def _default_partner_tags(self):
+        cust = self.env['res.partner'].search([('category_id','in',self.partner_tags.ids)])
+        if self.partner_tags:
+            self.partner_ids = cust.ids
+        else:
+            print("nnnnnnnnnnn")
+            self.partner_ids =[(5,0,0)]
         # {self.partner_ids: [(4, cust.ids)]}
         # return cust
 
