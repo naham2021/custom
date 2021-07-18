@@ -216,7 +216,7 @@ class PartnerXlsx(models.AbstractModel):
             values['partner_id'] = partner['partner_id']
             if partner['partner_id']:
                 browsed_partner = self.env['res.partner'].browse(partner['partner_id'])
-                values['name'] = browsed_partner.name and len(browsed_partner.name) >= 45 and browsed_partner.name[0:40] + '...' or browsed_partner.name
+                values['name'] = browsed_partner.name and len(browsed_partner.name) >= 60 and browsed_partner.name[0:60] + '...' or browsed_partner.name
                 values['trust'] = browsed_partner.trust
             else:
                 values['name'] = _('Unknown Partner')
