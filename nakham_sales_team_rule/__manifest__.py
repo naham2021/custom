@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','sale','sales_team','nakham_journal_operation_rules','pos_user_restrict'],
+    'depends': ['base','sale','sales_team','nakham_journal_operation_rules'],
 
     # always loaded
     'data': [
