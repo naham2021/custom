@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','sale','account','point_of_sale','purchase','stock_landed_costs'],
+    'depends': ['base','sale','account','purchase','stock_landed_costs'],
 
     # always loaded
     'data': [
@@ -30,9 +30,9 @@
         'views/templates.xml',
         'views/sale_views.xml',
         'views/account_move_views.xml',
-        'views/pos_order_views.xml',
-        'views/pos_session_views.xml',
-        'views/pos_payment_views.xml',
+        # 'views/pos_order_views.xml',
+        # 'views/pos_session_views.xml',
+        # 'views/pos_payment_views.xml',
         'views/purchase_views.xml',
         'views/stock_picking.xml',
         'views/stock_inventory.xml',
