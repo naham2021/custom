@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','sale','purchase','stock','account','analytic','point_of_sale','sale_stock','nakham_analytic_account', 'purchase_stock'],
+    'depends': ['base','sale','purchase','stock','account','analytic','sale_stock','nakham_analytic_account', 'purchase_stock'],
 
     # always loaded
     'data': [
