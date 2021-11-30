@@ -25,23 +25,23 @@ class AccountInvoice(models.Model):
     @api.depends('ref')
     def _compute_warehouse(self):
         for rec in self:
-            pos_order = self.env['pos.order'].search([('name', '=',
-                                                       rec.ref)])
+            # pos_order = self.env['pos.order'].search([('name', '=',
+            #                                            rec.ref)])
 
 
 
             sale_order = self.env['sale.order'].search([('name', '=',
                                                        rec.ref)])
-            if pos_order:
-                # print('self.find_warehouse(pos_order.location_id.id)',rec.find_warehouse(pos_order.location_id.id))
-                # w = rec.find_warehouse(pos_order.location_id.id)
-                # w_l = self.env['stock.warehouse'].search([('id', '=',
-                #                                          w)], limit=1)
-                # print("w  -->:: ",w_l)
-                # rec.warehouse_char = w_l.code
-                rec.warehouse_char = pos_order.picking_id.picking_type_id.warehouse_id.code
-                rec.analytic_account_id = pos_order.picking_id.picking_type_id.warehouse_id.analytic_account_id.id
-            elif sale_order:
+            # if pos_order:
+            #     # print('self.find_warehouse(pos_order.location_id.id)',rec.find_warehouse(pos_order.location_id.id))
+            #     # w = rec.find_warehouse(pos_order.location_id.id)
+            #     # w_l = self.env['stock.warehouse'].search([('id', '=',
+            #     #                                          w)], limit=1)
+            #     # print("w  -->:: ",w_l)
+            #     # rec.warehouse_char = w_l.code
+            #     rec.warehouse_char = pos_order.picking_id.picking_type_id.warehouse_id.code
+            #     rec.analytic_account_id = pos_order.picking_id.picking_type_id.warehouse_id.analytic_account_id.id
+            if sale_order:
                 rec.warehouse_char = sale_order.warehouse_id.code
                 rec.analytic_account_id = sale_order.warehouse_id.analytic_account_id.id
             else:
