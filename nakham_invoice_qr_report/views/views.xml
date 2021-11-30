@@ -96,7 +96,7 @@
                 <div style="font-size:15px;font-weight: bold;">
                     <div class="row" style="color:#ffffff;">
                         <div class="col-6" >
-                            <img style="height:85px; padding-left:35em;padding-top:10px;" t-att-src="'/report/barcode/?type=%s&amp;width=%s&amp;height=%s&amp;value=Seller : %s\nVat_Number : %s\ndate : %s\nTotal_Vat : %s\nTotal_Amount : %s\n'%('QR', 130, 130,o.company_id.name,o.company_id.vat,o.invoice_date,o.amount_tax_signed,o.amount_total)"/>
+                            <img style="height:90px; padding-left:35em;padding-top:10px;" t-att-src="'/report/barcode/?type=%s&amp;width=%s&amp;height=%s&amp;value=Seller : %s\nVat_Number : %s\ndate : %s\nTotal_Vat : %s\nTotal_Amount : %s\n'%('QR', 130, 130,o.company_id.name,o.company_id.vat,o.invoice_date,o.amount_tax_signed,o.amount_total)"/>
                         </div>
 
                         <div class="col-6">
