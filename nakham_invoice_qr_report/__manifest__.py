@@ -7,7 +7,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','account','nakham_journals_invoices'],
+    'depends': ['base','account','nakham_journals_invoices','l10n_sa'],
 
     # always loaded
     'data': [
