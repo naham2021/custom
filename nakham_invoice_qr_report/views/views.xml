@@ -97,12 +97,10 @@
                     <div class="row" style="color:#ffffff;">
                         <div class="col-6" >
 <!--                            <img style="height:90px; padding-left:35em;padding-top:10px;" t-att-src="'/report/barcode/?type=%s&amp;width=%s&amp;height=%s&amp;value=Seller : %s\nVat_Number : %s\ndate : %s\nTotal_Vat : %s\nTotal_Amount : %s\n'%('QR', 130, 130,o.company_id.name,o.company_id.vat,o.invoice_date,o.amount_tax_signed,o.amount_total)"/>-->
-                            <img
-                                 style="height:90px; padding-left:35em;padding-top:10px;"
-                                 t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', o.l10n_sa_qr_code_str, 150, 150)"/>
 
 
                         </div>
+
 
                         <div class="col-6">
                             <table class="table table-sm" style="page-break-inside: avoid;">
@@ -160,9 +158,12 @@
                                 <tr class="border-black o_total" style="border:0">
                                 </tr>
                             </table>
+
+
                         </div>
 
                     </div>
+
 
 
 
@@ -542,6 +543,10 @@
 
                             </tbody>
                         </table>
+                                                                        <img
+                                 style="height:120px; padding-left:25em;padding-top:10px;"
+                                 t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', o.l10n_sa_qr_code_str, 150, 150)"/>
+
 
                         <!--                            <div>-->
                         <!--                                <div class="row" style="color:#ffffff;">-->
