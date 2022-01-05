@@ -19,5 +19,8 @@
         <record id="naham_picking_delete_group" model="res.groups">
             <field name="name">Picking Delete Action Group</field>
         </record>
+        <record id="naham_Landed_Costs_group" model="res.groups">
+            <field name="name">Landed Costs Group</field>
+        </record>
     </data>
 </odoo>

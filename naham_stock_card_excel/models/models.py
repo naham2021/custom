@@ -20,8 +20,12 @@ class StockCardWizard(models.TransientModel):
     file_name = fields.Char('Excel File', size=64)
     date_from = fields.Date(string="Date From", required=True)
     date_to = fields.Date(string="Date To", required=True)
-    location_id = fields.Many2one('stock.location', string="Location", domain=[('usage', '=', 'internal')],
+    def _get_location_domain(self):
+        return [('usage', '=', 'internal'),('users_ids', '=', self.env.uid)]
+    location_id = fields.Many2one('stock.location', string="Location",domain=lambda self: self._get_location_domain() ,
                                   required=True)
+
+
     product_id = fields.Many2one('product.product', string="Product", required=True)
 
     def stock_card_search(self):
