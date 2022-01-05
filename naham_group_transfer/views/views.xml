@@ -19,5 +19,14 @@
 
             </field>
         </record>
+
+
+        <menuitem action="stock_landed_costs.action_stock_landed_cost"
+                  name="Landed Costs"
+                  parent="stock.menu_stock_warehouse_mgmt"
+                  id="stock_landed_costs.menu_stock_landed_cost"
+                  groups="naham_group_transfer.naham_Landed_Costs_group"
+                  sequence="115"/>
+
     </data>
 </odoo>

@@ -613,6 +613,21 @@
             groups="nakham_sales_team_rule.group_admin_system"
             sequence="1"/>
 
+<!--&lt;!&ndash;      General Ledger&ndash;&gt;-->
+<!--        <menuitem-->
+<!--            id="account.menu_action_account_moves_ledger_general"-->
+<!--            action="account.action_account_moves_ledger_general"-->
+<!--            parent="account.menu_finance_entries_accounting_ledgers"-->
+<!--            groups="nakham_sales_team_rule.group_admin_system"-->
+<!--            sequence="1"/>-->
+<!--&lt;!&ndash;      Partner Ledger&ndash;&gt;-->
+
+<!--        <menuitem-->
+<!--            id="account.menu_action_account_moves_ledger_partner"-->
+<!--            action="account.action_account_moves_ledger_partner"-->
+<!--            parent="account.menu_finance_entries_accounting_ledgers"-->
+<!--            groups="nakham_sales_team_rule.group_admin_system"-->
+<!--            sequence="1"/>-->
 
         <menuitem
             id="account.menu_action_account_moves_all"
