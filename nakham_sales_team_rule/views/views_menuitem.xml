@@ -695,5 +695,14 @@
                    eval="{'search_default_Sales': 1, 'time_ranges': {'field':'date_order', 'range':'last_30_days'}}"/>
         </record>
 
+
+                    <record id="account.action_account_moves_all" model="ir.actions.act_window">
+            <field name="context">{'journal_type':'general', 'search_default_posted':1}</field>
+            <field name="name">Journal Items</field>
+            <field name="res_model">account.move.line</field>
+            <field name="domain">[('display_type', 'not in', ('line_section', 'line_note')), ('move_id.state', '!=', 'cancel'), ('account_id', 'in', allowed_account_ids)]</field>
+            <field name="view_id" ref="account.view_move_line_tree"/>
+            <field name="view_mode">tree,pivot,graph,form,kanban</field>
+        </record>
     </data>
 </odoo>
