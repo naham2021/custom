@@ -1,5 +1,5 @@
 <odoo>
-  <data>
+    <data>
         <record id="purchase_order_line_inherit" model="ir.ui.view">
             <field name="name">purchase.order.line.inherit</field>
             <field name="model">purchase.order.line</field>
@@ -13,66 +13,184 @@
 
             </field>
         </record>
-      <!-- Inherit Form View to Modify it -->
-      <record id="sale_order_remaining_qty" model="ir.ui.view">
-          <field name="name">sale.order.remaining.qty</field>
-          <field name="model">sale.order</field>
-          <field name="inherit_id" ref="sale.view_order_form"/>
-          <field name="arch" type="xml">
+        <!-- Inherit Form View to Modify it -->
+        <record id="sale_order_remaining_qty" model="ir.ui.view">
+            <field name="name">sale.order.remaining.qty</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
 
-              <xpath expr="//field[@name='order_line']/tree/field[@name='qty_delivered']" position="after">
-                  <field name="remaining_qty"/>
-              </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='qty_delivered']" position="after">
+                    <field name="remaining_qty"/>
+                </xpath>
 
-          </field>
-      </record>
-      <!-- Inherit Form View to Modify it -->
-      <record id="purchase_order_type" model="ir.ui.view">
-          <field name="name">purchase.order.type</field>
-          <field name="model">purchase.order</field>
-          <field name="inherit_id" ref="purchase.purchase_order_form"/>
-          <field name="arch" type="xml">
+            </field>
+        </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="purchase_order_type" model="ir.ui.view">
+            <field name="name">purchase.order.type</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
 
-              <xpath expr="//field[@name='currency_id']" position="after">
-                <field name="purchase_type"/>
-              </xpath>
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="purchase_type"/>
+                </xpath>
 
-              <xpath expr="//field[@name='order_line']/tree/field[@name='qty_received']" position="after">
-                  <field name="remaining_qty"/>
-              </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='qty_received']" position="after">
+                    <field name="remaining_qty"/>
+                </xpath>
 
-          </field>
-      </record>
+            </field>
+        </record>
 
-      <record id="purchase_order_line_action" model="ir.actions.act_window">
-          <field name="name">Purchase Order Lines</field>
-          <field name="type">ir.actions.act_window</field>
-          <field name="res_model">purchase.order.line</field>
-          <field name="view_mode">tree,form</field>
-      </record>
+        <record id="purchase_order_line_action" model="ir.actions.act_window">
+            <field name="name">Purchase Order Lines</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
-      <!-- This Menu Item must have a parent and an action -->
-      <menuitem id="purchase_order_line_menu"
-                name="Purchase Order Line"
-                parent="purchase.menu_procurement_management"
-                action="purchase_order_line_action"
-                sequence="16"
-      />
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="purchase_order_line_menu"
+                  name="Purchase Order Line"
+                  parent="purchase.menu_procurement_management"
+                  action="purchase_order_line_action"
+                  sequence="16"
+        />
 
-      <record id="sale_order_line_action" model="ir.actions.act_window">
-          <field name="name">Sale Order Lines</field>
-          <field name="type">ir.actions.act_window</field>
-          <field name="res_model">sale.order.line</field>
-          <field name="view_mode">tree,form</field>
-      </record>
+        <record id="sale_order_line_action" model="ir.actions.act_window">
+            <field name="name">Sale Order Lines</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
-      <!-- This Menu Item must have a parent and an action -->
-      <menuitem id="sale_order_line_menu"
-                name="Sale Order Line"
-                parent="sale.sale_order_menu"
-                action="sale_order_line_action"
-                sequence="16"
-      />
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="sale_order_line_menu"
+                  name="Sale Order Line"
+                  parent="sale.sale_order_menu"
+                  action="sale_order_line_action"
+                  sequence="16"
+        />
 
-  </data>
+
+        <!--      menu item accountant -->
+        <!--sale order  line-->
+        <record id="sale_order_line_accountant_action" model="ir.actions.act_window">
+            <field name="name">Sale Order Lines ( Accountant )</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('team_id.Accountant_id','=',uid)]</field>
+
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="sale_order_line_accountant_menu"
+                  name="Sale Order Lines ( Accountant )"
+                  parent="sale.sale_order_menu"
+                  action="sale_order_line_accountant_action"
+                  groups="nakham_sales_team_rule.group_accountant_sale_teams"
+
+        />
+
+        <!--        purchase order line-->
+        <record id="purchase_order_line_accountant_action" model="ir.actions.act_window">
+            <field name="name">Purchase Order Lines ( Accountant )</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('team_id.Accountant_id','=',uid)]</field>
+
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="purchase_order_line_accountant_menu"
+                  name="Purchase Order Line ( Accountant )"
+                  parent="purchase.menu_procurement_management"
+                  action="purchase_order_line_accountant_action"
+                  groups="nakham_sales_team_rule.group_accountant_sale_teams"
+
+        />
+
+        <!--      menu item ( Head Team ) -->
+        <!--sale order  line-->
+        <record id="sale_order_line_head_team_action" model="ir.actions.act_window">
+            <field name="name">Sale Order Lines ( Head Team )</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('team_id.user_id','=',uid)]</field>
+
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="sale_order_line_head_team_menu"
+                  name="Sale Order Lines ( Head Team )"
+                  parent="sale.sale_order_menu"
+                  action="sale_order_line_head_team_action"
+                  groups="nakham_sales_team_rule.group_manager_sale_teams"
+
+        />
+
+        <!--        purchase order line-->
+        <record id="purchase_order_line_head_team_action" model="ir.actions.act_window">
+            <field name="name">Purchase Order Lines ( Head Team )</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('team_id.user_id','=',uid)]</field>
+
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="purchase_order_line_head_team_menu"
+                  name="Purchase Order Line ( Head Team )"
+                  parent="purchase.menu_procurement_management"
+                  action="purchase_order_line_head_team_action"
+                  groups="nakham_sales_team_rule.group_manager_sale_teams"
+
+        />
+
+
+                <!--      menu item ( Member ) -->
+        <!--sale order  line-->
+        <record id="sale_order_line_member_action" model="ir.actions.act_window">
+            <field name="name">Sale Order Lines ( Member )</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('user_id','=',uid)]</field>
+
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="sale_order_line_member_menu"
+                  name="Sale Order Lines ( Member )"
+                  parent="sale.sale_order_menu"
+                  action="sale_order_line_member_action"
+                  groups="nakham_sales_team_rule.group_member_sale_teams"
+
+        />
+
+        <!--        purchase order line-->
+        <record id="purchase_order_line_member_action" model="ir.actions.act_window">
+            <field name="name">Purchase Order Lines ( Member )</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('user_id','=',uid)]</field>
+
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="purchase_order_line_member_menu"
+                  name="Purchase Order Line ( Member )"
+                  parent="purchase.menu_procurement_management"
+                  action="purchase_order_line_member_action"
+                  groups="nakham_sales_team_rule.group_member_sale_teams"
+
+        />
+    </data>
 </odoo>
