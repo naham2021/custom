@@ -1,8 +1,9 @@
 <odoo>
-  <data>
-      <!--    accountant -->
-<!--      action -->
-              <record id="action_move_out_invoice_type_accountant" model="ir.actions.act_window">
+    <data>
+        <!--    accountant -->
+        <!--      action -->
+
+        <record id="action_move_out_invoice_type_accountant" model="ir.actions.act_window">
             <field name="name">Invoices ( Accountant )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
@@ -11,11 +12,12 @@
             <field name="domain">[('type', '=', 'out_invoice'),('team_id.Accountant_id','=',uid)]</field>
             <field name="context">{'default_type': 'out_invoice'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a customer invoice
-              </p><p>
-                Create invoices, register payments and keep track of the discussions with your customers.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a customer invoice
+                </p>
+                <p>
+                    Create invoices, register payments and keep track of the discussions with your customers.
+                </p>
             </field>
         </record>
 
@@ -28,17 +30,18 @@
             <field name="domain">[('type', '=', 'out_refund'),('team_id.Accountant_id','=',uid)]</field>
             <field name="context">{'default_type': 'out_refund'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a credit note
-              </p><p>
-                Note that the easiest way to create a credit note is to do it directly
-                from the customer invoice.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a credit note
+                </p>
+                <p>
+                    Note that the easiest way to create a credit note is to do it directly
+                    from the customer invoice.
+                </p>
             </field>
         </record>
 
         <record id="action_move_in_invoice_type_accountant" model="ir.actions.act_window">
-            <field name="name">Bills ( Accountant ) </field>
+            <field name="name">Bills ( Accountant )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -46,16 +49,17 @@
             <field name="domain">[('type', '=', 'in_invoice'),('team_id.Accountant_id','=',uid)]</field>
             <field name="context">{'default_type': 'in_invoice'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a vendor bill
-              </p><p>
-                Create invoices, register payments and keep track of the discussions with your vendors.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a vendor bill
+                </p>
+                <p>
+                    Create invoices, register payments and keep track of the discussions with your vendors.
+                </p>
             </field>
         </record>
 
         <record id="action_move_in_refund_type_accountant" model="ir.actions.act_window">
-            <field name="name">Refund ( Accountant ) </field>
+            <field name="name">Refund ( Accountant )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -63,16 +67,17 @@
             <field name="domain">[('type', '=', 'in_refund'),('team_id.Accountant_id','=',uid)]</field>
             <field name="context">{'default_type': 'in_refund'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a vendor credit note
-              </p><p>
-                Note that the easiest way to create a vendor credit note it to do it directly from the vendor bill.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a vendor credit note
+                </p>
+                <p>
+                    Note that the easiest way to create a vendor credit note it to do it directly from the vendor bill.
+                </p>
             </field>
         </record>
 
         <record id="action_move_out_receipt_type_accountant" model="ir.actions.act_window">
-            <field name="name">Receipts ( Accountant ) </field>
+            <field name="name">Receipts ( Accountant )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -80,17 +85,18 @@
             <field name="domain">[('type', '=', 'out_receipt'),('team_id.Accountant_id','=',uid)]</field>
             <field name="context">{'default_type': 'out_receipt'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a new sales receipt
-              </p><p>
-                When the sale receipt is confirmed, you can record the customer
-                payment related to this sales receipt.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new sales receipt
+                </p>
+                <p>
+                    When the sale receipt is confirmed, you can record the customer
+                    payment related to this sales receipt.
+                </p>
             </field>
         </record>
 
         <record id="action_move_in_receipt_type_accountant" model="ir.actions.act_window">
-            <field name="name">Receipts ( Accountant ) </field>
+            <field name="name">Receipts ( Accountant )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -98,98 +104,105 @@
             <field name="domain">[('type', '=', 'in_receipt'),('team_id.Accountant_id','=',uid)]</field>
             <field name="context">{'default_type': 'in_receipt'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Register a new purchase receipt
-              </p><p>
-                When the purchase receipt is confirmed, you can record the
-                vendor payment related to this purchase receipt.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Register a new purchase receipt
+                </p>
+                <p>
+                    When the purchase receipt is confirmed, you can record the
+                    vendor payment related to this purchase receipt.
+                </p>
             </field>
         </record>
-       <record id="action_move_journal_line_accountant" model="ir.actions.act_window">
-            <field name="name">Journal Entries ( Accountant ) </field>
+
+        <record id="action_move_journal_line_accountant" model="ir.actions.act_window">
+            <field name="name">Journal Entries ( Accountant )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_move_tree"/>
             <field name="search_view_id" ref="account.view_account_move_filter"/>
             <field name="domain">[('invoice_user_id', '=', uid)]</field>
-            <field name="context">{'default_type': 'entry', 'search_default_misc_filter':1, 'view_no_maturity': True}</field>
+            <field name="context">{'default_type': 'entry', 'search_default_misc_filter':1, 'view_no_maturity': True}
+            </field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a journal entry
-              </p><p>
-                A journal entry consists of several journal items, each of
-                which is either a debit or a credit transaction.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a journal entry
+                </p>
+                <p>
+                    A journal entry consists of several journal items, each of
+                    which is either a debit or a credit transaction.
+                </p>
             </field>
         </record>
 
-              <record id="action_account_moves_all_accountant" model="ir.actions.act_window">
+        <record id="action_account_moves_all_accountant" model="ir.actions.act_window">
             <field name="context">{'journal_type':'general', 'search_default_posted':1}</field>
             <field name="name">Journal Items ( Accountant )</field>
             <field name="res_model">account.move.line</field>
-            <field name="domain">[('move_id.team_id.Accountant_id','=',uid),('display_type', 'not in', ('line_section', 'line_note')), ('move_id.state', '!=', 'cancel')]</field>
+            <field name="domain">[('move_id.team_id.Accountant_id','=',uid),('display_type', 'not in', ('line_section',
+                'line_note')), ('move_id.state', '!=', 'cancel')]
+            </field>
             <field name="view_id" ref="account.view_move_line_tree"/>
             <field name="view_mode">tree,pivot,graph,form,kanban</field>
         </record>
-            	      <!-- MENUS -->
+
+        <!-- MENUS -->
 
         <menuitem
-            id="menu_action_move_out_invoice_type_accountant"
-            action="action_move_out_invoice_type_accountant"
-            parent="account.menu_finance_receivables"
-            groups="nakham_sales_team_rule.group_accountant_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_out_invoice_type_accountant"
+                action="action_move_out_invoice_type_accountant"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_accountant_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_out_refund_type_accountant"
-            action="action_move_out_refund_type_accountant"
-            parent="account.menu_finance_receivables"
-            groups="nakham_sales_team_rule.group_accountant_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_out_refund_type_accountant"
+                action="action_move_out_refund_type_accountant"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_accountant_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_out_receipt_type_accountant"
-            action="action_move_out_receipt_type_accountant"
-            parent="account.menu_finance_receivables"
-            groups="nakham_sales_team_rule.group_accountant_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_out_receipt_type_accountant"
+                action="action_move_out_receipt_type_accountant"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_accountant_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_in_invoice_type_accountant"
-            action="action_move_in_invoice_type_accountant"
-            parent="account.menu_finance_payables"
-            groups="nakham_sales_team_rule.group_accountant_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_in_invoice_type_accountant"
+                action="action_move_in_invoice_type_accountant"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_accountant_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_in_refund_type_accountant"
-            action="action_move_in_refund_type_accountant"
-            parent="account.menu_finance_payables"
-            groups="nakham_sales_team_rule.group_accountant_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_in_refund_type_accountant"
+                action="action_move_in_refund_type_accountant"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_accountant_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_in_receipt_type_accountant"
-            action="action_move_in_receipt_type_accountant"
-            parent="account.menu_finance_payables"
-            groups="nakham_sales_team_rule.group_accountant_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_in_receipt_type_accountant"
+                action="action_move_in_receipt_type_accountant"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_accountant_sale_teams"
+                sequence="1"/>
         <menuitem
-            id="menu_action_move_journal_line_form_accountant"
-            action="action_move_journal_line_accountant"
-            parent="account.menu_finance_entries_accounting_miscellaneous"
-            groups="nakham_sales_team_rule.group_accountant_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_journal_line_form_accountant"
+                action="action_move_journal_line_accountant"
+                parent="account.menu_finance_entries_accounting_miscellaneous"
+                groups="nakham_sales_team_rule.group_accountant_sale_teams"
+                sequence="1"/>
         <menuitem
-            id="menu_action_account_moves_all_accountant"
-            action="action_account_moves_all_accountant"
-            parent="account.menu_finance_entries_accounting_miscellaneous"
-            groups="nakham_sales_team_rule.group_accountant_sale_teams"
-            sequence="10"/>
-      <!--    Head Team -->
-<!--      action -->
-              <record id="action_move_out_invoice_type_head" model="ir.actions.act_window">
+                id="menu_action_account_moves_all_accountant"
+                action="action_account_moves_all_accountant"
+                parent="account.menu_finance_entries_accounting_miscellaneous"
+                groups="nakham_sales_team_rule.group_accountant_sale_teams"
+                sequence="10"/>
+        <!--    Head Team -->
+        <!--      action -->
+        <record id="action_move_out_invoice_type_head" model="ir.actions.act_window">
             <field name="name">Invoices ( Head Team )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
@@ -198,11 +211,12 @@
             <field name="domain">[('type', '=', 'out_invoice'),('team_id.user_id','=',uid)]</field>
             <field name="context">{'default_type': 'out_invoice'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a customer invoice
-              </p><p>
-                Create invoices, register payments and keep track of the discussions with your customers.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a customer invoice
+                </p>
+                <p>
+                    Create invoices, register payments and keep track of the discussions with your customers.
+                </p>
             </field>
         </record>
 
@@ -215,17 +229,18 @@
             <field name="domain">[('type', '=', 'out_refund'),('team_id.user_id','=',uid)]</field>
             <field name="context">{'default_type': 'out_refund'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a credit note
-              </p><p>
-                Note that the easiest way to create a credit note is to do it directly
-                from the customer invoice.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a credit note
+                </p>
+                <p>
+                    Note that the easiest way to create a credit note is to do it directly
+                    from the customer invoice.
+                </p>
             </field>
         </record>
 
         <record id="action_move_in_invoice_type_head" model="ir.actions.act_window">
-            <field name="name">Bills ( Head Team ) </field>
+            <field name="name">Bills ( Head Team )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -233,16 +248,17 @@
             <field name="domain">[('type', '=', 'in_invoice'),('team_id.user_id','=',uid)]</field>
             <field name="context">{'default_type': 'in_invoice'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a vendor bill
-              </p><p>
-                Create invoices, register payments and keep track of the discussions with your vendors.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a vendor bill
+                </p>
+                <p>
+                    Create invoices, register payments and keep track of the discussions with your vendors.
+                </p>
             </field>
         </record>
 
         <record id="action_move_in_refund_type_head" model="ir.actions.act_window">
-            <field name="name">Refund ( Head Team ) </field>
+            <field name="name">Refund ( Head Team )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -250,16 +266,17 @@
             <field name="domain">[('type', '=', 'in_refund'),('team_id.user_id','=',uid)]</field>
             <field name="context">{'default_type': 'in_refund'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a vendor credit note
-              </p><p>
-                Note that the easiest way to create a vendor credit note it to do it directly from the vendor bill.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a vendor credit note
+                </p>
+                <p>
+                    Note that the easiest way to create a vendor credit note it to do it directly from the vendor bill.
+                </p>
             </field>
         </record>
 
         <record id="action_move_out_receipt_type_head" model="ir.actions.act_window">
-            <field name="name">Receipts ( Head Team ) </field>
+            <field name="name">Receipts ( Head Team )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -267,17 +284,18 @@
             <field name="domain">[('type', '=', 'out_receipt'),('team_id.user_id','=',uid)]</field>
             <field name="context">{'default_type': 'out_receipt'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a new sales receipt
-              </p><p>
-                When the sale receipt is confirmed, you can record the customer
-                payment related to this sales receipt.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new sales receipt
+                </p>
+                <p>
+                    When the sale receipt is confirmed, you can record the customer
+                    payment related to this sales receipt.
+                </p>
             </field>
         </record>
 
         <record id="action_move_in_receipt_type_head" model="ir.actions.act_window">
-            <field name="name">Receipts ( Head Team ) </field>
+            <field name="name">Receipts ( Head Team )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -285,98 +303,103 @@
             <field name="domain">[('type', '=', 'in_receipt'),('team_id.user_id','=',uid)]</field>
             <field name="context">{'default_type': 'in_receipt'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Register a new purchase receipt
-              </p><p>
-                When the purchase receipt is confirmed, you can record the
-                vendor payment related to this purchase receipt.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Register a new purchase receipt
+                </p>
+                <p>
+                    When the purchase receipt is confirmed, you can record the
+                    vendor payment related to this purchase receipt.
+                </p>
             </field>
         </record>
-       <record id="action_move_journal_line_head" model="ir.actions.act_window">
-            <field name="name">Journal Entries ( Head Team ) </field>
+        <record id="action_move_journal_line_head" model="ir.actions.act_window">
+            <field name="name">Journal Entries ( Head Team )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_move_tree"/>
             <field name="search_view_id" ref="account.view_account_move_filter"/>
             <field name="domain">[('invoice_user_id', '=', uid)]</field>
-            <field name="context">{'default_type': 'entry', 'search_default_misc_filter':1, 'view_no_maturity': True}</field>
+            <field name="context">{'default_type': 'entry', 'search_default_misc_filter':1, 'view_no_maturity': True}
+            </field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a journal entry
-              </p><p>
-                A journal entry consists of several journal items, each of
-                which is either a debit or a credit transaction.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a journal entry
+                </p>
+                <p>
+                    A journal entry consists of several journal items, each of
+                    which is either a debit or a credit transaction.
+                </p>
             </field>
         </record>
 
-              <record id="action_account_moves_all_head" model="ir.actions.act_window">
+        <record id="action_account_moves_all_head" model="ir.actions.act_window">
             <field name="context">{'journal_type':'general', 'search_default_posted':1}</field>
             <field name="name">Journal Items ( Head Team )</field>
             <field name="res_model">account.move.line</field>
-            <field name="domain">[('move_id.team_id.user_id','=',uid),('display_type', 'not in', ('line_section', 'line_note')), ('move_id.state', '!=', 'cancel')]</field>
+            <field name="domain">[('move_id.team_id.user_id','=',uid),('display_type', 'not in', ('line_section',
+                'line_note')), ('move_id.state', '!=', 'cancel')]
+            </field>
             <field name="view_id" ref="account.view_move_line_tree"/>
             <field name="view_mode">tree,pivot,graph,form,kanban</field>
         </record>
-            	      <!-- MENUS -->
+        <!-- MENUS -->
 
         <menuitem
-            id="menu_action_move_out_invoice_type_head"
-            action="action_move_out_invoice_type_head"
-            parent="account.menu_finance_receivables"
-            groups="nakham_sales_team_rule.group_manager_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_out_invoice_type_head"
+                action="action_move_out_invoice_type_head"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_manager_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_out_refund_type_head"
-            action="action_move_out_refund_type_head"
-            parent="account.menu_finance_receivables"
-            groups="nakham_sales_team_rule.group_manager_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_out_refund_type_head"
+                action="action_move_out_refund_type_head"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_manager_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_out_receipt_type_head"
-            action="action_move_out_receipt_type_head"
-            parent="account.menu_finance_receivables"
-            groups="nakham_sales_team_rule.group_manager_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_out_receipt_type_head"
+                action="action_move_out_receipt_type_head"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_manager_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_in_invoice_type_head"
-            action="action_move_in_invoice_type_head"
-            parent="account.menu_finance_payables"
-            groups="nakham_sales_team_rule.group_manager_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_in_invoice_type_head"
+                action="action_move_in_invoice_type_head"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_manager_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_in_refund_type_head"
-            action="action_move_in_refund_type_head"
-            parent="account.menu_finance_payables"
-            groups="nakham_sales_team_rule.group_manager_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_in_refund_type_head"
+                action="action_move_in_refund_type_head"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_manager_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_in_receipt_type_head"
-            action="action_move_in_receipt_type_head"
-            parent="account.menu_finance_payables"
-            groups="nakham_sales_team_rule.group_manager_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_in_receipt_type_head"
+                action="action_move_in_receipt_type_head"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_manager_sale_teams"
+                sequence="1"/>
         <menuitem
-            id="menu_action_move_journal_line_form_head"
-            action="action_move_journal_line_head"
-            parent="account.menu_finance_entries_accounting_miscellaneous"
-                        groups="nakham_sales_team_rule.group_manager_sale_teams"
-            sequence="1"/>
-              <menuitem
-            id="menu_action_account_moves_all_head"
-            action="action_account_moves_all_head"
-            parent="account.menu_finance_entries_accounting_miscellaneous"
-                        groups="nakham_sales_team_rule.group_manager_sale_teams"
-            sequence="10"/>
-<!--    member -->
-<!--      action -->
-              <record id="action_move_out_invoice_type_member" model="ir.actions.act_window">
+                id="menu_action_move_journal_line_form_head"
+                action="action_move_journal_line_head"
+                parent="account.menu_finance_entries_accounting_miscellaneous"
+                groups="nakham_sales_team_rule.group_manager_sale_teams"
+                sequence="1"/>
+        <menuitem
+                id="menu_action_account_moves_all_head"
+                action="action_account_moves_all_head"
+                parent="account.menu_finance_entries_accounting_miscellaneous"
+                groups="nakham_sales_team_rule.group_manager_sale_teams"
+                sequence="10"/>
+        <!--    member -->
+        <!--      action -->
+        <record id="action_move_out_invoice_type_member" model="ir.actions.act_window">
             <field name="name">Invoices ( Member )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
@@ -385,11 +408,12 @@
             <field name="domain">[('type', '=', 'out_invoice'),('invoice_user_id', '=', uid)]</field>
             <field name="context">{'default_type': 'out_invoice'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a customer invoice
-              </p><p>
-                Create invoices, register payments and keep track of the discussions with your customers.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a customer invoice
+                </p>
+                <p>
+                    Create invoices, register payments and keep track of the discussions with your customers.
+                </p>
             </field>
         </record>
 
@@ -402,17 +426,18 @@
             <field name="domain">[('type', '=', 'out_refund'),('invoice_user_id', '=', uid)]</field>
             <field name="context">{'default_type': 'out_refund'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a credit note
-              </p><p>
-                Note that the easiest way to create a credit note is to do it directly
-                from the customer invoice.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a credit note
+                </p>
+                <p>
+                    Note that the easiest way to create a credit note is to do it directly
+                    from the customer invoice.
+                </p>
             </field>
         </record>
 
         <record id="action_move_in_invoice_type_member" model="ir.actions.act_window">
-            <field name="name">Bills ( Member ) </field>
+            <field name="name">Bills ( Member )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -420,16 +445,17 @@
             <field name="domain">[('type', '=', 'in_invoice'),('invoice_user_id', '=', uid)]</field>
             <field name="context">{'default_type': 'in_invoice'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a vendor bill
-              </p><p>
-                Create invoices, register payments and keep track of the discussions with your vendors.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a vendor bill
+                </p>
+                <p>
+                    Create invoices, register payments and keep track of the discussions with your vendors.
+                </p>
             </field>
         </record>
 
         <record id="action_move_in_refund_type_member" model="ir.actions.act_window">
-            <field name="name">Refund ( Member ) </field>
+            <field name="name">Refund ( Member )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -437,16 +463,17 @@
             <field name="domain">[('type', '=', 'in_refund'),('invoice_user_id', '=', uid)]</field>
             <field name="context">{'default_type': 'in_refund'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a vendor credit note
-              </p><p>
-                Note that the easiest way to create a vendor credit note it to do it directly from the vendor bill.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a vendor credit note
+                </p>
+                <p>
+                    Note that the easiest way to create a vendor credit note it to do it directly from the vendor bill.
+                </p>
             </field>
         </record>
 
         <record id="action_move_out_receipt_type_member" model="ir.actions.act_window">
-            <field name="name">Receipts ( Member ) </field>
+            <field name="name">Receipts ( Member )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -454,17 +481,18 @@
             <field name="domain">[('type', '=', 'out_receipt'),('invoice_user_id', '=', uid)]</field>
             <field name="context">{'default_type': 'out_receipt'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a new sales receipt
-              </p><p>
-                When the sale receipt is confirmed, you can record the customer
-                payment related to this sales receipt.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new sales receipt
+                </p>
+                <p>
+                    When the sale receipt is confirmed, you can record the customer
+                    payment related to this sales receipt.
+                </p>
             </field>
         </record>
 
         <record id="action_move_in_receipt_type_member" model="ir.actions.act_window">
-            <field name="name">Receipts ( Member ) </field>
+            <field name="name">Receipts ( Member )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_invoice_tree"/>
@@ -472,190 +500,200 @@
             <field name="domain">[('type', '=', 'in_receipt'),('invoice_user_id', '=', uid)]</field>
             <field name="context">{'default_type': 'in_receipt'}</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Register a new purchase receipt
-              </p><p>
-                When the purchase receipt is confirmed, you can record the
-                vendor payment related to this purchase receipt.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Register a new purchase receipt
+                </p>
+                <p>
+                    When the purchase receipt is confirmed, you can record the
+                    vendor payment related to this purchase receipt.
+                </p>
             </field>
         </record>
 
-       <record id="action_move_journal_line_member" model="ir.actions.act_window">
+        <record id="action_move_journal_line_member" model="ir.actions.act_window">
             <field name="name">Journal Entries ( Member )</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="account.view_move_tree"/>
             <field name="search_view_id" ref="account.view_account_move_filter"/>
             <field name="domain">[('invoice_user_id', '=', uid)]</field>
-            <field name="context">{'default_type': 'entry', 'search_default_misc_filter':1, 'view_no_maturity': True}</field>
+            <field name="context">{'default_type': 'entry', 'search_default_misc_filter':1, 'view_no_maturity': True}
+            </field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a journal entry
-              </p><p>
-                A journal entry consists of several journal items, each of
-                which is either a debit or a credit transaction.
-              </p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a journal entry
+                </p>
+                <p>
+                    A journal entry consists of several journal items, each of
+                    which is either a debit or a credit transaction.
+                </p>
             </field>
         </record>
         <record id="action_account_moves_all_member" model="ir.actions.act_window">
             <field name="context">{'journal_type':'general', 'search_default_posted':1}</field>
             <field name="name">Journal Items ( Member )</field>
             <field name="res_model">account.move.line</field>
-            <field name="domain">[('move_id.invoice_user_id', '=', uid),('display_type', 'not in', ('line_section', 'line_note')), ('move_id.state', '!=', 'cancel')]</field>
+            <field name="domain">[('move_id.invoice_user_id', '=', uid),('display_type', 'not in', ('line_section',
+                'line_note')), ('move_id.state', '!=', 'cancel')]
+            </field>
             <field name="view_id" ref="account.view_move_line_tree"/>
             <field name="view_mode">tree,pivot,graph,form,kanban</field>
         </record>
-            	      <!-- MENUS -->
+        <!-- MENUS -->
 
         <menuitem
-            id="menu_action_move_out_invoice_type_member"
-            action="action_move_out_invoice_type_member"
-            parent="account.menu_finance_receivables"
-                        groups="nakham_sales_team_rule.group_member_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_out_invoice_type_member"
+                action="action_move_out_invoice_type_member"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_member_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_out_refund_type_member"
-            action="action_move_out_refund_type_member"
-            parent="account.menu_finance_receivables"
-                        groups="nakham_sales_team_rule.group_member_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_out_refund_type_member"
+                action="action_move_out_refund_type_member"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_member_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_out_receipt_type_member"
-            action="action_move_out_receipt_type_member"
-            parent="account.menu_finance_receivables"
-                        groups="nakham_sales_team_rule.group_member_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_out_receipt_type_member"
+                action="action_move_out_receipt_type_member"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_member_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_in_invoice_type_member"
-            action="action_move_in_invoice_type_member"
-            parent="account.menu_finance_payables"
-                        groups="nakham_sales_team_rule.group_member_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_in_invoice_type_member"
+                action="action_move_in_invoice_type_member"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_member_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_in_refund_type_member"
-            action="action_move_in_refund_type_member"
-            parent="account.menu_finance_payables"
-                        groups="nakham_sales_team_rule.group_member_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_in_refund_type_member"
+                action="action_move_in_refund_type_member"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_member_sale_teams"
+                sequence="1"/>
 
         <menuitem
-            id="menu_action_move_in_receipt_type_member"
-            action="action_move_in_receipt_type_member"
-            parent="account.menu_finance_payables"
-                        groups="nakham_sales_team_rule.group_member_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_in_receipt_type_member"
+                action="action_move_in_receipt_type_member"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_member_sale_teams"
+                sequence="1"/>
         <menuitem
-            id="menu_action_move_journal_line_form_member"
-            action="action_move_journal_line_member"
-            parent="account.menu_finance_entries_accounting_miscellaneous"
-            groups="nakham_sales_team_rule.group_member_sale_teams"
-            sequence="1"/>
+                id="menu_action_move_journal_line_form_member"
+                action="action_move_journal_line_member"
+                parent="account.menu_finance_entries_accounting_miscellaneous"
+                groups="nakham_sales_team_rule.group_member_sale_teams"
+                sequence="1"/>
         <menuitem
-            id="menu_action_account_moves_all_member"
-            action="action_account_moves_all_member"
-            parent="account.menu_finance_entries_accounting_miscellaneous"
-            groups="nakham_sales_team_rule.group_member_sale_teams"
-            sequence="10"/>
+                id="menu_action_account_moves_all_member"
+                action="action_account_moves_all_member"
+                parent="account.menu_finance_entries_accounting_miscellaneous"
+                groups="nakham_sales_team_rule.group_member_sale_teams"
+                sequence="10"/>
 
 
-<!--      admin -->
+        <!--      admin -->
         <menuitem
-            id="account.menu_action_move_out_invoice_type"
-            action="account.action_move_out_invoice_type"
-            parent="account.menu_finance_receivables"
-            groups="nakham_sales_team_rule.group_admin_system"
-            sequence="1"/>
-
-        <menuitem
-            id="account.menu_action_move_out_refund_type"
-            action="account.action_move_out_refund_type"
-            parent="account.menu_finance_receivables"
-            groups="nakham_sales_team_rule.group_admin_system"
-            sequence="1"/>
+                id="account.menu_action_move_out_invoice_type"
+                action="account.action_move_out_invoice_type"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_admin_system"
+                sequence="1"/>
 
         <menuitem
-            id="account.menu_action_move_out_receipt_type"
-            action="account.action_move_out_receipt_type"
-            parent="account.menu_finance_receivables"
-            groups="nakham_sales_team_rule.group_admin_system"
-            sequence="1"/>
+                id="account.menu_action_move_out_refund_type"
+                action="account.action_move_out_refund_type"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_admin_system"
+                sequence="1"/>
 
         <menuitem
-            id="account.menu_action_move_in_invoice_type"
-            action="account.action_move_in_invoice_type"
-            parent="account.menu_finance_payables"
-            groups="nakham_sales_team_rule.group_admin_system"
-            sequence="1"/>
+                id="account.menu_action_move_out_receipt_type"
+                action="account.action_move_out_receipt_type"
+                parent="account.menu_finance_receivables"
+                groups="nakham_sales_team_rule.group_admin_system"
+                sequence="1"/>
 
         <menuitem
-            id="account.menu_action_move_in_refund_type"
-            action="account.action_move_in_refund_type"
-            parent="account.menu_finance_payables"
-            groups="nakham_sales_team_rule.group_admin_system"
-            sequence="1"/>
+                id="account.menu_action_move_in_invoice_type"
+                action="account.action_move_in_invoice_type"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_admin_system"
+                sequence="1"/>
 
         <menuitem
-            id="account.menu_action_move_in_receipt_type"
-            action="account.action_move_in_receipt_type"
-            parent="account.menu_finance_payables"
-            groups="nakham_sales_team_rule.group_admin_system"
-            sequence="1"/>
-
-              <menuitem
-            id="account.menu_action_move_journal_line_form"
-            action="account.action_move_journal_line"
-            parent="account.menu_finance_entries_accounting_miscellaneous"
-            groups="nakham_sales_team_rule.group_admin_system"
-            sequence="1"/>
-
-<!--&lt;!&ndash;      General Ledger&ndash;&gt;-->
-<!--        <menuitem-->
-<!--            id="account.menu_action_account_moves_ledger_general"-->
-<!--            action="account.action_account_moves_ledger_general"-->
-<!--            parent="account.menu_finance_entries_accounting_ledgers"-->
-<!--            groups="nakham_sales_team_rule.group_admin_system"-->
-<!--            sequence="1"/>-->
-<!--&lt;!&ndash;      Partner Ledger&ndash;&gt;-->
-
-<!--        <menuitem-->
-<!--            id="account.menu_action_account_moves_ledger_partner"-->
-<!--            action="account.action_account_moves_ledger_partner"-->
-<!--            parent="account.menu_finance_entries_accounting_ledgers"-->
-<!--            groups="nakham_sales_team_rule.group_admin_system"-->
-<!--            sequence="1"/>-->
+                id="account.menu_action_move_in_refund_type"
+                action="account.action_move_in_refund_type"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_admin_system"
+                sequence="1"/>
 
         <menuitem
-            id="account.menu_action_account_moves_all"
-            action="account.action_account_moves_all"
-            parent="account.menu_finance_entries_accounting_miscellaneous"
-            groups="nakham_sales_team_rule.group_admin_system"
-            sequence="10"/>
+                id="account.menu_action_move_in_receipt_type"
+                action="account.action_move_in_receipt_type"
+                parent="account.menu_finance_payables"
+                groups="nakham_sales_team_rule.group_admin_system"
+                sequence="1"/>
 
-<!--     تحليل البيانات -->
+        <menuitem
+                id="account.menu_action_move_journal_line_form"
+                action="account.action_move_journal_line"
+                parent="account.menu_finance_entries_accounting_miscellaneous"
+                groups="nakham_sales_team_rule.group_admin_system"
+                sequence="1"/>
 
-      <!-- This Menu Item must have a parent and an action -->
-       <record id="sale_report_action_dashboard_2" model="ir.actions.act_window">
+        <!--&lt;!&ndash;      General Ledger&ndash;&gt;-->
+        <!--        <menuitem-->
+        <!--            id="account.menu_action_account_moves_ledger_general"-->
+        <!--            action="account.action_account_moves_ledger_general"-->
+        <!--            parent="account.menu_finance_entries_accounting_ledgers"-->
+        <!--            groups="nakham_sales_team_rule.group_admin_system"-->
+        <!--            sequence="1"/>-->
+        <!--&lt;!&ndash;      Partner Ledger&ndash;&gt;-->
+
+        <!--        <menuitem-->
+        <!--            id="account.menu_action_account_moves_ledger_partner"-->
+        <!--            action="account.action_account_moves_ledger_partner"-->
+        <!--            parent="account.menu_finance_entries_accounting_ledgers"-->
+        <!--            groups="nakham_sales_team_rule.group_admin_system"-->
+        <!--            sequence="1"/>-->
+
+        <menuitem
+                id="account.menu_action_account_moves_all"
+                action="account.action_account_moves_all"
+                parent="account.menu_finance_entries_accounting_miscellaneous"
+                groups="nakham_sales_team_rule.group_admin_system"
+                sequence="10"/>
+
+        <!--     تحليل البيانات -->
+
+        <!-- This Menu Item must have a parent and an action -->
+        <record id="sale_report_action_dashboard_2" model="ir.actions.act_window">
             <field name="name">Sales Analysis</field>
             <field name="res_model">sale.report</field>
             <field name="view_mode">dashboard,pivot,graph</field>
             <field name="search_view_id" ref="sale.view_order_product_search"/>
-            <field name="context" eval="{'search_default_Sales': 1, 'time_ranges': {'field':'date_order', 'range':'last_30_days'}}"/>
+            <field name="context"
+                   eval="{'search_default_Sales': 1, 'time_ranges': {'field':'date_order', 'range':'last_30_days'}}"/>
         </record>
-      <menuitem id="sale_report_admin" name="Sales Analysis" parent="sale.menu_sale_report" action="sale_report_action_dashboard_2" groups="nakham_sales_team_rule.group_admin_system" />
+        <menuitem id="sale_report_admin" name="Sales Analysis" parent="sale.menu_sale_report"
+                  action="sale_report_action_dashboard_2" groups="nakham_sales_team_rule.group_admin_system"/>
 
         <record id="sale_enterprise.sale_report_action_dashboard" model="ir.actions.act_window">
             <field name="name">Sales Analysis</field>
             <field name="res_model">sale.report</field>
-            <field name="domain">['|','|',('team_id.Accountant_id', '=', uid),('team_id.user_id', '=', uid),('team_id.member_ids', '=', uid)]</field>
+            <field name="domain">['|','|',('team_id.Accountant_id', '=', uid),('team_id.user_id', '=',
+                uid),('team_id.member_ids', '=', uid)]
+            </field>
             <field name="view_mode">dashboard,pivot,graph</field>
             <field name="search_view_id" ref="sale.view_order_product_search"/>
-            <field name="context" eval="{'search_default_Sales': 1, 'time_ranges': {'field':'date_order', 'range':'last_30_days'}}"/>
+            <field name="context"
+                   eval="{'search_default_Sales': 1, 'time_ranges': {'field':'date_order', 'range':'last_30_days'}}"/>
         </record>
 
-  </data>
+    </data>
 </odoo>

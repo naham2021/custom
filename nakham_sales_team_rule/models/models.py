@@ -33,6 +33,12 @@ class PurchaseOrderInherit(models.Model):
                               default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(
                                   user_id=self.env.uid), readonly=False, force_save=True)
 
+class PurchaseOrderLineInherit(models.Model):
+    _inherit = 'purchase.order.line'
+
+    team_id = fields.Many2one('crm.team',related="order_id.team_id", string='Sales Team')
+    user_id = fields.Many2one(related='order_id.user_id', string='User')
+
 
 class StockPickingInherit(models.Model):
     _inherit = 'stock.picking'
