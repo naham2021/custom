@@ -7,7 +7,7 @@ class AccountMoveLineInherit(models.Model):
 
 
     current_user = fields.Many2one('res.users', 'Current User', default=lambda self: self.env.uid,compute="_get_current_user")
-    user_all = fields.Boolean(compute="_get_user_all")
+    # user_all = fields.Boolean(compute="_get_user_all")
     def _get_current_user(self):
         for rec in self:
             rec.current_user = self.env.uid
