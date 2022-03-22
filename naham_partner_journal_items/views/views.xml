@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record model="ir.actions.server" id="action_move_partner_server">
+            <field name="name">Adjust Partner</field>
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="binding_model_id" ref="account.model_account_move_line"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                     action = records.partner_server()
+            </field>
+        </record>
+
+    </data>
+</odoo>
