@@ -61,14 +61,20 @@
             </function>
             <value eval="{'noupdate': False}"/>
         </function>
-       <record id="sale_sale_order_line_see_all_Accountant" model="ir.rule">
+        <record id="sale_sale_order_line_see_all_user_member" model="ir.rule">
+            <field name="name">All Orders Lines (For Team only) ( Member )</field>
+            <field ref="sale.model_sale_order_line" name="model_id"/>
+            <field name="domain_force">[('order_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams'))]"/>
+        </record>
+        <record id="sale_sale_order_line_see_all_Accountant" model="ir.rule">
             <field name="name">All Orders Lines (For Team only) ( Accountant )</field>
             <field ref="sale.model_sale_order_line" name="model_id"/>
             <field name="domain_force">[('order_id.team_id.Accountant_id','=',user.id)]</field>
             <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_accountant_sale_teams'))]"/>
         </record>
         <record id="sale.sale_order_line_see_all" model="ir.rule">
-            <field name="name">All Orders Lines (For Team only)</field>
+            <field name="name">All Orders Lines (For Team only) ( Manager )</field>
             <field ref="sale.model_sale_order_line" name="model_id"/>
             <field name="domain_force">[('order_id.team_id.user_id','=',user.id)]</field>
             <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_manager_sale_teams'))]"/>
@@ -96,18 +102,18 @@
             </function>
             <value eval="{'noupdate': False}"/>
         </function>
-<!--        <record id="sale.account_move_personal_rule" model="ir.rule">-->
-<!--            <field name="name">Personal Invoice (For Personal)</field>-->
-<!--            <field ref="account.model_account_move" name="model_id"/>-->
-<!--            <field name="domain_force">[('invoice_user_id', '=', user.id)]</field>-->
-<!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams'))]"/>-->
-<!--        </record>-->
-<!--        <record id="sale.account_move_see_all" model="ir.rule">-->
-<!--            <field name="name">All Invoices (For Team Only)</field>-->
-<!--            <field ref="account.model_account_move" name="model_id"/>-->
-<!--            <field name="domain_force">[('team_id.user_id','=',user.id)]</field>-->
-<!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_manager_sale_teams'))]"/>-->
-<!--        </record>-->
+        <!--        <record id="sale.account_move_personal_rule" model="ir.rule">-->
+        <!--            <field name="name">Personal Invoice (For Personal)</field>-->
+        <!--            <field ref="account.model_account_move" name="model_id"/>-->
+        <!--            <field name="domain_force">[('invoice_user_id', '=', user.id)]</field>-->
+        <!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams'))]"/>-->
+        <!--        </record>-->
+        <!--        <record id="sale.account_move_see_all" model="ir.rule">-->
+        <!--            <field name="name">All Invoices (For Team Only)</field>-->
+        <!--            <field ref="account.model_account_move" name="model_id"/>-->
+        <!--            <field name="domain_force">[('team_id.user_id','=',user.id)]</field>-->
+        <!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_manager_sale_teams'))]"/>-->
+        <!--        </record>-->
         <record id="account_move_see_all_admin" model="ir.rule">
             <field name="name">All Invoices (For All Teams)</field>
             <field ref="account.model_account_move" name="model_id"/>
@@ -123,18 +129,18 @@
             </function>
             <value eval="{'noupdate': False}"/>
         </function>
-<!--        <record id="account.account_move_see_all" model="ir.rule">-->
-<!--            <field name="name">All Journal Entries (For Your invoices)</field>-->
-<!--            <field ref="account.model_account_move" name="model_id"/>-->
-<!--            <field name="domain_force">[('invoice_user_id','=',user.id)]</field>-->
-<!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams'))]"/>-->
-<!--        </record>-->
-<!--        <record id="account_move_see_all_manaegr" model="ir.rule">-->
-<!--            <field name="name">All Journal Entries (For Manager Team )</field>-->
-<!--            <field ref="account.model_account_move" name="model_id"/>-->
-<!--            <field name="domain_force">[('team_id.user_id','=',user.id)]</field>-->
-<!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_manager_sale_teams'))]"/>-->
-<!--        </record>-->
+        <!--        <record id="account.account_move_see_all" model="ir.rule">-->
+        <!--            <field name="name">All Journal Entries (For Your invoices)</field>-->
+        <!--            <field ref="account.model_account_move" name="model_id"/>-->
+        <!--            <field name="domain_force">[('invoice_user_id','=',user.id)]</field>-->
+        <!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams'))]"/>-->
+        <!--        </record>-->
+        <!--        <record id="account_move_see_all_manaegr" model="ir.rule">-->
+        <!--            <field name="name">All Journal Entries (For Manager Team )</field>-->
+        <!--            <field ref="account.model_account_move" name="model_id"/>-->
+        <!--            <field name="domain_force">[('team_id.user_id','=',user.id)]</field>-->
+        <!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_manager_sale_teams'))]"/>-->
+        <!--        </record>-->
         <record id="account_move_see_all_admin" model="ir.rule">
             <field name="name">All Journal Entries (For All System )</field>
             <field ref="account.model_account_move" name="model_id"/>
@@ -160,20 +166,20 @@
             </function>
             <value eval="{'noupdate': False}"/>
         </function>
-<!--        <record id="sale.account_move_line_personal_rule" model="ir.rule">-->
-<!--            <field name="name">Personal Invoice Lines (only)</field>-->
-<!--            <field ref="account.model_account_move_line" name="model_id"/>-->
-<!--            <field name="domain_force">[('move_id.invoice_user_id', '=', user.id)]</field>-->
-<!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams'))]"/>-->
+        <!--        <record id="sale.account_move_line_personal_rule" model="ir.rule">-->
+        <!--            <field name="name">Personal Invoice Lines (only)</field>-->
+        <!--            <field ref="account.model_account_move_line" name="model_id"/>-->
+        <!--            <field name="domain_force">[('move_id.invoice_user_id', '=', user.id)]</field>-->
+        <!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams'))]"/>-->
 
-<!--        </record>-->
+        <!--        </record>-->
 
-<!--        <record id="sale.account_move_line_see_all" model="ir.rule">-->
-<!--            <field name="name">All Invoices Lines (For only Team)</field>-->
-<!--            <field ref="account.model_account_move_line" name="model_id"/>-->
-<!--            <field name="domain_force">[('move_id.team_id.user_id', '=', user.id)]</field>-->
-<!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_manager_sale_teams'))]"/>-->
-<!--        </record>-->
+        <!--        <record id="sale.account_move_line_see_all" model="ir.rule">-->
+        <!--            <field name="name">All Invoices Lines (For only Team)</field>-->
+        <!--            <field ref="account.model_account_move_line" name="model_id"/>-->
+        <!--            <field name="domain_force">[('move_id.team_id.user_id', '=', user.id)]</field>-->
+        <!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_manager_sale_teams'))]"/>-->
+        <!--        </record>-->
         <record id="account_move_line_see_all_admin" model="ir.rule">
             <field name="name">All Invoices Lines (All)</field>
             <field ref="account.model_account_move_line" name="model_id"/>
@@ -188,7 +194,7 @@
             <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams'))]"/>
 
         </record>
-                <record id="model_account_payment_manger_Accountant_id" model="ir.rule">
+        <record id="model_account_payment_manger_Accountant_id" model="ir.rule">
             <field name="name">Account Payment Manager (For Team only) ( Accountant_id )</field>
             <field name="model_id" ref="account.model_account_payment"/>
             <field name="domain_force">[('team_id.Accountant_id','=',user.id)]</field>
@@ -220,7 +226,7 @@
             <field name="perm_unlink" eval="True"/>
             <field name="domain_force">[('user_ids', '=', user.id)]</field>
         </record>
-                <record id="account_journal_rule_manager_Accountant_id" model="ir.rule">
+        <record id="account_journal_rule_manager_Accountant_id" model="ir.rule">
             <field name="name">Account Journal Rule (For All) ( Accountant_id )</field>
             <field name="model_id" ref="account.model_account_journal"/>
             <field name="perm_read" eval="True"/>
@@ -258,25 +264,25 @@
 
         <!--        pos -->
 
-<!--        <record id="pos_user_restrict.point_of_sale_rule_user_order" model="ir.rule">-->
-<!--            <field name="name">Show POS Orders only for allowed POS configs. (For only)</field>-->
-<!--            <field name="model_id" ref="point_of_sale.model_pos_order"/>-->
-<!--            <field name="domain_force">[('user_id', '=', user.id)]</field>-->
-<!--            <field name="groups" eval="[(4,ref('point_of_sale.group_pos_user'))]"/>-->
-<!--        </record>-->
+        <!--        <record id="pos_user_restrict.point_of_sale_rule_user_order" model="ir.rule">-->
+        <!--            <field name="name">Show POS Orders only for allowed POS configs. (For only)</field>-->
+        <!--            <field name="model_id" ref="point_of_sale.model_pos_order"/>-->
+        <!--            <field name="domain_force">[('user_id', '=', user.id)]</field>-->
+        <!--            <field name="groups" eval="[(4,ref('point_of_sale.group_pos_user'))]"/>-->
+        <!--        </record>-->
 
-<!--        <record id="pos_user_restrict.point_of_sale_rule_manager_order" model="ir.rule">-->
-<!--            <field name="name">Show All POS Orders for Manager. (For Only Team)</field>-->
-<!--            <field name="model_id" ref="point_of_sale.model_pos_order"/>-->
-<!--            <field name="domain_force">[('crm_team_id.user_id','=',user.id)]</field>-->
-<!--            <field name="groups" eval="[(4,ref('point_of_sale.group_pos_manager'))]"/>-->
-<!--        </record>-->
-<!--        <record id="point_of_sale_rule_manager_order_admin" model="ir.rule">-->
-<!--            <field name="name">Show All POS Orders for Manager. (For All Team)</field>-->
-<!--            <field name="model_id" ref="point_of_sale.model_pos_order"/>-->
-<!--            <field name="domain_force">[(1, '=', 1)]</field>-->
-<!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_admin_system'))]"/>-->
-<!--        </record>-->
+        <!--        <record id="pos_user_restrict.point_of_sale_rule_manager_order" model="ir.rule">-->
+        <!--            <field name="name">Show All POS Orders for Manager. (For Only Team)</field>-->
+        <!--            <field name="model_id" ref="point_of_sale.model_pos_order"/>-->
+        <!--            <field name="domain_force">[('crm_team_id.user_id','=',user.id)]</field>-->
+        <!--            <field name="groups" eval="[(4,ref('point_of_sale.group_pos_manager'))]"/>-->
+        <!--        </record>-->
+        <!--        <record id="point_of_sale_rule_manager_order_admin" model="ir.rule">-->
+        <!--            <field name="name">Show All POS Orders for Manager. (For All Team)</field>-->
+        <!--            <field name="model_id" ref="point_of_sale.model_pos_order"/>-->
+        <!--            <field name="domain_force">[(1, '=', 1)]</field>-->
+        <!--            <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_admin_system'))]"/>-->
+        <!--        </record>-->
 
         <!--    Purchase     -->
         <!--purchase order-->
@@ -290,8 +296,8 @@
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="0"/>
         </record>
-                <record id="portal_purchase_order_user_rule_manager_Accountant_id" model="ir.rule">
-            <field name="name">Portal Purchase Orders (For Team Only) ( Accountant_id ) </field>
+        <record id="portal_purchase_order_user_rule_manager_Accountant_id" model="ir.rule">
+            <field name="name">Portal Purchase Orders (For Team Only) ( Accountant_id )</field>
             <field name="model_id" ref="purchase.model_purchase_order"/>
             <field name="domain_force">[('team_id.Accountant_id','=',user.id)]</field>
             <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_accountant_sale_teams'))]"/>
@@ -329,8 +335,8 @@
             <field name="domain_force">[('order_id.user_id', '=', user.id)]</field>
             <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_member_sale_teams'))]"/>
         </record>
-                <record id="portal_purchase_order_line_rule_manager_Accountant_id" model="ir.rule">
-            <field name="name">Portal Purhcase Orders Line (For team Only)  ( Accountant_id ) </field>
+        <record id="portal_purchase_order_line_rule_manager_Accountant_id" model="ir.rule">
+            <field name="name">Portal Purhcase Orders Line (For team Only) ( Accountant_id )</field>
             <field name="model_id" ref="purchase.model_purchase_order_line"/>
             <field name="domain_force">[('order_id.team_id.Accountant_id','=',user.id)]</field>
             <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_accountant_sale_teams'))]"/>
@@ -347,5 +353,7 @@
             <field name="domain_force">[(1, '=', 1)]</field>
             <field name="groups" eval="[(4, ref('nakham_sales_team_rule.group_admin_system'))]"/>
         </record>
+
+
     </data>
 </odoo>
