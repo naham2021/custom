@@ -1,49 +1,153 @@
 <odoo>
-  <data>
+    <data>
 
-      <!-- Inherit Form View to Modify it -->
-      <record id="stock_landed_cost_bills" model="ir.ui.view">
-          <field name="name">stock.landed.cost.bills</field>
-          <field name="model">stock.landed.cost</field>
-          <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_form"/>
-          <field name="arch" type="xml">
+        <!-- Inherit Form View to Modify it -->
+        <record id="stock_landed_cost_bills" model="ir.ui.view">
+            <field name="name">stock.landed.cost.bills</field>
+            <field name="model">stock.landed.cost</field>
+            <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_form"/>
+            <field name="arch" type="xml">
 
-              <xpath expr="//field[@name='vendor_bill_id']" position="after">
-                  <field name="vendor_bill_ids" widget="many2many_tags"/>
-                  <field name="vendor_bill_id2"/>
-              </xpath>
+                <xpath expr="//field[@name='vendor_bill_id']" position="after">
+                    <field name="vendor_bill_ids" widget="many2many_tags"/>
+                    <field name="vendor_bill_id2"/>
+                </xpath>
 
-          </field>
-      </record>
+            </field>
+        </record>
 
-    <record id="invoice_line_action" model="ir.actions.act_window">
-        <field name="name">Invoice Lines</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">account.move.line</field>
-        <field name="domain">[('move_id.type','in', ['out_invoice', 'out_refund'])]</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="invoice_line_menu"
-              name="Invoice Lines"
-              parent="account.menu_finance_receivables"
-              action="invoice_line_action"
-              sequence="9"
-    />
 
-    <record id="vendor_line_action" model="ir.actions.act_window">
-        <field name="name">Vendor Lines</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">account.move.line</field>
-        <field name="domain">[('move_id.type','in', ['in_invoice', 'in_refund'])]</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-    <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="vendor_line_menu"
-              name="Vendor Lines"
-              parent="account.menu_finance_payables"
-              action="vendor_line_action"
-              sequence="300"
-    />
-  </data>
+        <!--  customer ->       account.move.line -->
+<!--        Admin System -->
+                <record id="invoice_line_action_admin" model="ir.actions.act_window">
+            <field name="name">Invoice Lines ( Admin )</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move.line</field>
+            <field name="domain">[('move_id.type','in', ['out_invoice', 'out_refund'])]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="invoice_line_menu_admin"
+                  name="Invoice Lines ( Admin )"
+                  parent="account.menu_finance_receivables"
+                  action="invoice_line_action_admin"
+                  sequence="9"
+                  groups="nakham_sales_team_rule.group_admin_system"
+        />
+        <!--    accountant -->
+        <record id="invoice_line_action_accountant" model="ir.actions.act_window">
+            <field name="name">Invoice Lines ( Accountant ) </field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move.line</field>
+            <field name="domain">[('move_id.type','in', ['out_invoice', 'out_refund']),('move_id.team_id.Accountant_id','=',uid)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="invoice_line_menu_accountant"
+                  name="Invoice Lines ( Accountant ) "
+                  parent="account.menu_finance_receivables"
+                  action="invoice_line_action_accountant"
+                  sequence="9"
+                  groups="nakham_sales_team_rule.group_accountant_sale_teams"
+        />
+        <!--    Head Team -->
+                <record id="invoice_line_action_head_team" model="ir.actions.act_window">
+            <field name="name">Invoice Lines ( Head team )</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move.line</field>
+            <field name="domain">[('move_id.type','in', ['out_invoice', 'out_refund']),('move_id.team_id.user_id','=',uid)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="invoice_line_menu_head_team"
+                  name="Invoice Lines ( Head team )"
+                  parent="account.menu_finance_receivables"
+                  action="invoice_line_action_head_team"
+                  sequence="9"
+                  groups="nakham_sales_team_rule.group_manager_sale_teams"
+        />
+<!--        member -->
+                <record id="invoice_line_action_member" model="ir.actions.act_window">
+            <field name="name">Invoice Lines ( Member ) </field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move.line</field>
+            <field name="domain">[('move_id.type','in', ['out_invoice', 'out_refund']),('move_id.invoice_user_id', '=', uid)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="invoice_line_menu_member"
+                  name="Invoice Lines ( Member ) "
+                  parent="account.menu_finance_receivables"
+                  action="invoice_line_action_member"
+                  sequence="9"
+                  groups="nakham_sales_team_rule.group_member_sale_teams"
+        />
+        <!--  vendor  ->       account.move.line -->
+
+<!-- Admin system -->
+        <record id="vendor_line_action_admin" model="ir.actions.act_window">
+            <field name="name">Vendor Lines</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move.line</field>
+            <field name="domain">[('move_id.type','in', ['in_invoice', 'in_refund'])]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="vendor_line_menu_admin"
+                  name="Vendor Lines"
+                  parent="account.menu_finance_payables"
+                  action="vendor_line_action_admin"
+                  sequence="300"
+                  groups="nakham_sales_team_rule.group_admin_system"
+        />
+
+        <!-- Accountant -->
+        <record id="vendor_line_action_accountant" model="ir.actions.act_window">
+            <field name="name">Vendor Lines ( Accountant ) </field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move.line</field>
+            <field name="domain">[('move_id.type','in', ['in_invoice', 'in_refund']),('move_id.team_id.Accountant_id','=',uid)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="vendor_line_menu_accountant"
+                  name="Vendor Lines ( Accountant ) "
+                  parent="account.menu_finance_payables"
+                  action="vendor_line_action_accountant"
+                  sequence="300"
+                  groups="nakham_sales_team_rule.group_accountant_sale_teams"
+        />
+        <!--  ( Head Team )  -->
+        <record id="vendor_line_action_head_team" model="ir.actions.act_window">
+            <field name="name">Vendor Lines ( Head Team ) </field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move.line</field>
+            <field name="domain">[('move_id.type','in', ['in_invoice', 'in_refund']),('move_id.team_id.user_id','=',uid)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="vendor_line_menu_head_team"
+                  name="Vendor Lines ( Head Team ) "
+                  parent="account.menu_finance_payables"
+                  action="vendor_line_action_head_team"
+                  sequence="300"
+                  groups="nakham_sales_team_rule.group_manager_sale_teams"
+        />
+        <!--  ( Member )  -->
+        <record id="vendor_line_action_member" model="ir.actions.act_window">
+            <field name="name">Vendor Lines ( Member ) </field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move.line</field>
+            <field name="domain">[('move_id.type','in', ['in_invoice', 'in_refund']),('move_id.invoice_user_id', '=', uid)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="vendor_line_menu_member"
+                  name="Vendor Lines ( Member ) "
+                  parent="account.menu_finance_payables"
+                  action="vendor_line_action_member"
+                  sequence="300"
+                  groups="nakham_sales_team_rule.group_member_sale_teams"
+        />
+    </data>
 </odoo>
