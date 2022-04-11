@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Nakham Invoice Line Menu",
-    'depends': ['base', 'account', 'stock_landed_costs'],
+    'depends': ['base', 'account', 'stock_landed_costs','nakham_sales_team_rule'],
 
     # always loaded
     'data': [
