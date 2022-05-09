@@ -12,10 +12,10 @@
     <field name="perm_create" eval="0"/>
     <field name="perm_unlink" eval="0"/>
 </record>
-        <record id="point_of_sale.access_product_product_pos_manager" model="ir.model.access">
-    <field name="perm_create" eval="0"/>
-    <field name="perm_unlink" eval="0"/>
-</record>
+<!--        <record id="point_of_sale.access_product_product_pos_manager" model="ir.model.access">-->
+<!--    <field name="perm_create" eval="0"/>-->
+<!--    <field name="perm_unlink" eval="0"/>-->
+<!--</record>-->
         <record id="account.access_product_product_account_manager" model="ir.model.access">
     <field name="perm_create" eval="0"/>
     <field name="perm_unlink" eval="0"/>
@@ -24,10 +24,10 @@
     <field name="perm_create" eval="0"/>
     <field name="perm_unlink" eval="0"/>
 </record>
-        <record id="point_of_sale.access_product_template_pos_manager" model="ir.model.access">
-    <field name="perm_create" eval="0"/>
-    <field name="perm_unlink" eval="0"/>
-</record>
+<!--        <record id="point_of_sale.access_product_template_pos_manager" model="ir.model.access">-->
+<!--    <field name="perm_create" eval="0"/>-->
+<!--    <field name="perm_unlink" eval="0"/>-->
+<!--</record>-->
         <record id="purchase.access_product_template_purchase_manager" model="ir.model.access">
     <field name="perm_create" eval="0"/>
     <field name="perm_unlink" eval="0"/>
