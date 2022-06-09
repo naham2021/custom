@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <record id="invisible_account_payment_widget" model="res.groups">
+            <field name="name">Invisible Account Payment Widget</field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="invisible_account_payment_widget_form" model="ir.ui.view">
+            <field name="name">invisible_account_payment_widget_form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="groups_id" eval="[(6,0,[ref('naham_payment_widget.invisible_account_payment_widget')])]"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='invoice_payments_widget']" position="replace">
+
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="res_users__analytic_inh_form_view" model="ir.ui.view">
+            <field name="name">res_users__analytic_inh_form_view</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="nakham_analytic_account.res_users_inh_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='analytic_ids']" position="after">
+                    <field name="analytic_groups" widget="many2many_tags"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="nakham_invoice_line_menu.invoice_line_action_admin" model="ir.actions.act_window">
+            <field name="domain">[('move_id.type','in', ['out_invoice', 'out_refund']),('group_id','in',analytic_groups)]</field>
+        </record>
+        <record id="nakham_invoice_line_menu.vendor_line_action_admin" model="ir.actions.act_window">
+            <field name="domain">[('move_id.type','in', ['out_invoice', 'out_refund']),('group_id','in',analytic_groups)]</field>
+        </record>
+
+
+    </data>
+</odoo>
