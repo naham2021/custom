@@ -5,6 +5,11 @@ from odoo import models, fields, api, tools
 class ResUsersInherit(models.Model):
     _inherit = 'res.users'
 
+    @api.onchange('allowed_account_ids')
+    def _onchange_allowed_account_ids(self):
+        self.clear_caches()
+
+
     @api.model
     @tools.ormcache('self._uid')
     def context_get(self):
