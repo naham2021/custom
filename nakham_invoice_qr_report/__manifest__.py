@@ -15,6 +15,7 @@
         # 'views/views_3.xml',
         'views/views.xml',
         'views/nakham2.xml',
+        'views/invoice.xml',
         # 'views/templates.xml',
     ]
 }
