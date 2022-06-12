@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <template id="report_invoice_document_qr" inherit_id="account.report_invoice_document">
-            <xpath expr="//div[hasclass('clearfix')]" position="after">
+            <xpath expr="//div[@id='qrcode']" position="after">
                     <div class="row" style="">
                         <div class="col-6">
                             <img
