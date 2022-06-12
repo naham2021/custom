@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','account','nakham_analytic_account'],
+    'depends': ['base','account','nakham_analytic_account','nakham_invoice_line_menu'],
 
     # always loaded
     'data': [
