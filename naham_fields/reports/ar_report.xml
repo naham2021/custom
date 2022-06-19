@@ -11,7 +11,8 @@
                     <span>عرض سعر</span>
                 </h5>
 
-                <table class="table table-bordered" style="width:100%;margin:auto;border:1px solid black;padding:5px;direction:rtl">
+                <table class="table table-bordered"
+                       style="width:100%;margin:auto;border:1px solid black;padding:5px;direction:rtl">
                     <tr>
                         <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px;"
                             border="2" colspan="2">
@@ -19,13 +20,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important; text-align:right" border="1">الموضوع</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important; text-align:right" border="1">
+                            الموضوع
+                        </th>
                         <td style="padding:2px !important; text-align:right">
                             <t t-esc="o.subject"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;height:5px;padding:2px !important; text-align:right" border="1">رقم العرض
+                        <th style="font-weight:bold;width:50%;height:5px;padding:2px !important; text-align:right"
+                            border="1">رقم العرض
                         </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.name"/>
@@ -42,7 +46,8 @@
                 <br></br>
                 <br></br>
                 <br></br>
-                <table class="table table-bordered" style="width:100%;margin;auto;border:1px solid black;padding:5px;direction:rtl">
+                <table class="table table-bordered"
+                       style="width:100%;margin;auto;border:1px solid black;padding:5px;direction:rtl">
                     <tr>
                         <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px"
                             border="2" colspan="2">
@@ -50,13 +55,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">من</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">من
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.company_id.partner_id.name"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">مسئول مبيعات</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">مسئول
+                            مبيعات
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.user_id.partner_id.name"/>
                         </td>
@@ -74,13 +82,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">البريد الالكتروني</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">البريد
+                            الالكتروني
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.user_id.partner_id.email"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">الموقع الالكتروني</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">الموقع
+                            الالكتروني
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.company_id.website"/>
                         </td>
@@ -129,7 +141,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">البريدالالكتروني</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right">
+                            البريدالالكتروني
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.contact.email"/>
                         </td>
@@ -175,12 +189,12 @@
                                 <!--                                   <span t-field="line.product_id.image_1920" t-option="wid" style="width:30px"/>-->
                             </td>
                             <td class="text-right">
-                                    <t t-esc="line.product_id.default_code"/>
-                                    <br></br>
-                                    <t t-esc="line.product_id.display_name" style="text-align: center;"/>
+                                <t t-esc="line.product_id.default_code"/>
+                                <br></br>
+                                <t t-esc="line.product_id.display_name" style="text-align: center;"/>
 
                                 <pre>
-                                <t t-raw="line.product_id.description_ar" dir="rtl"/>
+                                    <t t-raw="line.product_id.description_ar" dir="rtl"/>
                                 </pre>
                             </td>
                             <td>
@@ -197,9 +211,11 @@
                     </t>
                 </table>
                 <br></br>
-                <table  class="table table-bordered" style="width:100%;margin:auto;border:2;direction:rtl">
+                <table class="table table-bordered" style="width:100%;margin:auto;border:2;direction:rtl">
                     <tr>
-                        <th style="font-weight:bold;padding:2px !important; text-align: right" width="16%" colspan="1">الاجمالي</th>
+                        <th style="font-weight:bold;padding:2px !important; text-align: right" width="16%" colspan="1">
+                            الاجمالي
+                        </th>
                         <td colspan="5" style="padding:2px !important;text-align: left;">
                             <t t-esc="o.amount_untaxed"/>
                         </td>
@@ -211,7 +227,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;padding:2px !important;text-align: right" colspan="1">اجمالي العرض</th>
+                        <th style="font-weight:bold;padding:2px !important;text-align: right" colspan="1">اجمالي العرض
+                        </th>
                         <td colspan="5" style="padding:2px !important;text-align: left;">
                             <t t-esc="o.amount_total"/>
                         </td>
@@ -225,47 +242,68 @@
                     <tr>
                         <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px;"
                             border="2" colspan="2">
-                            <span> الشروط والاحكام</span>
+                            <span>الشروط والاحكام</span>
                         </td>
                     </tr>
 
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">الدفع</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">
+                            الدفع
+                        </th>
                         <td style="padding:2px !important;text-align:right">
 
                             <t t-esc="o.payment_sale.payment"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">الضمان</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">
+                            الضمان
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.warranty_sale.name"/>
                         </td>
                     </tr>
 
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">مكان الضمان</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">مكان
+                            الضمان
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.warranty_location_sale.name"/>
                         </td>
                     </tr>
+                    <tr>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">
+                            مده الدعم الفني
+                        </th>
+                        <td style="padding:2px !important;text-align:right">
+                            <t t-esc="o.duration_of_technical_support_sale.name"/>
+                        </td>
+                    </tr>
+
 
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">التسليم</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">
+                            التسليم
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.Delivery_sale.name"/>
                         </td>
                     </tr>
 
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">التركيب</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">
+                            التركيب
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.installation_sale.name"/>
                         </td>
                     </tr>
 
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">طرق الدفع</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">طرق
+                            الدفع
+                        </th>
 
                         <td style="padding:2px !important;text-align:right">
                             <t t-foreach="o.payment_way_sale" t-as="n">
@@ -275,13 +313,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">التدريب</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">
+                            التدريب
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-esc="o.training_sale.name"/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">البرامج</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">
+                            البرامج
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-foreach="o.Software_sale" t-as="n">
 
@@ -291,7 +333,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">متطلبات التشغيل
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">
+                            متطلبات التشغيل
 
                         </th>
                         <td style="padding:2px !important;text-align:right">
@@ -303,7 +346,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">الموقع</th>
+                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">
+                            الموقع
+                        </th>
                         <td style="padding:2px !important;text-align:right">
                             <t t-foreach="o.delivery_place_sale" t-as="n">
 
@@ -318,14 +363,13 @@
 
         </t>
     </template>
-            <template id="report_naham_card_base_ar">
-            <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="o">
-                    <t t-call="naham_fields.report_naham_card_ar"/>
-                </t>
+    <template id="report_naham_card_base_ar">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="naham_fields.report_naham_card_ar"/>
             </t>
-        </template>
-
+        </t>
+    </template>
 
 
     <report

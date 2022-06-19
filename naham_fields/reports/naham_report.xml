@@ -79,13 +79,16 @@
                 <div class="oe_structure"/>
                 <div class="page">
 
-                    <h5 class="text-center" style="color:blue; font-size: 30px;"><span t-field="o.quotation"/></h5>
+                    <h5 class="text-center" style="color:blue; font-size: 30px;">
+                        <span t-field="o.quotation"/>
+                    </h5>
 
                     <table class="table table-bordered"
                            style="width:100%;margin:auto;border:1px solid black;padding:5px;">
                         <tr>
                             <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px;"
-                                border="2" colspan="2"><span t-field="o.details"/>
+                                border="2" colspan="2">
+                                <span t-field="o.details"/>
                             </td>
                         </tr>
                         <tr>
@@ -96,7 +99,8 @@
                         </tr>
                         <tr>
                             <th style="font-weight:bold;width:50%;height:5px;padding:2px !important;" border="1">Quote
-                                Number</th>
+                                Number
+                            </th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.name"/>
                             </td>
@@ -116,7 +120,8 @@
                            style="width:100%;margin;auto;border:1px solid black;padding:5px;">
                         <tr>
                             <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px"
-                                border="2" colspan="2"><span t-field="o.sent_from"/>
+                                border="2" colspan="2">
+                                <span t-field="o.sent_from"/>
                             </td>
                         </tr>
                         <tr>
@@ -169,7 +174,8 @@
                     <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
                         <tr>
                             <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px;"
-                                colspan="2"><span t-field="o.sent_to"/>
+                                colspan="2">
+                                <span t-field="o.sent_to"/>
                             </td>
                         </tr>
 
@@ -247,9 +253,9 @@
                                     <t t-esc="line.product_id.default_code"/>
                                     <br/>
                                     <t t-esc="line.product_id.display_name" style="text-align: center;"/>
-                                        <pre>
-                                           <t t-raw="line.product_id.desc"/>
-                                        </pre>
+                                    <pre>
+                                        <t t-raw="line.product_id.desc"/>
+                                    </pre>
                                 </td>
                                 <td>
                                     <t t-esc="line.product_uom_qty"/>
@@ -268,7 +274,9 @@
                     <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
 
                         <tr>
-                            <th style="font-weight:bold;padding:2px !important;text-align: left;" width="14%" colspan="1">Total</th>
+                            <th style="font-weight:bold;padding:2px !important;text-align: left;" width="14%"
+                                colspan="1">Total
+                            </th>
                             <td colspan="5" style="padding:2px !important;text-align: right;">
                                 <t t-esc="o.amount_untaxed"/>
                             </td>
@@ -280,7 +288,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <th style="font-weight:bold;padding:2px !important;text-align: left" colspan="1">Net total</th>
+                            <th style="font-weight:bold;padding:2px !important;text-align: left" colspan="1">Net total
+                            </th>
                             <td colspan="5" style="padding:2px !important;text-align: right;">
                                 <t t-esc="o.amount_total"/>
                             </td>
@@ -293,7 +302,8 @@
                     <table class="table table-bordered" style="width:100%;margin:auto;border:2;">
                         <tr>
                             <td style="color:white;text-align:center;background-color:blue !important;font-size: 20px;"
-                                border="2" colspan="2"><span t-field="o.terms"/>
+                                border="2" colspan="2">
+                                <span t-field="o.terms"/>
                             </td>
                         </tr>
 
@@ -313,9 +323,18 @@
 
                         <tr>
                             <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Warranty
-                                Location</th>
+                                Location
+                            </th>
                             <td style="padding:2px !important;">
                                 <t t-esc="o.warranty_location_sale.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Duration Of
+                                Technical Support
+                            </th>
+                            <td style="padding:2px !important;">
+                                <t t-esc="o.duration_of_technical_support_sale.name"/>
                             </td>
                         </tr>
 
@@ -335,7 +354,8 @@
 
                         <tr>
                             <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">payment
-                                Method</th>
+                                Method
+                            </th>
 
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.payment_way_sale" t-as="n">
@@ -355,17 +375,20 @@
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.Software_sale" t-as="n">
 
-                                    <t t-esc="n.name"/> ,
+                                    <t t-esc="n.name"/>
+                                    ,
                                 </t>
                             </td>
                         </tr>
                         <tr>
                             <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">Operation
-                                Requirment</th>
+                                Requirment
+                            </th>
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.operation_requirment_sale" t-as="n">
 
-                                    <t t-esc="n.name"/> ,
+                                    <t t-esc="n.name"/>
+                                    ,
                                 </t>
                             </td>
                         </tr>
@@ -374,7 +397,8 @@
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.delivery_place_sale" t-as="n">
 
-                                    <t t-esc="n.name"/> ,
+                                    <t t-esc="n.name"/>
+                                    ,
                                 </t>
                             </td>
                         </tr>
