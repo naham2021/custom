@@ -32,6 +32,7 @@
         'views/account.xml',
         'reports/naham_report.xml',
         'reports/ar_report.xml',
+        'reports/new_ar_report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
