@@ -305,7 +305,9 @@
                             </h2>
 
                             <br></br>
-                            <br></br>
+<!--                            <br></br>-->
+                            <div class="text-center" style="color:#243BA0" t-if="o.partner_id.company_type == 'person'" >فاتورة مبيعات ضريبية مبسطه</div>
+                            <div class="text-center" style="color:#243BA0" t-if="o.partner_id.company_type == 'company'" >فاتورة مبيعات ضريبية</div>
 
                             <table class="table table-sm o_main_table"
                                    style="margin-top:25px;color:#243BA0;border: 1px solid #000000;font-weight:bold;font-size:16px !important;">
