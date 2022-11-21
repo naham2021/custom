@@ -416,42 +416,42 @@
                             </td>
                         </tr>
 
-                        <tr>
-                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">
-                                Warranty
-                            </th>
-                            <td style="padding:2px !important;">
-                                <t t-foreach="o.warranty_sale" t-as="n">
+<!--                        <tr>-->
+<!--                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">-->
+<!--                                Warranty-->
+<!--                            </th>-->
+<!--                            <td style="padding:2px !important;">-->
+<!--                                <t t-foreach="o.warranty_sale" t-as="n">-->
 
-                                    <t t-esc="n.name"/>
-                                    ,
-                                </t>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">
-                                warranty Location
-                            </th>
-                            <td style="padding:2px !important;">
-                                <t t-foreach="o.warranty_location_sale" t-as="n">
+<!--                                    <t t-esc="n.name"/>-->
+<!--                                    ,-->
+<!--                                </t>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">-->
+<!--                                warranty Location-->
+<!--                            </th>-->
+<!--                            <td style="padding:2px !important;">-->
+<!--                                <t t-foreach="o.warranty_location_sale" t-as="n">-->
 
-                                    <t t-esc="n.name"/>
-                                    ,
-                                </t>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">
-                                Duration Of Technical Support
-                            </th>
-                            <td style="padding:2px !important;">
-                                <t t-foreach="o.duration_of_technical_support_sale" t-as="n">
+<!--                                    <t t-esc="n.name"/>-->
+<!--                                    ,-->
+<!--                                </t>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">-->
+<!--                                Duration Of Technical Support-->
+<!--                            </th>-->
+<!--                            <td style="padding:2px !important;">-->
+<!--                                <t t-foreach="o.duration_of_technical_support_sale" t-as="n">-->
 
-                                    <t t-esc="n.name"/>
-                                    ,
-                                </t>
-                            </td>
-                        </tr>
+<!--                                    <t t-esc="n.name"/>-->
+<!--                                    ,-->
+<!--                                </t>-->
+<!--                            </td>-->
+<!--                        </tr>-->
                         <tr>
                             <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">
                                 Training

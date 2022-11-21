@@ -245,31 +245,31 @@
                             <t t-esc="o.payment_sale.payment"/>
                         </td>
                     </tr>
-                    <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">
-                            الضمان
-                        </th>
-                        <td style="padding:2px !important;text-align:right">
-                            <t t-esc="o.warranty_sale.name"/>
-                        </td>
-                    </tr>
+<!--                    <tr>-->
+<!--                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">-->
+<!--                            الضمان-->
+<!--                        </th>-->
+<!--                        <td style="padding:2px !important;text-align:right">-->
+<!--                            <t t-esc="o.warranty_sale.name"/>-->
+<!--                        </td>-->
+<!--                    </tr>-->
 
-                    <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">مكان
-                            الضمان
-                        </th>
-                        <td style="padding:2px !important;text-align:right">
-                            <t t-esc="o.warranty_location_sale.name"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">
-                            مده الدعم الفني
-                        </th>
-                        <td style="padding:2px !important;text-align:right">
-                            <t t-esc="o.duration_of_technical_support_sale.name"/>
-                        </td>
-                    </tr>
+<!--                    <tr>-->
+<!--                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">مكان-->
+<!--                            الضمان-->
+<!--                        </th>-->
+<!--                        <td style="padding:2px !important;text-align:right">-->
+<!--                            <t t-esc="o.warranty_location_sale.name"/>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th style="font-weight:bold;width:50%;padding:2px !important;text-align:right" border="1">-->
+<!--                            مده الدعم الفني-->
+<!--                        </th>-->
+<!--                        <td style="padding:2px !important;text-align:right">-->
+<!--                            <t t-esc="o.duration_of_technical_support_sale.name"/>-->
+<!--                        </td>-->
+<!--                    </tr>-->
 
 
                     <tr>
