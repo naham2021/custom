@@ -4,6 +4,7 @@ from odoo import models, fields, api
 
 class saleorder(models.Model):
     _inherit = 'sale.order'
+    note = fields.Char('Note')
     payment_sale = fields.Many2one('payment')
     payment_way_sale = fields.Many2many('payment.way')
     installation_sale = fields.Many2one('installation')
