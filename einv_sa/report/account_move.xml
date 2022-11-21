@@ -17,7 +17,7 @@
             <field name="report_name">einv_sa.account_move_report</field>
             <field name="report_file">einv_sa.account_move_report</field>
             <field name="print_report_name">'Invoice - %s' % (object.name).replace('/', '')</field>
-            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
             <field name="binding_type">report</field>
         </record>
 
