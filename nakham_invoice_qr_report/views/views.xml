@@ -322,8 +322,8 @@
 
                         <br></br>
 <!--                            <br></br>-->
-                            <div class="text-center" style="color:#243BA0" t-if="o.partner_id.company_type == 'person'" >مبسطه</div>
-<!--                            <div class="text-center" style="color:#243BA0" t-if="o.partner_id.company_type == 'company'" >فاتورة مبيعات ضريبية</div>-->
+<!--                            <div class="text-center" style="color:#243BA0" t-if="o.partner_id.company_type == 'person'" >مبسطه</div>-->
+                            <div class="text-center" style="color:#243BA0" t-if="o.partner_id.company_type == 'company'" >فاتورة مبيعات ضريبية</div>
 
                         <table class="table table-sm o_main_table"
                                style="margin-top:25px;color:#243BA0;border: 1px solid #ffffff;">

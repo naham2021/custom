@@ -348,9 +348,10 @@
                             الصلاحية حتى البيع
                         </th>
                         <td style="padding:2px !important;text-align:right">
-                            <t t-foreach="o.valid_untill_sale" t-as="n">
-                                <t t-esc="n.name"/>,
-                            </t>
+                            <t t-esc="o.valid_untill_sale"/>
+<!--                            <t t-foreach="o.valid_untill_sale" t-as="n">-->
+<!--                                <t t-esc="n.date"/>,-->
+<!--                            </t>-->
                         </td>
                     </tr>
                     <tr>
