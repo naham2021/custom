@@ -406,6 +406,17 @@
                         </tr>
                         <tr>
                             <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">
+                                Valid Untill Sale
+                            </th>
+                            <td style="padding:2px !important;text-align:right">
+                                <t t-foreach="o.valid_untill_sale" t-as="n">
+                                    <t t-esc="n.name"/>,
+                                </t>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">
                                 Warranty
                             </th>
                             <td style="padding:2px !important;">
@@ -430,7 +441,7 @@
                         </tr>
                         <tr>
                             <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">
-                               Duration Of Technical Support
+                                Duration Of Technical Support
                             </th>
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.duration_of_technical_support_sale" t-as="n">
@@ -442,7 +453,7 @@
                         </tr>
                         <tr>
                             <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">
-                               Training
+                                Training
                             </th>
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.training_sale" t-as="n">
@@ -454,7 +465,7 @@
                         </tr>
                         <tr>
                             <th style="font-weight:bold;width:50%;padding:2px !important;" border="1">
-                               Software
+                                Software
                             </th>
                             <td style="padding:2px !important;">
                                 <t t-foreach="o.Software_sale" t-as="n">
@@ -475,6 +486,14 @@
                             </td>
                         </tr>
                     </table>
+                    <div class="col-12">
+                    <div class="row">
+                        <div class="col-12" style="font-weight:bold;width:50%;padding:2px !important;">
+                            Note:
+                            <span t-esc="docs.sale_note" style="font-weight: normal;"/>
+                        </div>
+                    </div>
+                </div>
 
                 </div>
 

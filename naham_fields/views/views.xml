@@ -8,25 +8,27 @@
                 <xpath expr="//page[@name='customer_signature']" position="after">
                     <page name="terms_conditions" string="Terms and Conditions">
                         <group class="col-6">
-                        <field name="payment_sale" string="payment"/>
-                        <field name="payment_way_sale" string="payment Way" widget="many2many_tags"/>
-                        <field name="installation_sale" string="Installation"/>
-                        <field name="valid_untill_sale" string="Valid Untill"/>
-                        <field name="Delivery_sale" string="Delivery"/>
-                        <field name="operation_requirment_sale" string="Operation Requirment" widget="many2many_tags"/>
+                            <field name="payment_sale" string="payment"/>
+                            <field name="payment_way_sale" string="payment Way" widget="many2many_tags"/>
+                            <field name="installation_sale" string="Installation"/>
+                            <field name="valid_untill_sale" string="Valid Untill"/>
+                            <field name="sale_note" string="Note"/>
+                            <field name="Delivery_sale" string="Delivery"/>
+                            <field name="operation_requirment_sale" string="Operation Requirment"
+                                   widget="many2many_tags"/>
                         </group>
                         <group class="col-6">
-                        <field name="Travel_civil_work_sale" string="Travel And Civil Work"/>
-                        <field name="warranty_sale" string="Warranty"/>
-                        <field name="warranty_location_sale" string="Warranty Location"/>
-                        <field name="duration_of_technical_support_sale" string="Duration Of Technical Support"/>
-                        <field name="training_sale" string="Training"/>
-                        <field name="Software_sale" string="Software"/>
-                        <field name="delivery_place_sale" string="Delivery Place" widget="many2many_tags"/>
+                            <field name="Travel_civil_work_sale" string="Travel And Civil Work"/>
+                            <field name="warranty_sale" string="Warranty"/>
+                            <field name="warranty_location_sale" string="Warranty Location"/>
+                            <field name="duration_of_technical_support_sale" string="Duration Of Technical Support"/>
+                            <field name="training_sale" string="Training"/>
+                            <field name="Software_sale" string="Software"/>
+                            <field name="delivery_place_sale" string="Delivery Place" widget="many2many_tags"/>
                         </group>
                     </page>
                     <page name="technical" string="فنيين">
-                          <field name="technical" string="فنيين"/>
+                        <field name="technical" string="فنيين"/>
                     </page>
 
                 </xpath>
@@ -51,7 +53,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="payment" string="Payment"/>
+                    <field name="payment" string="Payment"/>
 
                 </tree>
             </field>
@@ -91,7 +93,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string="Payment_way"/>
+                    <field name="name" string="Payment_way"/>
 
                 </tree>
             </field>
@@ -131,7 +133,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string="Installation"/>
+                    <field name="name" string="Installation"/>
 
                 </tree>
             </field>
@@ -171,7 +173,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string="Delivery"/>
+                    <field name="name" string="Delivery"/>
 
                 </tree>
             </field>
@@ -211,7 +213,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string="Operation Requirment"/>
+                    <field name="name" string="Operation Requirment"/>
 
                 </tree>
             </field>
@@ -251,7 +253,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string="Travel And Civil Work"/>
+                    <field name="name" string="Travel And Civil Work"/>
 
                 </tree>
             </field>
@@ -291,7 +293,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string='Warranty'/>
+                    <field name="name" string='Warranty'/>
 
                 </tree>
             </field>
@@ -331,7 +333,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string='Warranty Location'/>
+                    <field name="name" string='Warranty Location'/>
 
                 </tree>
             </field>
@@ -371,7 +373,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string='Duration Of Technical Support'/>
+                    <field name="name" string='Duration Of Technical Support'/>
 
                 </tree>
             </field>
@@ -411,7 +413,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string='Training'/>
+                    <field name="name" string='Training'/>
 
                 </tree>
             </field>
@@ -451,7 +453,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string='Software'/>
+                    <field name="name" string='Software'/>
 
                 </tree>
             </field>
@@ -491,7 +493,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string='Delivery Place'/>
+                    <field name="name" string='Delivery Place'/>
 
                 </tree>
             </field>
@@ -511,7 +513,8 @@
                   action="sale_menu_config_delivery_place_type"
                   parent="sale.menu_sale_config"
                   name="Delivery Place"
-                  sequence="22"/>  <record model="ir.ui.view" id="sale_location_view">
+                  sequence="22"/>
+        <record model="ir.ui.view" id="sale_location_view">
             <field name="name">sale.location.form</field>
             <field name="model">sale.location</field>
             <field name="arch" type="xml">
@@ -530,7 +533,7 @@
             <field name="arch" type="xml">
                 <tree>
 
-                            <field name="name" string='Location'/>
+                    <field name="name" string='Location'/>
 
                 </tree>
             </field>

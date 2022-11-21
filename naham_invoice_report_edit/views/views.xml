@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+          <template id="invoices_without_payment_edit" inherit_id="account.account_invoices_without_payment">
+<!--            <xpath expr="//div[@class='header']" position="replace">-->
+<!--                <div class ="header">-->
+<!--                    Your Code-->
+<!--                </div>-->
+<!--            </xpath>-->
+        </template>
+    </data>
+</odoo>
