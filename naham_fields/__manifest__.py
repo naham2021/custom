@@ -33,6 +33,8 @@
         'reports/naham_report.xml',
         'reports/ar_report.xml',
         'reports/new_ar_report.xml',
+        'reports/new_naham_report_and_logo.xml',
+        'reports/new_naham_ar_report_and_logo.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
